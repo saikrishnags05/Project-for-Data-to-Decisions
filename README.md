@@ -15,4 +15,13 @@
 -   TODO make sure the document is in markdown
 -   TODO make a git repository with this information in our git repository.
 -   TODO make sure the repo is up-to-notch on what the professor expects, e.g., license, copyright year and names
+-   
 
+|**Task**| **Dead line(4:30pm)**|
+| ------------- | ------------- |
+|project work Plan	|	sep 16|
+|RQs(research questions) |	oct 28|
+|R Script	|	Nov 11|
+|R Plots	|	Nov 18|
+|Project Presentation| Dec 7|
+|Git Repository Package	|	Dec 7|
