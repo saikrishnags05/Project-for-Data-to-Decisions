@@ -15,6 +15,34 @@
 |Project Presentation| December 7|
 |Git Repository Package	|	December 7|
 
+| Assignment | Due Date | Task | Assignee | Focus | Effort Estimation |
+| --- | --- | --- | --- | --- | --- |
+| RQs(research questions) | Thu Sep 23 2021 03:00:00 GMT-0400 (Eastern Daylight Time) |  |  |  |  |
+|  |  | Create RQ | Chad | RQ #1 | 1w |
+|  |  | Create RQ | Sai | RQ #2 | 1w |
+|  |  | Create RQ | Rhonda | RQ #3 | 1w |
+| Data Cleaning Documentation | Thu Oct 28 2021 03:00:00 GMT-0400 (Eastern Daylight Time) |  |  |  |  |
+|  |  | Clean Text | Chad | Toward RQ #1 | 1w |
+|  |  | Clean Categories | Sai | Toward RQ #2 | 1w |
+|  |  | Clean Numbers | Rhonda | Toward RQ #3 | 1w |
+| R Script | Thu Nov 11 2021 03:00:00 GMT-0500 (Eastern Standard Time) |  |  |  |  |
+|  |  | R Script to Answer RQ #1 | Chad | RQ #1 | 1w |
+|  |  | R Script to Answer RQ #2 | Sai | RQ #2 | 1w |
+|  |  | R Script to Answer RQ #3 | Rhonda | RQ #3 | 1w |
+| R Plots | Thu Nov 18 2021 03:00:00 GMT-0500 (Eastern Standard Time) |  |  |  |  |
+|  |  | Plots for RQ #1 | Chad | RQ #1 | 1w |
+|  |  | Plots for RQ #1 | Sai | RQ #2 | 1w |
+|  |  | Plots for RQ #1 | Rhonda | RQ #3 | 1w |
+| Project Presentation | Tue Dec 07 2021 03:00:00 GMT-0500 (Eastern Standard Time) |  |  |  |  |
+|  |  | RQ #1 Slides | Chad | RQ #1 | 1w |
+|  |  | RQ #2 Slides | Sai | RQ #2 | 1w |
+|  |  | RQ #3 Slides | Rhonda | RQ #3 | 1w |
+| Git Repository Package | Tue Dec 07 2021 03:00:00 GMT-0500 (Eastern Standard Time) |  |  |  |  |
+|  |  | GitHub Summary for RQ #1 | Chad | RQ #1 | 1w |
+|  |  | GitHub Summary for RQ #2 | Sai | RQ #2 | 1w |
+|  |  | GitHub Summary for RQ #3 | Rhonda | RQ #3 | 1w |
+
+
 # Communication Agreement
 
 ## primary mode of communication
