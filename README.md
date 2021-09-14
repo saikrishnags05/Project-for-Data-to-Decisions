@@ -79,5 +79,14 @@
 -   TODO make a git repository with this information in our git repository.
 -   TODO make sure the repo is up-to-notch on what the professor expects, e.g., license, copyright year and names
 
+# Detailed Assignment Tasks
 
+## RQs
+- assemble comprehensive background report related to your data
+- build necessary data context
+- client organization's mission and goals
+- RQs you plan to focus on
+- decisions, interventions, or actions that analysis results could support
+- Each person develops one content section for the report (2300+ word range).
+  - proper citations is required (10+).           
 
