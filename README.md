@@ -134,3 +134,14 @@
 - One person on your team must post a reply to the canvas "Peer Review Discussion Thread" that contains your research question
   - e.g., RQ plot, interpretation for each RQ.
 
+## Project Presentation
+- Present on Zoom
+- should rehearse
+- Need to address:
+  - why your question is important
+  - who should care
+  - where the data is from
+  - how you used the data
+  - limitations of the data
+  - interpretations of the data
+  - what decisions should be made based on your analysis
