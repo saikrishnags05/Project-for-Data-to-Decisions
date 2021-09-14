@@ -109,3 +109,11 @@
   - which provides an overview of the script             
   - source RMarkdown document must include the full script and be in the same deliverable directory.
 
+## RScript
+- interim deliverable (knitted HTML document) to demonstrate progress on your project
+- should include comments
+- submit an HTML document, created via RMarkdown, to present the key components of the script and relevant results
+- source must show all detail
+- expected to run some basic descriptive statistics, e.g., distribution, means, etc
+  - might also include anova or regression analyses
+- remember to include full script and RMarkdown document in the same deliverable directory
