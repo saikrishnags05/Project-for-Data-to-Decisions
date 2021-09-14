@@ -144,7 +144,7 @@
 - Teams
   - Chad Crowe (ccrowe@linkedin.com)
   - Rhonda Silva ()
-  - Sai Krishna Gaduputi Subbammagari ()
+  - [Sai Krishna Gaduputi Subbammagari] (https://www.linkedin.com/in/sai-krishna-gaduputi-subbammagari-b02613194/)
 
 ## plan for a period of responding
 - Each teammate agrees to respond within 48 hours, or 72 hours if over the weekend.
