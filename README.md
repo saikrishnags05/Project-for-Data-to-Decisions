@@ -117,3 +117,20 @@
 - expected to run some basic descriptive statistics, e.g., distribution, means, etc
   - might also include anova or regression analyses
 - remember to include full script and RMarkdown document in the same deliverable directory
+
+## RPlots
+- create at least one plot per research question
+  - create an interpretation
+- submit a knitted HTML document with an overview of the script, included plots, contributorship statement, and URL submitted on Canvas
+- update the Readme.md with the source
+- RMarkdown document must be included in the same delivery directory.
+- PLOT:
+  - title
+  - label on axes
+  - readable details like scale values
+  - key or legend
+  - 1-2 paragraph description of what the plot represents
+  - link to the commented script for generating the plots
+- One person on your team must post a reply to the canvas "Peer Review Discussion Thread" that contains your research question
+  - e.g., RQ plot, interpretation for each RQ.
+
