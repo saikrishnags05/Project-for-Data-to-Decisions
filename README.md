@@ -163,7 +163,7 @@
 -   TODO project effort estimation
     -   TODO and who will do each task
     -   TODO the topics that each member will focus on for the background research assignment.
-        -   goal is to provide background for the rest of our work **RHONDA will gladly do any research**
+        -   goal is to provide background for the rest of our work
             -   will allows the instructor to provide early feedback
         -   must be more detailed than one deliverable per week per person
 -   TODO include communication aggreement
