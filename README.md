@@ -3,8 +3,6 @@
 
 # Project Work Plan
 
-[Current google sheets for the work plan][https://docs.google.com/spreadsheets/d/1RZkD75XsNOv30Naq4uv5EEBSCGWIzO4CzXXsQBYkhdg/edit?usp=sharing]
-
 ## Summary of Assignments and Due Dates
 
 |**Assignments**| **Dead line(4:30pm)**|
