@@ -142,7 +142,7 @@
 
 ## primary mode of communication
 - Teams
-  - [Chad Crowe](ccrowe@linkedin.com)
+  - Chad Crowe (ccrowe@linkedin.com)
   - Rhonda Silva ()
   - [Sai Krishna Gaduputi Subbammagari](https://www.linkedin.com/in/sai-krishna-gaduputi-subbammagari-b02613194/)
 
