@@ -19,7 +19,7 @@
 
 | Assignment | Due Date | Task | Assignee | Focus | Effort Estimation |
 | --- | --- | --- | --- | --- | --- |
-| RQs(research questions) | Thu Sep 23 2021 03:00:00 GMT-0400 (Eastern Daylight Time) |  |  |  |  |
+| RQs(research questions) | Thu Sep 23 |  |  |  |  |
 |  |  | Assemble Comprehensive Background Report for your Data | Chad |  |  |
 |  |  | Build necessary Context | Chad |  |  |
 |  |  | Write up client's organization mission and goals | Chad |  |  |
@@ -38,7 +38,7 @@
 |  |  | RQs to focus on | Rhonda |  |  |
 |  |  | Decisions, interventions, or actions that analysis can support | Rhonda |  |  |
 |  |  | Develop one content section for the report (2300+ words) with 10+ citations | Rhonda |  |  |
-| Data Cleaning Documentation | Thu Oct 28 2021 03:00:00 GMT-0400 (Eastern Daylight Time) |  |  |  |  |
+| Data Cleaning Documentation | Thu Oct 28 |  |  |  |  |
 |  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Chad |  |  |
 |  |  | specify any intellectual policy and constraints | Chad |  |  |
 |  |  | paragraph description of the metadata: what information is avilable to help you interpret the data? | Chad |  |  |
@@ -59,14 +59,14 @@
 |  |  | script or step-by-step textual description that documents your cleaning process | Rhonda |  |  |
 |  |  | contributor statement as a knitted HTML | Rhonda |  |  |
 |  |  | Ensure directory contains all deliverables in the same directory | Rhonda |  |  |
-| R Script | Thu Nov 11 2021 03:00:00 GMT-0500 (Eastern Standard Time) |  |  |  |  |
+| R Script | Thu Nov 11 |  |  |  |  |
 |  |  | Create and manage the knitted HTML document, created via RMarkdown |  |  |  |
 |  |  | Ensure the document includes comments |  |  |  |
 |  |  | Ensure the document contains key compoentns of the script |  |  |  |
 |  |  | Ensure the sources contain all details |  |  |  |
 |  |  | Create and ensure the knitted HTML contains the descriptive statistics |  |  |  |
 |  |  | Ensure everything ends up in the main deliverable directory |  |  |  |
-| R Plots | Thu Nov 18 2021 03:00:00 GMT-0500 (Eastern Standard Time) |  |  |  |  |
+| R Plots | Thu Nov 18 |  |  |  |  |
 |  |  | Create a plot for your research question | Chad |  |  |
 |  |  | Create a plot for your research question | Sai |  |  |
 |  |  | Create a plot for your research question | Rhonda |  |  |
@@ -79,7 +79,7 @@
 |  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Sai |  |  |
 |  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Rhonda |  |  |
 |  |  | One person on team must post all RQ plots and interpretations on canvas | Rhonda |  |  |
-| Project Presentation | Tue Dec 07 2021 03:00:00 GMT-0500 (Eastern Standard Time) |  |  |  |  |
+| Project Presentation | Tue Dec 07 |  |  |  |  |
 |  |  | Schedule Zoom Prerehearsal | Chad |  |  |
 |  |  | Schedule Zoom Presentation | Rhonda |  |  |
 |  |  | Slides: |  |  |  |
@@ -102,7 +102,7 @@
 |  |  | limitations of the data | Chad |  |  |
 |  |  | interpretations of the data | Chad |  |  |
 |  |  | what decisions should be made based on your analysis | Chad |  |  |
-| Git Repository Package | Tue Dec 07 2021 03:00:00 GMT-0500 (Eastern Standard Time) |  |  |  |  |
+| Git Repository Package | Tue Dec 07 |  |  |  |  |
 |  |  | Ensure all group project deliverables are included | Rhonda |  |  |
 |  |  | including: |  |  |  |
 |  |  | readme - license, team members, overview of package contents, proofreaders' sign-off statements | Chad |  |  |
