@@ -4,7 +4,7 @@
 |**Assignments**| **Dead line(4:30pm)**|
 | ------------- | ------------- |
 |project work Plan	|	September 16|
-|RQs(research questions) |	October 28|
+|RQs(research questions) |	September 23|
 |Data Cleaning Documentation | October 28|
 |R Script	|	November 11|
 |R Plots	|	November 18|
