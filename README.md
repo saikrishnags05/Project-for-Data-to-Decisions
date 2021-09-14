@@ -1,9 +1,11 @@
 
 # Table of Contents
 
-# Project Work Plan (WIP)
+# Project Work Plan
 
 [Current google sheets for the work plan][https://docs.google.com/spreadsheets/d/1RZkD75XsNOv30Naq4uv5EEBSCGWIzO4CzXXsQBYkhdg/edit?usp=sharing]
+
+## Summary of Assignments and Due Dates
 
 |**Assignments**| **Dead line(4:30pm)**|
 | ------------- | ------------- |
@@ -15,32 +17,127 @@
 |Project Presentation| December 7|
 |Git Repository Package	|	December 7|
 
+## Detailed Project Work Plan
+
 | Assignment | Due Date | Task | Assignee | Focus | Effort Estimation |
 | --- | --- | --- | --- | --- | --- |
 | RQs(research questions) | Thu Sep 23 2021 03:00:00 GMT-0400 (Eastern Daylight Time) |  |  |  |  |
-|  |  | Create RQ | Chad | RQ #1 | 1w |
-|  |  | Create RQ | Sai | RQ #2 | 1w |
-|  |  | Create RQ | Rhonda | RQ #3 | 1w |
+|  |  | Assemble Comprehensive Background Report for your Data | Chad |  |  |
+|  |  | Build necessary Context | Chad |  |  |
+|  |  | Write up client's organization mission and goals | Chad |  |  |
+|  |  | RQs to focus on | Chad |  |  |
+|  |  | Decisions, interventions, or actions that analysis can support | Chad |  |  |
+|  |  | Develop one content section for the report (2300+ words) with 10+ citations | Chad |  |  |
+|  |  | Assemble Comprehensive Background Report for your Data | Sai |  |  |
+|  |  | Build necessary Context | Sai |  |  |
+|  |  | Write up client's organization mission and goals | Sai |  |  |
+|  |  | RQs to focus on | Sai |  |  |
+|  |  | Decisions, interventions, or actions that analysis can support | Sai |  |  |
+|  |  | Develop one content section for the report (2300+ words) with 10+ citations | Sai |  |  |
+|  |  | Assemble Comprehensive Background Report for your Data | Rhonda |  |  |
+|  |  | Build necessary Context | Rhonda |  |  |
+|  |  | Write up client's organization mission and goals | Rhonda |  |  |
+|  |  | RQs to focus on | Rhonda |  |  |
+|  |  | Decisions, interventions, or actions that analysis can support | Rhonda |  |  |
+|  |  | Develop one content section for the report (2300+ words) with 10+ citations | Rhonda |  |  |
 | Data Cleaning Documentation | Thu Oct 28 2021 03:00:00 GMT-0400 (Eastern Daylight Time) |  |  |  |  |
-|  |  | Clean Text | Chad | Toward RQ #1 | 1w |
-|  |  | Clean Categories | Sai | Toward RQ #2 | 1w |
-|  |  | Clean Numbers | Rhonda | Toward RQ #3 | 1w |
+|  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Chad |  |  |
+|  |  | specify any intellectual policy and constraints | Chad |  |  |
+|  |  | paragraph description of the metadata: what information is avilable to help you interpret the data? | Chad |  |  |
+|  |  | Identify issues encountered with the data | Chad |  |  |
+|  |  | rational to remedy data, e.g., filling in missing fields | Chad |  |  |
+|  |  | script or step-by-step textual description that documents your cleaning process | Chad |  |  |
+|  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Sai |  |  |
+|  |  | specify any intellectual policy and constraints | Sai |  |  |
+|  |  | paragraph description of the metadata: what information is avilable to help you interpret the data? | Sai |  |  |
+|  |  | Identify issues encountered with the data | Sai |  |  |
+|  |  | rational to remedy data, e.g., filling in missing fields | Sai |  |  |
+|  |  | script or step-by-step textual description that documents your cleaning process | Sai |  |  |
+|  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Rhonda |  |  |
+|  |  | specify any intellectual policy and constraints | Rhonda |  |  |
+|  |  | paragraph description of the metadata: what information is avilable to help you interpret the data? | Rhonda |  |  |
+|  |  | Identify issues encountered with the data | Rhonda |  |  |
+|  |  | rational to remedy data, e.g., filling in missing fields | Rhonda |  |  |
+|  |  | script or step-by-step textual description that documents your cleaning process | Rhonda |  |  |
+|  |  | contributor statement as a knitted HTML | Rhonda |  |  |
+|  |  | Ensure directory contains all deliverables in the same directory | Rhonda |  |  |
 | R Script | Thu Nov 11 2021 03:00:00 GMT-0500 (Eastern Standard Time) |  |  |  |  |
-|  |  | R Script to Answer RQ #1 | Chad | RQ #1 | 1w |
-|  |  | R Script to Answer RQ #2 | Sai | RQ #2 | 1w |
-|  |  | R Script to Answer RQ #3 | Rhonda | RQ #3 | 1w |
+|  |  | Create and manage the knitted HTML document, created via RMarkdown |  |  |  |
+|  |  | Ensure the document includes comments |  |  |  |
+|  |  | Ensure the document contains key compoentns of the script |  |  |  |
+|  |  | Ensure the sources contain all details |  |  |  |
+|  |  | Create and ensure the knitted HTML contains the descriptive statistics |  |  |  |
+|  |  | Ensure everything ends up in the main deliverable directory |  |  |  |
 | R Plots | Thu Nov 18 2021 03:00:00 GMT-0500 (Eastern Standard Time) |  |  |  |  |
-|  |  | Plots for RQ #1 | Chad | RQ #1 | 1w |
-|  |  | Plots for RQ #1 | Sai | RQ #2 | 1w |
-|  |  | Plots for RQ #1 | Rhonda | RQ #3 | 1w |
+|  |  | Create a plot for your research question | Chad |  |  |
+|  |  | Create a plot for your research question | Sai |  |  |
+|  |  | Create a plot for your research question | Rhonda |  |  |
+|  |  | Include an interpretation for your research question. | Chad |  |  |
+|  |  | Include an interpretation for your research question. | Sai |  |  |
+|  |  | Include an interpretation for your research question. | Rhonda |  |  |
+|  |  | Ensure the submission include the knitted HTMl, an overview of the script, plots, contributorship statement, and URL on canvas | Rhonda |  |  |
+|  |  | Ensure readme.md links to the source R script | Sai |  |  |
+|  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Chad |  |  |
+|  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Sai |  |  |
+|  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Rhonda |  |  |
+|  |  | One person on team must post all RQ plots and interpretations on canvas | Rhonda |  |  |
 | Project Presentation | Tue Dec 07 2021 03:00:00 GMT-0500 (Eastern Standard Time) |  |  |  |  |
-|  |  | RQ #1 Slides | Chad | RQ #1 | 1w |
-|  |  | RQ #2 Slides | Sai | RQ #2 | 1w |
-|  |  | RQ #3 Slides | Rhonda | RQ #3 | 1w |
+|  |  | Schedule Zoom Prerehearsal | Chad |  |  |
+|  |  | Schedule Zoom Presentation | Rhonda |  |  |
+|  |  | Slides: |  |  |  |
+|  |  | where the data is from | Rhonda |  |  |
+|  |  | why your question is important | Rhonda |  |  |
+|  |  | who should care | Rhonda |  |  |
+|  |  | how you used the data | Rhonda |  |  |
+|  |  | limitations of the data | Rhonda |  |  |
+|  |  | interpretations of the data | Rhonda |  |  |
+|  |  | what decisions should be made based on your analysis | Rhonda |  |  |
+|  |  | why your question is important | Sai |  |  |
+|  |  | who should care | Sai |  |  |
+|  |  | how you used the data | Sai |  |  |
+|  |  | limitations of the data | Sai |  |  |
+|  |  | interpretations of the data | Sai |  |  |
+|  |  | what decisions should be made based on your analysis | Sai |  |  |
+|  |  | why your question is important | Chad |  |  |
+|  |  | who should care | Chad |  |  |
+|  |  | how you used the data | Chad |  |  |
+|  |  | limitations of the data | Chad |  |  |
+|  |  | interpretations of the data | Chad |  |  |
+|  |  | what decisions should be made based on your analysis | Chad |  |  |
 | Git Repository Package | Tue Dec 07 2021 03:00:00 GMT-0500 (Eastern Standard Time) |  |  |  |  |
-|  |  | GitHub Summary for RQ #1 | Chad | RQ #1 | 1w |
-|  |  | GitHub Summary for RQ #2 | Sai | RQ #2 | 1w |
-|  |  | GitHub Summary for RQ #3 | Rhonda | RQ #3 | 1w |
+|  |  | Ensure all group project deliverables are included | Rhonda |  |  |
+|  |  | including: |  |  |  |
+|  |  | readme - license, team members, overview of package contents, proofreaders' sign-off statements | Chad |  |  |
+|  |  | fully-commented html document from R both R Script and R Plots | Sai |  |  |
+|  |  | data scripts and data source locations | Rhonda |  |  |
+|  |  | overview-level script and results for basic stats and visualizations | Rhonda |  |  |
+|  |  | fully commented, comprehensive analysis and plotting script in R | Sai |  |  |
+|  |  | audience profile in markdown | Rhonda |  |  |
+|  |  | written summary (2000+ words) as html with audience and decisions your analysis targets, include any components from background research needed to support this. | Chad |  |  |
+|  |  | basic descriptions and source data processing | Chad |  |  |
+|  |  | overview summary of answers to RQs with supporting plots and statistical results | Chad |  |  |
+|  |  | 2-4 figures from your analysis, generated with R | Chad |  |  |
+|  |  | interpretation of the plots | Chad |  |  |
+|  |  | persuasive argument for a decision the audience should make based on your results | Chad |  |  |
+|  |  | a word count at the end, not including references | Chad |  |  |
+|  |  | written summary (2000+ words) as html with audience and decisions your analysis targets, include any components from background research needed to support this. | Sai |  |  |
+|  |  | basic descriptions and source data processing | Sai |  |  |
+|  |  | overview summary of answers to RQs with supporting plots and statistical results | Sai |  |  |
+|  |  | 2-4 figures from your analysis, generated with R | Sai |  |  |
+|  |  | interpretation of the plots | Sai |  |  |
+|  |  | persuasive argument for a decision the audience should make based on your results | Sai |  |  |
+|  |  | a word count at the end, not including references | Sai |  |  |
+|  |  | written summary (2000+ words) as html with audience and decisions your analysis targets, include any components from background research needed to support this. | Rhonda |  |  |
+|  |  | basic descriptions and source data processing | Rhonda |  |  |
+|  |  | overview summary of answers to RQs with supporting plots and statistical results | Rhonda |  |  |
+|  |  | 2-4 figures from your analysis, generated with R | Rhonda |  |  |
+|  |  | interpretation of the plots | Rhonda |  |  |
+|  |  | persuasive argument for a decision the audience should make based on your results | Rhonda |  |  |
+|  |  | a word count at the end, not including references | Rhonda |  |  |
+|  |  | Markdown document with contributorship for the individual deliverables (who did what) | Sai |  |  |
+|  |  | and change log for github | Sai |  |  |
+|  |  | list updates made, based on feedback | Chad |  |  |
+
 
 
 # Communication Agreement
