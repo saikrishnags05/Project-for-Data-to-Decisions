@@ -90,3 +90,22 @@
 - Each person develops one content section for the report (2300+ word range).
   - proper citations is required (10+).           
 
+## Data Cleaning Documentation
+- submit as a complete document
+- 1-2 paragraph text for each data source
+  - how much
+  - where from
+  - what it contains
+  - citations for each source too
+  - how many rows and columns
+    - and sample headers
+- specify any intellectual policy constraints or lack thereof (licensing)
+- paragraph description of the metadata: what information is available to help you interpret and understand the data?
+- identify issues we encountered with the data, e.g., missing values, unstandardized content, entity matching, integration
+- rationale for the steps you're taking to remedy data, e.g., how to fill in empty fields, the method we chose and why
+- script or step-by-step textual description that documents your cleaning process with enough detail for replication.
+- contributorship statement
+  - submit as a knitted HTML document
+  - which provides an overview of the script             
+  - source RMarkdown document must include the full script and be in the same deliverable directory.
+
