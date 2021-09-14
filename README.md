@@ -145,3 +145,30 @@
   - limitations of the data
   - interpretations of the data
   - what decisions should be made based on your analysis
+
+## Git Repository Package
+- will be graded very closely!!!
+- create a directory with all deliverables, including:
+  - brief but descriptive Readme.md, includes a license for your work
+    - name of team members
+    - overview of package contents
+    - proofreaders' sign-off statement
+  - Fully commted HTML document from R, both with RScript and R Plots
+    - data cleaning and/or scripts, include data source location
+    - overview-level script and results for basic stats and visualizations, written summary too.
+  - fully commented, comprehensive analysis and plotting script in R
+  - Audience profile in markdown
+  - written summary (2000+ words) as HTML, including:
+    - audience and decisions your analysis targets
+      - incorporate any components from your background research that you need to support this
+    - basic descriptions of the source data and processing
+    - overview summary of answers to your RQs with supporting plots and statistical results
+  - 2-4 figures (plots) from your analysis, generated with R.
+  - interpretations of the plots
+  - persuasive argument for a decision your specific audience should make based on your results
+  - a word count at the end, not including references
+  - all relevant references, e.g., data sources and background section.
+  - brief Markdown document summarizing contributorship to the individual deliverables for the entire project (who did what), should match with Git version history.
+    - and change log
+    - list updates made, based on feedback
+  - e.g., it should contain all UPDATED versions of all your other deliverables.
