@@ -122,7 +122,6 @@
 |  |  | interpretation of the plots | Sai |  |  |
 |  |  | persuasive argument for a decision the audience should make based on your results | Sai |  |  |
 |  |  | a word count at the end, not including references | Sai |  |  |
-|  |  | written summary (2000+ words) as html with audience and decisions your analysis targets, include any components from background research needed to support this. | Rhonda |  |  |
 |  |  | basic descriptions and source data processing | Rhonda |  |  |
 |  |  | overview summary of answers to RQs with supporting plots and statistical results | Rhonda |  |  |
 |  |  | 2-4 figures from your analysis, generated with R | Rhonda |  |  |
