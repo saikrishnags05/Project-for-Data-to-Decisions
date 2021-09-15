@@ -25,19 +25,16 @@
 |  |  | Write up client's organization mission and goals | Chad |  |  |
 |  |  | RQs to focus on | Chad |  |  |
 |  |  | Decisions, interventions, or actions that analysis can support | Chad |  |  |
-|  |  | Develop one content section for the report (2300+ words) with 10+ citations | Chad |  |  |
 |  |  | Assemble Comprehensive Background Report for your Data | Sai |  |  |
 |  |  | Build necessary Context | Sai |  |  |
 |  |  | Write up client's organization mission and goals | Sai |  |  |
 |  |  | RQs to focus on | Sai |  |  |
 |  |  | Decisions, interventions, or actions that analysis can support | Sai |  |  |
-|  |  | Develop one content section for the report (2300+ words) with 10+ citations | Sai |  |  |
 |  |  | Assemble Comprehensive Background Report for your Data | Rhonda |  |  |
 |  |  | Build necessary Context | Rhonda |  |  |
 |  |  | Write up client's organization mission and goals | Rhonda |  |  |
 |  |  | RQs to focus on | Rhonda |  |  |
 |  |  | Decisions, interventions, or actions that analysis can support | Rhonda |  |  |
-|  |  | Develop one content section for the report (2300+ words) with 10+ citations | Rhonda |  |  |
 | Data Cleaning Documentation | Thu Oct 28 |  |  |  |  |
 |  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Chad |  |  |
 |  |  | specify any intellectual policy and constraints | Chad |  |  |
@@ -143,7 +140,7 @@
 ## primary mode of communication
 - Teams
   - Chad Crowe (ccrowe@linkedin.com)
-  - Rhonda Silva ()
+  - Rhonda Silva (rsilva6871@gmail.com)
   - Sai Krishna Gaduputi Subbammagari (sgaduputisubbammag@unomaha.edu)
 
 ## plan for a period of responding
