@@ -24,7 +24,7 @@
 |  |  | Write up client's organization mission and goals | Chad |  |  |
 |  |  | RQs to focus on | Chad |  |  |
 |  |  | Decisions, interventions, or actions that analysis can support | Chad |  |  |
-|  |  | Build necessary Context | Sai |  |  |
+|  |  | Build necessary Context | Sai |  | 1day |
 |  |  | Write up client's organization mission and goals | Sai |  | 1 hr |
 |  |  | RQs to focus on | Sai |  | 1 day |
 |  |  | Decisions, interventions, or actions that analysis can support | Sai |  | 1 day |
