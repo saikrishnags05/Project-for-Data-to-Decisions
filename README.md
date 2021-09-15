@@ -139,7 +139,7 @@
 ## primary mode of communication
 - Teams
   - Chad Crowe (ccrowe@linkedin.com)
-  - Rhonda Silva (rsilva6871@gmail.com)
+  - Rhonda Silva (rhondasilva@unomaha.edu)
   - Sai Krishna Gaduputi Subbammagari (sgaduputisubbammag@unomaha.edu)
 
 ## plan for a period of responding
