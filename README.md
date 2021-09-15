@@ -20,18 +20,14 @@
 | Assignment | Due Date | Task | Assignee | Focus | Effort Estimation |
 | --- | --- | --- | --- | --- | --- |
 | RQs(research questions) | Thu Sep 23 |  |  |  |  |
-|  |  | Assemble Comprehensive Background Report for your Data | Chad |  |  |
 |  |  | Build necessary Context | Chad |  |  |
 |  |  | Write up client's organization mission and goals | Chad |  |  |
 |  |  | RQs to focus on | Chad |  |  |
 |  |  | Decisions, interventions, or actions that analysis can support | Chad |  |  |
-|  |  | Assemble Comprehensive Background Report for your Data | Sai |  |  |
 |  |  | Build necessary Context | Sai |  |  |
 |  |  | Write up client's organization mission and goals | Sai |  |  |
 |  |  | RQs to focus on | Sai |  |  |
 |  |  | Decisions, interventions, or actions that analysis can support | Sai |  |  |
-|  |  | Assemble Comprehensive Background Report for your Data | Rhonda |  |  |
-|  |  | Build necessary Context | Rhonda |  |  |
 |  |  | Write up client's organization mission and goals | Rhonda |  |  |
 |  |  | RQs to focus on | Rhonda |  |  |
 |  |  | Decisions, interventions, or actions that analysis can support | Rhonda |  |  |
