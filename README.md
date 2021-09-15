@@ -28,9 +28,9 @@
 |  |  | Write up client's organization mission and goals | Sai |  |  |
 |  |  | RQs to focus on | Sai |  |  |
 |  |  | Decisions, interventions, or actions that analysis can support | Sai |  |  |
-|  |  | Write up client's organization mission and goals | Rhonda |  |  |
-|  |  | RQs to focus on | Rhonda |  |  |
-|  |  | Decisions, interventions, or actions that analysis can support | Rhonda |  |  |
+|  |  | Write up client's organization mission and goals | Rhonda |  |30 min  |
+|  |  | RQs to focus on | Rhonda |  | 2 days |
+|  |  | Decisions, interventions, or actions that analysis can support | Rhonda |  | 2 days |
 | Data Cleaning Documentation | Thu Oct 28 |  |  |  |  |
 |  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Chad |  |  |
 |  |  | specify any intellectual policy and constraints | Chad |  |  |
@@ -44,14 +44,14 @@
 |  |  | Identify issues encountered with the data | Sai |  |  |
 |  |  | rational to remedy data, e.g., filling in missing fields | Sai |  |  |
 |  |  | script or step-by-step textual description that documents your cleaning process | Sai |  |  |
-|  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Rhonda |  |  |
-|  |  | specify any intellectual policy and constraints | Rhonda |  |  |
-|  |  | paragraph description of the metadata: what information is avilable to help you interpret the data? | Rhonda |  |  |
-|  |  | Identify issues encountered with the data | Rhonda |  |  |
-|  |  | rational to remedy data, e.g., filling in missing fields | Rhonda |  |  |
-|  |  | script or step-by-step textual description that documents your cleaning process | Rhonda |  |  |
-|  |  | contributor statement as a knitted HTML | Rhonda |  |  |
-|  |  | Ensure directory contains all deliverables in the same directory | Rhonda |  |  |
+|  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Rhonda |  | 2 days |
+|  |  | specify any intellectual policy and constraints | Rhonda |  | 2 days |
+|  |  | paragraph description of the metadata: what information is avilable to help you interpret the data? | Rhonda |  | 2 days |
+|  |  | Identify issues encountered with the data | Rhonda |  | 2 days |
+|  |  | rational to remedy data, e.g., filling in missing fields | Rhonda |  | 2 days |
+|  |  | script or step-by-step textual description that documents your cleaning process | Rhonda |  | 1 day |
+|  |  | contributor statement as a knitted HTML | Rhonda |  | 1 day |
+|  |  | Ensure directory contains all deliverables in the same directory | Rhonda |  | 1 day |
 | R Script | Thu Nov 11 |  |  |  |  |
 |  |  | Create and manage the knitted HTML document, created via RMarkdown |  |  |  |
 |  |  | Ensure the document includes comments |  |  |  |
@@ -62,16 +62,16 @@
 | R Plots | Thu Nov 18 |  |  |  |  |
 |  |  | Create a plot for your research question | Chad |  |  |
 |  |  | Create a plot for your research question | Sai |  |  |
-|  |  | Create a plot for your research question | Rhonda |  |  |
+|  |  | Create a plot for your research question | Rhonda |  | 1 day |
 |  |  | Include an interpretation for your research question. | Chad |  |  |
 |  |  | Include an interpretation for your research question. | Sai |  |  |
-|  |  | Include an interpretation for your research question. | Rhonda |  |  |
-|  |  | Ensure the submission include the knitted HTMl, an overview of the script, plots, contributorship statement, and URL on canvas | Rhonda |  |  |
+|  |  | Include an interpretation for your research question. | Rhonda |  | 2 days |
+|  |  | Ensure the submission include the knitted HTMl, an overview of the script, plots, contributorship statement, and URL on canvas | Rhonda |  | 1 day |
 |  |  | Ensure readme.md links to the source R script | Sai |  |  |
 |  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Chad |  |  |
 |  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Sai |  |  |
 |  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Rhonda |  |  |
-|  |  | One person on team must post all RQ plots and interpretations on canvas | Rhonda |  |  |
+|  |  | One person on team must post all RQ plots and interpretations on canvas | Rhonda |  | 1 day |
 | Project Presentation | Tue Dec 07 |  |  |  |  |
 |  |  | Schedule Zoom Prerehearsal | Chad |  |  |
 |  |  | Schedule Zoom Presentation | Rhonda |  |  |
