@@ -151,21 +151,4 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
   - It should be noted that miscommunication is common on team-projects, even expected.
     - If miscommunication occurs, please communicate that 1. miscommunication has occurred, 2. what the miscommunication is, and 3. the desired communication from the other party. The other party has 72 hours to reply. If the reply is insufficient then the team can CC Dr. Grover via email concerning the communication issue within the team.
 
-# Project Work Plan Checklist
-
--   Homework Due on 9/16/21
--   TODO add timeline for completing project
--   TODO project effort estimation
-    -   TODO and who will do each task
-    -   TODO the topics that each member will focus on for the background research assignment.
-        -   goal is to provide background for the rest of our work
-            -   will allows the instructor to provide early feedback
-        -   must be more detailed than one deliverable per week per person
--   TODO include communication aggreement
-    -   what mode we will primarily use for communications
-    -   TODO include an agreed-upon time period for responding.
-    -   TODO and a plan for when someone does not respond.
--   TODO make sure the document is in markdown
--   TODO make a git repository with this information in our git repository.
--   TODO make sure the repo is up-to-notch on what the professor expects, e.g., license, copyright year and names
 
