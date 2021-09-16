@@ -28,10 +28,10 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 |  |  | Write up client's organization mission and goals | Chad | help establish context | 1 hr |
 |  |  | RQs to focus on | Chad | choose the most useful RQs out of the ones I create via brainstorming | 30 min |
 |  |  | Decisions, interventions, or actions that analysis can support | Chad | Goal is to decide on whether the RQ can be answered and applicable for our reserach goals. | 1 hr |
-|  |  | Build necessary Context | Sai |  | 1day |
-|  |  | Write up client's organization mission and goals | Sai |  | 1 hr |
-|  |  | RQs to focus on | Sai |  | 1 day |
-|  |  | Decisions, interventions, or actions that analysis can support | Sai |  | 1 day |
+|  |  | Build necessary Context | Sai | make a research question based on the data | 1day |
+|  |  | Write up client's organization mission and goals | Sai | get the data if get better idea | 1 hr |
+|  |  | RQs to focus on | Sai | get a best research question based on the data | 1 day |
+|  |  | Decisions, interventions, or actions that analysis can support | Sai | select the best RQ's from a list | 1 day |
 |  |  | Write up client's organization mission and goals | Rhonda |  |30 min  |
 |  |  | RQs to focus on | Rhonda |  | 2 days |
 |  |  | Decisions, interventions, or actions that analysis can support | Rhonda |  | 2 days |
@@ -42,7 +42,7 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 |  |  | Identify issues encountered with the data | Chad | Delineate the issues we encountered for anyone who might try to repeat the process | 2 hr |
 |  |  | rational to remedy data, e.g., filling in missing fields | Chad | How we remedied the issues we ran into | 1 hr |
 |  |  | script or step-by-step textual description that documents your cleaning process | Chad | Description of our cleaning process in a detailed way that someone can follow.  Also time to clean up the code so it is easy to follow. | 2 hr |
-|  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Sai |  | 3 days |
+|  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Sai | understaing the data and writeing a proper contant  | 3 days |
 |  |  | specify any intellectual policy and constraints | Sai |  | 2 days |
 |  |  | paragraph description of the metadata: what information is avilable to help you interpret the data? | Sai |  | 3 days |
 |  |  | Identify issues encountered with the data | Sai |  | 1 day |
@@ -113,11 +113,11 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 |  |  | 2-4 figures from your analysis, generated with R | Chad | Copy over previously created figures | 30 min |
 |  |  | interpretation of the plots | Chad | copy over our interpretation | 30 min |
 |  |  | persuasive argument for a decision the audience should make based on your results | Chad | Ensure the argument for the decision makes sense and is backed up by data. | 1 hr |
-|  |  | basic descriptions and source data processing | Sai |  |  |
-|  |  | overview summary of answers to RQs with supporting plots and statistical results | Sai |  |  |
-|  |  | 2-4 figures from your analysis, generated with R | Sai |  |  |
-|  |  | interpretation of the plots | Sai |  |  |
-|  |  | persuasive argument for a decision the audience should make based on your results | Sai |  |  |
+|  |  | basic descriptions and source data processing | Sai |  | 1day |
+|  |  | overview summary of answers to RQs with supporting plots and statistical results | Sai |  | 8 hrs |
+|  |  | 2-4 figures from your analysis, generated with R | Sai |  |  1day|
+|  |  | interpretation of the plots | Sai |  |3 hrs  |
+|  |  | persuasive argument for a decision the audience should make based on your results | Sai |  | 12 hrs |
 |  |  | a word count at the end, not including references | Sai |  |  |
 |  |  | basic descriptions and source data processing | Rhonda |  | 1 day |
 |  |  | overview summary of answers to RQs with supporting plots and statistical results | Rhonda |  | 1 day  |
@@ -125,8 +125,8 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 |  |  | interpretation of the plots | Rhonda |  | 1 day |
 |  |  | persuasive argument for a decision the audience should make based on your results | Rhonda |  | 1 day |
 |  |  | a word count at the end, not including references | Rhonda |  | 1 hr |
-|  |  | Markdown document with contributorship for the individual deliverables (who did what) | Sai |  |  |
-|  |  | and change log for github | Sai |  |  |
+|  |  | Markdown document with contributorship for the individual deliverables (who did what) | Sai |  | 1day |
+|  |  | and change log for github | Sai |  | 1day |
 |  |  | list updates made, based on feedback | Chad | Need to list all changes we made based on the updates I performed, upload to a shared directory | 2 hr |
 |  |  | list updates made, based on feedback | Rhonda | Need to list all changes we made based on the updates I performed, upload to a shared directory | 2 hr |
 |  |  | list updates made, based on feedback | Sai | Need to list all changes we made based on the updates I performed, upload to a shared directory | 2 hr |
