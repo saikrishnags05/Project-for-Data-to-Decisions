@@ -17,6 +17,8 @@
 
 ## Detailed Project Work Plan
 
+Note that tasks are in-order for completion.  While many tasks can be completed in parallel, those tasks which depend on one another are listed in order for each assignment.  At a minimum, the group assumes 1 day of work, at minimum, will occur between class dates.  This estimation will be used to communicate expectations for the task completion, ordered by row, for each assignment.
+
 | Assignment | Due Date | Task | Assignee | Focus | Effort Estimation |
 | --- | --- | --- | --- | --- | --- |
 | RQs(research questions) | Thu Sep 23 |  |  |  |  |
