@@ -1,6 +1,8 @@
 
 # Table of Contents
 
+Copyright 2021 Rhonda Silva, Chad Crowe, Sai Krishna Gaduputi Subbammagari
+
 # Project Work Plan
 
 ## Summary of Assignments and Due Dates
