@@ -70,19 +70,19 @@
 |  |  | Ensure readme.md links to the source R script | Sai |  | 1 hr |
 |  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Chad |  |  |
 |  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Sai |  | 12 hrs |
-|  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Rhonda |  |  |
+|  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Rhonda |  | 1 day |
 |  |  | One person on team must post all RQ plots and interpretations on canvas | Rhonda |  | 1 day |
 | Project Presentation | Tue Dec 07 |  |  |  |  |
 |  |  | Schedule Zoom Prerehearsal | Chad |  |  |
-|  |  | Schedule Zoom Presentation | Rhonda |  |  |
+|  |  | Schedule Zoom Presentation | Rhonda |  | 15 min |
 |  |  | Slides: |  |  |  |
-|  |  | where the data is from | Rhonda |  |  |
-|  |  | why your question is important | Rhonda |  |  |
-|  |  | who should care | Rhonda |  |  |
-|  |  | how you used the data | Rhonda |  |  |
-|  |  | limitations of the data | Rhonda |  |  |
-|  |  | interpretations of the data | Rhonda |  |  |
-|  |  | what decisions should be made based on your analysis | Rhonda |  |  |
+|  |  | where the data is from | Rhonda |  |15 min  |
+|  |  | why your question is important | Rhonda |  | 15 min |
+|  |  | who should care | Rhonda |  |15 min  |
+|  |  | how you used the data | Rhonda |  | 15 min |
+|  |  | limitations of the data | Rhonda |  |15 min  |
+|  |  | interpretations of the data | Rhonda |  |1 hr  |
+|  |  | what decisions should be made based on your analysis | Rhonda |  | 1 day  |
 |  |  | why your question is important | Sai |  |  |
 |  |  | who should care | Sai |  |  |
 |  |  | how you used the data | Sai |  |  |
@@ -96,14 +96,14 @@
 |  |  | interpretations of the data | Chad |  |  |
 |  |  | what decisions should be made based on your analysis | Chad |  |  |
 | Git Repository Package | Tue Dec 07 |  |  |  |  |
-|  |  | Ensure all group project deliverables are included | Rhonda |  |  |
+|  |  | Ensure all group project deliverables are included | Rhonda |  |1 hr  |
 |  |  | including: |  |  |  |
 |  |  | readme - license, team members, overview of package contents, proofreaders' sign-off statements | Chad |  |  |
 |  |  | fully-commented html document from R both R Script and R Plots | Sai |  |  |
-|  |  | data scripts and data source locations | Rhonda |  |  |
-|  |  | overview-level script and results for basic stats and visualizations | Rhonda |  |  |
+|  |  | data scripts and data source locations | Rhonda |  | 1hr |
+|  |  | overview-level script and results for basic stats and visualizations | Rhonda |  | 1hr |
 |  |  | fully commented, comprehensive analysis and plotting script in R | Sai |  |  |
-|  |  | audience profile in markdown | Rhonda |  |  |
+|  |  | audience profile in markdown | Rhonda |  |15 min  |
 |  |  | written summary (2000+ words) as html with audience and decisions your analysis targets, include any components from background research needed to support this. | Chad |  |  |
 |  |  | basic descriptions and source data processing | Chad |  |  |
 |  |  | overview summary of answers to RQs with supporting plots and statistical results | Chad |  |  |
@@ -118,12 +118,12 @@
 |  |  | interpretation of the plots | Sai |  |  |
 |  |  | persuasive argument for a decision the audience should make based on your results | Sai |  |  |
 |  |  | a word count at the end, not including references | Sai |  |  |
-|  |  | basic descriptions and source data processing | Rhonda |  |  |
-|  |  | overview summary of answers to RQs with supporting plots and statistical results | Rhonda |  |  |
-|  |  | 2-4 figures from your analysis, generated with R | Rhonda |  |  |
-|  |  | interpretation of the plots | Rhonda |  |  |
-|  |  | persuasive argument for a decision the audience should make based on your results | Rhonda |  |  |
-|  |  | a word count at the end, not including references | Rhonda |  |  |
+|  |  | basic descriptions and source data processing | Rhonda |  | 1 day |
+|  |  | overview summary of answers to RQs with supporting plots and statistical results | Rhonda |  | 1 day  |
+|  |  | 2-4 figures from your analysis, generated with R | Rhonda |  | 1 day |
+|  |  | interpretation of the plots | Rhonda |  | 1 day |
+|  |  | persuasive argument for a decision the audience should make based on your results | Rhonda |  | 1 day |
+|  |  | a word count at the end, not including references | Rhonda |  | 1 hr |
 |  |  | Markdown document with contributorship for the individual deliverables (who did what) | Sai |  |  |
 |  |  | and change log for github | Sai |  |  |
 |  |  | list updates made, based on feedback | Chad |  |  |
