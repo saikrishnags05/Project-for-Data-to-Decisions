@@ -32,9 +32,9 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 |  |  | Write up client's organization mission and goals | Sai | get the data if get better idea | 1 hr |
 |  |  | RQs to focus on | Sai | get a best research question based on the data | 1 day |
 |  |  | Decisions, interventions, or actions that analysis can support | Sai | select the best RQ's from a list | 1 day |
-|  |  | Write up client's organization mission and goals | Rhonda |  |30 min  |
-|  |  | RQs to focus on | Rhonda |  | 2 days |
-|  |  | Decisions, interventions, or actions that analysis can support | Rhonda |  | 2 days |
+|  |  | Write up client's organization mission and goals | Rhonda |Find this on the customers website  |30 min  |
+|  |  | RQs to focus on | Rhonda | come up with questions regarding the data | 2 days |
+|  |  | Decisions, interventions, or actions that analysis can support | Rhonda | select the best RQ's | 2 days |
 | Data Cleaning Documentation | Thu Oct 28 |  |  |  |  |
 |  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Chad |  |  |
 |  |  | specify any intellectual policy and constraints | Chad | Make sure we are being correct with intellectual property. | 1 hr |
