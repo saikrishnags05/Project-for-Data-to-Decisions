@@ -73,7 +73,7 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 |  |  | Ensure the submission include the knitted HTMl, an overview of the script, plots, contributorship statement, and URL on canvas | Rhonda |  | 1 day |
 |  |  | Ensure readme.md links to the source R script | Sai |  | 1 hr |
 |  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Chad | Learn how R plot labels work, include this in the output. | 2 hr |
-|  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Sai |  | 12 hrs |
+|  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Sai | all will be done with ggplot | 12 hrs |
 |  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Rhonda |  | 1 day |
 |  |  | One person on team must post all RQ plots and interpretations on canvas | Rhonda |  | 1 day |
 | Project Presentation | Tue Dec 07 |  |  |  |  |
@@ -87,7 +87,7 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 |  |  | limitations of the data | Rhonda |  |15 min  |
 |  |  | interpretations of the data | Rhonda |  |1 hr  |
 |  |  | what decisions should be made based on your analysis | Rhonda |  | 1 day  |
-|  |  | why your question is important | Sai |  |  |
+|  |  | why your question is important | Sai | look into the data | 4 hrs |
 |  |  | who should care | Sai |  |  |
 |  |  | how you used the data | Sai |  |  |
 |  |  | limitations of the data | Sai |  |  |
