@@ -21,7 +21,7 @@ individuals and families that ultimately create the future of our community.
 ## Research Question 3
 ### **Relation between the gander whether they joined the with respect to program event according to locations.**
 
-#### **why they Research Question ?**
+#### **why they Research Question?**
 
 My Research Question can help the organization to identify the group of people who are taking part in the events 
 which are organization as  **Counseling and Prevention**. 
@@ -33,7 +33,7 @@ which are organization as  **Counseling and Prevention**.
      
   * This will help to Heartland Family Service to get an idea about the types of genders who attended the meeting.
  
-       * There are 3 programs which were orginased by Heartland Family Service.
+       * There are 3 programs which were organized by Heartland Family Service.
             * Mental Health
             * Substance Use
             * Gambling
@@ -44,14 +44,15 @@ which are organization as  **Counseling and Prevention**.
          
        * If increase the event with different in location, we can attract a greater number of people towards the HFS.
        
-#### **why they matter ?** 
+#### **why they matter?** 
 
 * By doing this kind of research question we can increase the number of events in location where the number of 
   participations in even is less according to the gender and location.
   
-* HFS can also increase there level of programs and service.
+* HFS can also increase their level of programs and service.
 
-
+# Website
+[Heartland Family Service organizational websites](https://www.heartlandfamilyservice.org/)
 
 
 
