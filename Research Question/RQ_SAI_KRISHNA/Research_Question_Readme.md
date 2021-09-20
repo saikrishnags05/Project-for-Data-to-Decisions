@@ -50,7 +50,7 @@ which are orgination as **Counseling and Prevention**.
 * By doing this kind of research question we can increase the number of event in location where the number of 
   participation in even is less according to the gender and location.
   
-* HFS can also increase there level of 
+* HFS can also increase there level of publicity and service
 
 
 
