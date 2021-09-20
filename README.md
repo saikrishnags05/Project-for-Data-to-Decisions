@@ -5,6 +5,9 @@ Copyright 2021 Rhonda Silva, Chad Crowe, Sai Krishna Gaduputi Subbammagari
 
 # Project Work Plan
 
+## Team Name:
+### The Sexy Librarians
+
 ## Summary of Assignments and Due Dates
 
 |**Assignments**| **Dead line(4:30pm)**|
