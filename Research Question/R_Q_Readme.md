@@ -12,5 +12,5 @@
 |S No|Author of the ouestion| Question|
 | ------------- | ------------- | ------------- |
 |1| Chad| |
-|2| Rhonda | |
+|2| Rhonda |Which program unit has more billing minutes/hours |
 |3| Sai krishna | Relation between the gander whether they got billed or paid the amount with respect to program event.|
