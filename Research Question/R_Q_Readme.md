@@ -2,7 +2,7 @@
 ## Research Question
 |S No|Author of the ouestion| Question|
 | ------------- | ------------- | ------------- |
-|1| Chad| Why does the duration for repeat customers decrease over time and what are the implications on how a greater familiar with the HFS process and programs affects customer efficiency and outcomes within HFS? |
+|1| Chad| Why does the duration for repeat customers decrease over time and what are the implications on how a greater familiar with the HFS process and programs affects customer efficiency and outcomes for HFS? |
 |2| Rhonda |How does the percentage of Straight men and women compare to the percentage of all other men and women seeking services? |
 |3| Sai krishna |Relation between the gander whether they joined the with respect to program event according to locations|
 
