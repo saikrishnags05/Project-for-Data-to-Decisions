@@ -52,6 +52,10 @@ which are organization as  **Counseling and Prevention**.
 
 ### **How does the percentage of Hispanic/Latin men and women compare to the percentage of all other men and women seeking services?**
 
+This research question will help explore the relationship of clients identifying as Hispanic and the type of services received and the location the service was received. We also need to know their primary language and if they would like counseling/literature in that language.
+
+By asking this question we can find out if their should be bilingual employees at each location or one location with many bilingual employess.
+
 ## Extra Questions( Optional):
 |S No|Author of the ouestion| Question|
 | ------------- | ------------- | ------------- |
