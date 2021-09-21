@@ -5,6 +5,8 @@ Copyright 2021 Rhonda Silva, Chad Crowe, Sai Krishna Gaduputi Subbammagari
 
 # Assignments
 
+[Research Questions](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Research%20Question/R_Q_Readme.md)
+
 ## Project Work Plan
 
 ### Team Name: The Sexy Librarians
