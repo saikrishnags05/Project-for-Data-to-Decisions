@@ -2,7 +2,7 @@
 ## Research Question
 |S No|Author of the ouestion| Question|
 | ------------- | ------------- | ------------- |
-|1| Chad| If the success outcomes are governed by showing to appointments and lower than average duration times, why are the success outcomes higher when persons receive more time with staff whose pay is higher than the average across each service? What are the implications for HFS' usage of higher-paid staff positions for producing a higher success outcome for more at-risk patients? What is the potential increase in expected return if HFS increases the facetime of higher-paid staff with more at-risk patients? |
+|1| Chad| Why are the success outcomes higher when persons receive more time with staff whose pay is higher than the average across each service? What are the implications for HFS' usage of higher-paid staff positions for producing a higher success outcome for more at-risk patients? What is the potential increase in expected return if HFS increases the facetime of higher-paid staff with more at-risk patients?  We define success outcomes as those with lower than average duration times who also show for their appointments. |
 |2| Rhonda |How does the percentage of Straight men and women compare to the percentage of all other men and women seeking services? |
 |3| Sai krishna |Relation between the gander whether they joined the with respect to program event according to locations|
 
