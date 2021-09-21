@@ -61,15 +61,15 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 | R Plots | Thu Nov 18 |  |  |  |  |
 |  |  | Create a plot for your research question | Chad | Learn about R plots and generate a useful and working plot. | 3 hr |
 |  |  | Create a plot for your research question | Sai | learn plot models in R with help of ggplots |1 day  |
-|  |  | Create a plot for your research question | Rhonda |  | 1 day |
+|  |  | Create a plot for your research question | Rhonda |Learn about R plots  | 1 day |
 |  |  | Include an interpretation for your research question. | Chad | Write up an interpretation about what the research question means. | 1 hr |
 |  |  | Include an interpretation for your research question. | Sai | breaf note on research question | 1 day |
-|  |  | Include an interpretation for your research question. | Rhonda |  | 2 days |
+|  |  | Include an interpretation for your research question. | Rhonda | describe purpose of research question | 2 days |
 |  |  | Ensure the submission include the knitted HTMl, an overview of the script, plots, contributorship statement, and URL on canvas | Rhonda |  | 1 day |
 |  |  | Ensure readme.md links to the source R script | Sai |  | 1 hr |
 |  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Chad | Learn how R plot labels work, include this in the output. | 2 hr |
 |  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Sai | all will be done with ggplot | 12 hrs |
-|  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Rhonda |  | 1 day |
+|  |  | Ensure your plot includes title, label, scale values, key/legend, 1-2 paragraph description, and link to the commented script for generating the plots | Rhonda |Learn R plot labels  | 1 day |
 |  |  | One person on team must post all RQ plots and interpretations on canvas | Rhonda |  | 1 day |
 | Project Presentation | Tue Dec 07 |  |  |  |  |
 |  |  | Schedule Zoom Prerehearsal | Chad | goal is to ensure our presentation runs smoothly and work out any issues. | 30 min |
