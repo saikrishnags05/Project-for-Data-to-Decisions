@@ -9,5 +9,5 @@ Copyright 2021 Rhonda Silva, Chad Crowe, Sai Krishna Gaduputi Subbammagari
 
 [Project Work Plan](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/ProjectWorkPlan/README.md)
 
-[Research Questions](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Research%20Question/R_Q_Readme.md)
+[Research Questions](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/ResearchQuestions/README.md)
 
