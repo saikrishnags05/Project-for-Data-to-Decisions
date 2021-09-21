@@ -3,7 +3,7 @@
 
 Copyright 2021 Rhonda Silva, Chad Crowe, Sai Krishna Gaduputi Subbammagari
 
-# Team Name: [The Sexy Librarians](https://www.youtube.com/watch?v=dQw4w9WgXcQ)
+# Group 4
 
 # Assignments
 
