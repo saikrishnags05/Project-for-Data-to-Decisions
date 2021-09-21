@@ -3,7 +3,7 @@
 |S No|Author of the ouestion| Question|
 | ------------- | ------------- | ------------- |
 |1| Chad| Why are the success outcomes higher when persons receive more time with staff whose pay is higher than the average across each service? What are the implications for HFS' usage of higher-paid staff positions for producing a higher success outcome for more at-risk patients? What is the potential increase in expected return if HFS increases the face-time of higher-paid staff with more at-risk patients?  We define success outcomes as those with lower than average duration times who also show for their appointments. |
-|2| Rhonda |How does the percentage of Straight men and women compare to the percentage of all other men and women seeking services? |
+|2| Rhonda |How does the percentage of Hispanic/Latin men and women compare to the percentage of all other men and women seeking services? |
 |3| Sai krishna |Find the relation between the events that took place in different location with respective to Gender.|
 
 ## Research Question Descriptions
@@ -49,6 +49,8 @@ which are organization as  **Counseling and Prevention**.
 
 
 ### Rhonda
+
+### **How does the percentage of Hispanic/Latin men and women compare to the percentage of all other men and women seeking services?**
 
 ## Extra Questions( Optional):
 |S No|Author of the ouestion| Question|
