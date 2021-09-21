@@ -8,6 +8,17 @@
 
 [Background Research Report](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Research%20Question/RQ_SAI_KRISHNA/Heartland%20Family%20Service%20background%20research%20report.docx)
 
+## Research Question Descriptions
+### Chad
+
+The research question is interesting because it explores the relationship between staff pay, success outcome by service, and at-risk patients. The research question provides an opportunity to understand whether time with staff whose salary is above the service's median increases person outcomes and decreases service duration. The second research question builds on the first and asks whether this "increased success rate" effect exists for the population most likely to miss appointments and have longer durations. The third research question seeks to apply the discovered effect to the current state of HFS and determine whether its application would benefit the organization.
+
+The research questions are useful for decision-makers in two ways; it explores a phenomenon: the effect of higher-paid staff on successful outcomes and applies the effect to benefit the organization's bottom dollar and the customer's success. As already shown, each of the three research questions builds upon one another. Moreover, the success or failure of any research question still provides insight concerning the HFS data.
+
+### Sai
+
+### Rhonda
+
 ## Extra Questions( Optional):
 |S No|Author of the ouestion| Question|
 | ------------- | ------------- | ------------- |
