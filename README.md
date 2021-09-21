@@ -3,11 +3,13 @@
 
 Copyright 2021 Rhonda Silva, Chad Crowe, Sai Krishna Gaduputi Subbammagari
 
-# Project Work Plan
+# Assignments
 
-## Team Name: The Sexy Librarians
+## Project Work Plan
 
-## Summary of Assignments and Due Dates
+### Team Name: The Sexy Librarians
+
+### Summary of Assignments and Due Dates
 
 |**Assignments**| **Dead line(4:30pm)**|
 | ------------- | ------------- |
@@ -19,7 +21,7 @@ Copyright 2021 Rhonda Silva, Chad Crowe, Sai Krishna Gaduputi Subbammagari
 |Project Presentation| December 7|
 |Git Repository Package	|	December 7|
 
-## Detailed Project Work Plan
+### Detailed Project Work Plan
 
 Note that tasks are in-order for completion.  While many tasks can be completed in parallel, those tasks which depend on one another are listed in order for each assignment.  At a minimum, the group assumes 1 day of work, at minimum, will occur between class dates.  This estimation will be used to communicate expectations for the task completion, ordered by row, for each assignment.
 
@@ -135,20 +137,20 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 
 
 
-# Communication Agreement
+## Communication Agreement
 
-## primary mode of communication
+### primary mode of communication
 - Teams
   - Chad Crowe (ccrowe@linkedin.com)
   - Rhonda Silva (rhondasilva@unomaha.edu)
   - Sai Krishna Gaduputi Subbammagari (sgaduputisubbammag@unomaha.edu)
 
-## plan for a period of responding
+### plan for a period of responding
 - Each teammate agrees to respond within 48 hours, or 72 hours if over the weekend.
   - Where the mode of communication of over Teams chat.
     - It is also acceptable to duplicate their communication over email during the waiting period.
 
-## action plan when they do not respond
+### action plan when they do not respond
 - After 72 hours the communicating teammate may reach out to Dr. Grover, informing Dr. Grover of the situation and seeking out our professor's advice.
   - It should be noted that miscommunication is common on team-projects, even expected.
     - If miscommunication occurs, please communicate that 1. miscommunication has occurred, 2. what the miscommunication is, and 3. the desired communication from the other party. The other party has 72 hours to reply. If the reply is insufficient then the team can CC Dr. Grover via email concerning the communication issue within the team.
