@@ -15,7 +15,39 @@ The research question is interesting because it explores the relationship betwee
 
 The research questions are useful for decision-makers in two ways; it explores a phenomenon: the effect of higher-paid staff on successful outcomes and applies the effect to benefit the organization's bottom dollar and the customer's success. As already shown, each of the three research questions builds upon one another. Moreover, the success or failure of any research question still provides insight concerning the HFS data.
 
-### Sai
+### Sai Krishna 
+#### **Relation between the gander whether they joined the with respect to program event according to locations.**
+
+#### **why they Research Question?**
+
+My Research Question can help the organization to identify the group of people who are taking part in the events 
+which are organization as  **Counseling and Prevention**. 
+
+**I like to create this because of the following:**
+
+  * It helps in identifying a set of people who are visiting the event based on their program with respect to gender
+     and the location of the event took place.
+     
+  * This will help to Heartland Family Service to get an idea about the types of genders who attended the meeting.
+ 
+       * There are 3 programs which were organized by Heartland Family Service.
+            * Mental Health
+            * Substance Use
+            * Gambling
+            
+       * By subgrouping them according to the programs we can create a table which give us information about what 
+         type of gender is joining the event but if we identify the data in visualization, we can get what kind of
+         gender is attending to an event. So, with that idea we can increase a greater number of events in different location.
+         
+       * If increase the event with different in location, we can attract a greater number of people towards the HFS.
+       
+#### **why they matter?** 
+
+* By doing this kind of research question we can increase the number of events in location where the number of 
+  participations in even is less according to the gender and location.
+  
+* HFS can also increase their level of programs and service.
+
 
 ### Rhonda
 
