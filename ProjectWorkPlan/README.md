@@ -149,6 +149,7 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 - Chad, Sai and Rhonda each contributed to the project plan.
 - Sai created the repository
 - Chad created the project plan timeline
+- Rhonda proofread
 
 
 
