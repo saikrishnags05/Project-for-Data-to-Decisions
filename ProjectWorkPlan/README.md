@@ -145,5 +145,10 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 - After 72 hours the communicating teammate may reach out to Dr. Grover, informing Dr. Grover of the situation and seeking out our professor's advice.
   - It should be noted that miscommunication is common on team-projects, even expected.
     - If miscommunication occurs, please communicate that 1. miscommunication has occurred, 2. what the miscommunication is, and 3. the desired communication from the other party. The other party has 72 hours to reply. If the reply is insufficient then the team can CC Dr. Grover via email concerning the communication issue within the team.
+### contributorship statement
+- Chad, Sai and Rhonda each contributed to the project plan.
+- Sai created the repository
+- Chad created the project plan timeline
+
 
 
