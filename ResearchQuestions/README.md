@@ -39,4 +39,4 @@ By asking this question we can find out if their should be bilingual employees a
 | ------------- | ------------- | ------------- |
 |1| Chad| Why does the duration for repeat customers decrease over time and what are the implications on how a greater familiar with the HFS process and programs affects customer efficiency and outcomes within HFS? |
 |2| Rhonda |Which program unit has more billing minutes/hours |
-|3| Sai krishna | Relation between the gander whether they got billed or paid the amount with respect to program event.|
+|3| Sai krishna | Relation between the gender whether they got billed or paid the amount with respect to program event.|
