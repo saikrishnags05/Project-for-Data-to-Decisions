@@ -15,7 +15,7 @@ The research questions are useful for decision-makers in two ways; it explores a
 
 ### Sai Krishna 
 
-#### **Find the relation between the events that took place in different location with respective to Gender. **
+#### **Find the relation between the events that took place in different location with respective to Gender.**
 
 #### **why they Research Question?**
 
