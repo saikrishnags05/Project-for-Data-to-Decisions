@@ -37,12 +37,12 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 |  |  | Identify issues encountered with the data | Chad | Delineate the issues we encountered for anyone who might try to repeat the process | 2 hr |
 |  |  | rational to remedy data, e.g., filling in missing fields | Chad | How we remedied the issues we ran into | 1 hr |
 |  |  | script or step-by-step textual description that documents your cleaning process | Chad | Description of our cleaning process in a detailed way that someone can follow.  Also time to clean up the code so it is easy to follow. | 2 hr |
-|  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Sai | understaing the data and writeing a proper contant  | 3 days |
+|  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Sai | understanding the data and writing a proper content  | 3 days |
 |  |  | specify any intellectual policy and constraints | Sai | based on the data we process  | 2 days |
 |  |  | paragraph description of the metadata: what information is avilable to help you interpret the data? | Sai | focus on data subsetting | 3 days |
 |  |  | Identify issues encountered with the data | Sai | use functions to identily the missing values or adding new row | 1 day |
-|  |  | rational to remedy data, e.g., filling in missing fields | Sai | it is deen done if we face any issue |6 hrs |
-|  |  | script or step-by-step textual description that documents your cleaning process | Sai | procidure to add cleaning process  | 3 hrs |
+|  |  | rational to remedy data, e.g., filling in missing fields | Sai | it has been done if we face any issue |6 hrs |
+|  |  | script or step-by-step textual description that documents your cleaning process | Sai | procedure to add cleaning process  | 3 hrs |
 |  |  | 1-2 paragraphs for each source, how much, where from, what it contains, source citations, the number of data rows/columns and sample headers | Rhonda |  | 2 days |
 |  |  | specify any intellectual policy and constraints | Rhonda |  | 2 days |
 |  |  | paragraph description of the metadata: what information is avilable to help you interpret the data? | Rhonda |  | 2 days |
@@ -54,7 +54,7 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 | R Script | Thu Nov 11 |  |  |  |  |
 |  |  | Create and manage the knitted HTML document, created via RMarkdown | Rhonda |  | 1 day |
 |  |  | Ensure the document includes comments | Rhonda |  | 1 day |
-|  |  | Ensure the document contains key compoentns of the script | Sai | make sure all the commands are coped and pasted into it | 2 hr |
+|  |  | Ensure the document contains key components of the script | Sai | make sure all the commands are copied and pasted into it | 2 hr |
 |  |  | Ensure the sources contain all details | Chad | Ensure our deliverable contains all the necessary details. | 3 hr |
 |  |  | Create and ensure the knitted HTML contains the descriptive statistics | Rhonda |  |  |
 |  |  | Ensure everything ends up in the main deliverable directory | Rhonda |  |  |
@@ -63,7 +63,7 @@ Note that tasks are in-order for completion.  While many tasks can be completed 
 |  |  | Create a plot for your research question | Sai | learn plot models in R with help of ggplots |1 day  |
 |  |  | Create a plot for your research question | Rhonda |Learn about R plots  | 1 day |
 |  |  | Include an interpretation for your research question. | Chad | Write up an interpretation about what the research question means. | 1 hr |
-|  |  | Include an interpretation for your research question. | Sai | breaf note on research question | 1 day |
+|  |  | Include an interpretation for your research question. | Sai | brief note on research question | 1 day |
 |  |  | Include an interpretation for your research question. | Rhonda | describe purpose of research question | 2 days |
 |  |  | Ensure the submission include the knitted HTMl, an overview of the script, plots, contributorship statement, and URL on canvas | Rhonda |  | 1 day |
 |  |  | Ensure readme.md links to the source R script | Sai |  | 1 hr |
