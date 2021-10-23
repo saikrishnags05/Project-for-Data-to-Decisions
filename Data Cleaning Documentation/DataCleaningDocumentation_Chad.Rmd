@@ -20,8 +20,6 @@ The research also explores whether job title effects dropped appointments. Job r
 
 Initial research also explores appointment duration.  Based on the given data, it is unknown whether appointment duration is fixed by insurance or varies between patients. This research explores duration of appointments across job position, ethnicity, location, and the rate of dropped appointments too. While success is not determined by duration, Dr. Juarez mentioned how HFS is very interested in exploring patterns pertaining to the number of appointments and durations by each patient since it affects the funding HFS receives. 
 
-;;Why are the success outcomes higher when persons receive more time with staff whose pay is higher than the average across each service? What are the implications for HFS' usage of higher-paid staff positions for producing a higher success outcome for more at-risk patients? What is the potential increase in expected return if HFS increases the face-time of higher-paid staff with more at-risk patients? We define success outcomes as those with lower than average duration times who also show for their appointments.
-
 ### Datasets Used
 
 The data explored in this research question include five columns:
@@ -45,7 +43,7 @@ Each column will be explored in the following section. The section will describe
 ```{r classwork}
 data <- read.csv("/Users/ccrowe/github/isqa8600_ChadCrowe/programs/data/HFS Service Data.csv")
 ```
-The data contains `r nrow(data)` rows. If we filter out NA values for job title there are `r nrow(as_tibble(data) %>% drop_na(job_title))`. This means each row has a job title and there are no NA values. 
+The data contains `r nrow(data)` rows. If we filter out NA values for job title there are `r nrow(as_tibble(data) %>% drop_na(job_title))`. This means each row has a job title and there are no NA values. Given that there is no missing data, there is no need to handle missing data. 
 
 Below is a plot of available job titles:
 ```{r job_title_all}
@@ -62,12 +60,7 @@ ylab("Count of Job Title's Occurrence") +
 
 ```
 
-
-
-%%Each column will be explored in the following section. The section will describe the number of rows & columns and provide sample headers. The section will also include a description of the metadata, such as what information is available for understanding and interpreting the data. The section will also cover the rationale for remediating and cleaning the data, such as handling empty data. It will also include a description of the approach and the code required for replication.
-
-
-Most job titles have fewer than fifty instances. Job titles with many instances include therapist, clinical supervisor, case managers, and admin assists. Of those job titles, there are five types of therapists.
+Most job titles have fewer than fifty instances. Job titles with many instances include therapist, clinical supervisor, case managers, and admin assists. Of those job titles, there are five types of therapists. Given most of the primary job titles are therapists, the exploration of job titles will focus on therapists. We filter the job titles to the various therapist job positions.
 
 ```{r filter_for_therapists}
 therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title == "THERAPIST II" | data$job_title == "THERAPIST III" | data$job_title == "LEAD THERAPIST" | data$job_title == "Therapist")
@@ -82,6 +75,7 @@ tibble_data <- as_tibble(data)
 ethnicity <- tibble_data %>% group_by(ethnic_identity) %>% count(sort=TRUE)
 # data header
 head(tibble_data$ethnic_identity)
+
 ```
 
 There are no NAs for the ethnic_identity column. The ethnic identities are categorized as Mexian, Hispanic/Latino, and not Spanish/Hispanic/Latino. Ninety-percent of the data (7820 rows) are not Spanish, Hispanic or Latino. The following plot shows the diparity of counts within the ethic_identity column.
@@ -94,7 +88,7 @@ ylab("Count of Job Title's Occurrence") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
 ```
 
-Given that most categories have fewer than two-hundred persons, one simlification is to create a binary column for Not Spanish/Hispanic/Latino and Spanish/Hispanic/Lantino.  We'll filter out unknown since it contains no ethnic identity information. 
+Given that most categories have fewer than two-hundred persons, one simlification is to create a binary column for Not Spanish/Hispanic/Latino and Spanish/Hispanic/Lantino.  We'll filter out unknown since it contains no ethnic identity information. Otherwise, there are no NAs or missing data in this column so there's no need to handle or filter out NAs.
 
 ```{r two_ethnicities}
 two_ethnicities <- tibble_data %>% mutate(is_minority = ethnic_identity != "Not Spanish/Hispanic/Latino") %>% filter(ethnic_identity != "Unknown")
@@ -105,6 +99,8 @@ When we filter by the identified ethinicities and filter out the unknown categor
 
 
 #### Facility Location
+
+Below we can see a breakdown of records per facility.  We group by facility and sort by the facilities with the most usage. This will help us understand the usage of HFS facilities within the dataset.
 
 ```{r facility_breakdown}
 tibble_data <- as_tibble(data)
@@ -121,9 +117,11 @@ ylab("Count of Job Title's Occurrence") +
 tibble_data %>% filter(facility == NA) %>% count()
 ```
 
-From the graph we see nine main facilities with more than two-hundred records. There are three facilities with more than one-thousand rows. No rows are NA.
+From the graph we see nine main facilities with more than two-hundred records. There are three facilities with more than one-thousand rows. We want to avoid aggregating smaller facilities together since each facility might be very different.  For now, we will leave the smaller facilities in the data.  Later on, we might remove facilities with very few users. No rows are NA so there is no need to handle NAs or missing data in this column. 
 
 #### Appointment No Shows
+
+The column is_noshow is interesting because these are costly events for both HFS and for the potential benefactor. No_shows consume HFS appointment time and the person loses out on an opportunity for therapy. 
 
 ```{r noshow_breakdown}
 tibble_data <- as_tibble(data)
