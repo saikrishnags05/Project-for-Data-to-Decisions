@@ -1,0 +1,164 @@
+---
+title: "DataCleaningDocumentation"
+author: "Chad Crowe"
+date: "10/12/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(moderndive)
+```
+
+## Job Position, Ethnicity, Location, and Dropped Appointments
+
+### RQ Overview
+
+The third research question concerns exploring the job role of therapists within HFS, with specific interest in appoinment no shows. When patients fail to appear for appointments, this costs HFS time and costs the patient opportunity for therapy. We explore whether there exist clear patterns that might contribute to patients missing visits, such as a location or ethnicity effect. It might be the case that particular facilities are less friendly in supporting a language, which might effect the rate of dropped appointments. 
+
+The research also explores whether job title effects dropped appointments. Job requirements might change from title to title that might have an effect on dropped appointments. This research explores the phenomenon. 
+
+Initial research also explores appointment duration.  Based on the given data, it is unknown whether appointment duration is fixed by insurance or varies between patients. This research explores duration of appointments across job position, ethnicity, location, and the rate of dropped appointments too. While success is not determined by duration, Dr. Juarez mentioned how HFS is very interested in exploring patterns pertaining to the number of appointments and durations by each patient since it affects the funding HFS receives. 
+
+;;Why are the success outcomes higher when persons receive more time with staff whose pay is higher than the average across each service? What are the implications for HFS' usage of higher-paid staff positions for producing a higher success outcome for more at-risk patients? What is the potential increase in expected return if HFS increases the face-time of higher-paid staff with more at-risk patients? We define success outcomes as those with lower than average duration times who also show for their appointments.
+
+### Datasets Used
+
+The data explored in this research question includes
+
+- Job Title (Therapists I, II, and III)
+
+- Ethnicity
+
+- Facility Location
+
+- Appointment Duration
+
+- Appointment No Shows
+
+
+### Description of Datasets
+
+#### Job Title (Therapists I, II, and III)
+
+```{r classwork}
+data <- read.csv("/Users/ccrowe/github/isqa8600_ChadCrowe/programs/data/HFS Service Data.csv")
+```
+The data contains `r nrow(data)` rows. If we filter out NA values for job title there are `r nrow(as_tibble(data) %>% drop_na(job_title))`. This means each row has a job title and there are no NA values. 
+
+Below is a plot of available job titles:
+```{r job_title_all}
+tibble_data <- as_tibble(data)
+
+job_title_counts <- tibble_data %>% group_by(job_title) %>% count(sort=TRUE)
+
+ggplot(job_title_counts) + geom_point(mapping = aes(x = reorder(job_title,-n), y = n)) +
+ggtitle("Count of Rows for each Job Title") +
+xlab("Job Title") +
+ylab("Count of Job Title's Occurrence") +
+ #ylim(0, 130) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+
+```
+
+Most job titles have fewer than fifty instances. Job titles with many instances include therapist, clinical supervisor, case managers, and admin assists. Of those job titles, there are five types of therapists.
+
+```{r filter_for_therapists}
+therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title == "THERAPIST II" | data$job_title == "THERAPIST III" | data$job_title == "LEAD THERAPIST" | data$job_title == "Therapist")
+```
+
+If we filter out therapists there are only `r nrow(therapists)` rows, so 1500 fewer rows. 
+
+#### Ethnicity
+
+```{r ethnicity_breakdown}
+tibble_data <- as_tibble(data)
+ethnicity <- tibble_data %>% group_by(ethnic_identity) %>% count(sort=TRUE)
+```
+
+There are no NAs for the ethnic_identity column. The ethnic identities are categorized as Mexian, Hispanic/Latino, and not Spanish/Hispanic/Latino. Ninety-percent of the data (7820 rows) are not Spanish, Hispanic or Latino. The following plot shows the diparity of counts within the ethic_identity column.
+
+```{r ethnic_plot}
+ggplot(ethnicity) + geom_point(mapping = aes(x = reorder(ethnic_identity,-n), y = n)) +
+ggtitle("Count of Rows for each Ethnicity") +
+xlab("Ethnicity") +
+ylab("Count of Job Title's Occurrence") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+```
+
+Given that most categories have fewer than two-hundred persons, one simlification is to create a binary column for Not Spanish/Hispanic/Latino and Spanish/Hispanic/Lantino.  We'll filter out unknown since it contains no ethnic identity information. 
+
+```{r two_ethnicities}
+two_ethnicities <- tibble_data %>% mutate(is_minority = ethnic_identity != "Not Spanish/Hispanic/Latino") %>% filter(ethnic_identity != "Unknown")
+two_ethnicities %>% group_by(is_minority) %>% count()
+```
+
+When we filter by the identified ethinicities and filter out the unknown category we get almost 800 rows of ethnicities HFS tracks. 
+
+
+#### Facility Location
+
+```{r facility_breakdown}
+tibble_data <- as_tibble(data)
+grouped_facility <- tibble_data %>% group_by(facility) %>% count(sort=TRUE)
+#ordered <- transform(grouped_facility, variable=reorder(facility, n) ) 
+ggplot(grouped_facility) + geom_point(mapping = aes(x = reorder(facility,-n), y = n)) +
+ggtitle("Count of Rows for each Ethnicity") +
+xlab("Ethnicity") +
+ylab("Count of Job Title's Occurrence") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+# check for NAs
+tibble_data %>% filter(facility == NA) %>% count()
+```
+
+From the graph we see nine main facilities with more than two-hundred records. There are three facilities with more than one-thousand rows. No rows are NA.
+
+#### Appointment No Shows
+
+```{r noshow_breakdown}
+tibble_data <- as_tibble(data)
+grouped_no_show <- tibble_data %>% group_by(is_noshow) %>% count(sort=TRUE)
+ggplot(grouped_no_show) + geom_point(mapping = aes(x = reorder(is_noshow,-n), y = n)) +
+ggtitle("Count of Rows for Show vs NoShow") +
+xlab("Appointment Show or No Show") +
+ylab("Count of Category") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+# check for NAs
+tibble_data %>% filter(is_noshow == NA) %>% count()
+```
+
+We see that 15% of all rows are no shows. 15% seems like a surprisingly high number of appointment no shows for any organization. This metric is worth looking into further. There are no NAs in the column or values we want to filter.
+
+### Number of Appointments per Person
+
+HFS has voiced an interest in the number of appointments and total duration spent per patient. While duration length or the number of appointments does not connotate to organizational success, they are metrics that HFS reports to funders. 
+
+```{r noshow_breakdown}
+tibble_data <- as_tibble(data)
+record_counts <- tibble_data %>% group_by(recordID) %>% count(sort=TRUE) %>% filter(n > 2)
+ggplot(record_counts) + geom_point(mapping = aes(x = reorder(recordID,-n), y = n)) +
+ggtitle("Count of Rows for Show vs NoShow") +
+xlab("Appointment Show or No Show") +
+ylab("Count of Category") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+```
+
+There are only 460 records with more than one appointment with HFS, which is only 5% of all HFS records. From this we learn that almost all appointments are single-time appointments. Considering the few number of records with multiple appointments, it might not be worth looking further into the factors affecting duration or the number of appointments.
+
+
+
+
+
+
+
+1-2 paragraph text description of the data source/s (how much, where from, what it contains, etc.) with a properly formatted citation for each data source. This should include how many rows & columns (&/or tables) and sample column headers. Each data source you're using should have a similar description.
+Specifically identify any intellectual policy constraints, or lack thereof (licensing).
+1 paragraph description of the metadata: what information is available to help you interpret and understand the data?
+Identify any issues you have encountered with the data: missing values, unstandardized content, entity matching, integration, etc.
+1 paragraph description of your rationale for the steps you're taking to remediate data. For example, if you need to fill in empty fields, specify what value you chose and why.
+A script or step-by-step textual description (or a combination) that documents your data cleaning process with enough detail for replication.
+A contributorship statement.
+This deliverable supports timely feedback for work-in-progress. Any issues highlighted by instructor feedback should be carefully addressed in your final project data processing documentation. Submit a knitted HTML document that provides an overview of the script, along with the contributorship statement, with the URL submitted on Canvas; update the Readme.md with the document link. The source RMarkdown document must include the full script in the same deliverable directory. If you are not yet able to do your full data cleaning procedures in R, describe any additional step-by-step processes in fine detail within the document.
+
+
+
