@@ -5,11 +5,6 @@ author: "Rhonda Silva"
 date: "10/14/2021"
 output: 
   # html_document
- # code_folding: hide
-  github_document:
-  toc: yes
-  theme: cosmo  
- # code_folding: hide
 ---
 
 
@@ -17,11 +12,13 @@ output:
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+###  RQ Rhonda
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+Of the clients receiving services that identified as Hispanic or Mexican, how many received services at which branch
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+### Dataset Used
+
 
 > HFS.Hispanic<-HFS
 
