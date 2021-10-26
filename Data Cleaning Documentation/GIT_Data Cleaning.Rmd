@@ -263,9 +263,9 @@ head(tibble_data$facility)
 grouped_facility <- tibble_data %>% group_by(facility) %>% count(sort=TRUE)
 #ordered <- transform(grouped_facility, variable=reorder(facility, n) ) 
 ggplot(grouped_facility) + geom_point(mapping = aes(x = reorder(facility,-n), y = n)) +
-ggtitle("Count of Rows for each Ethnicity") +
-xlab("Ethnicity") +
-ylab("Count of Job Title's Occurrence") +
+ggtitle("Count of Records by Facility") +
+xlab("Facility") +
+ylab("Count of Records at a Facility") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
 # check for NAs
 tibble_data %>% filter(facility == NA) %>% count()
