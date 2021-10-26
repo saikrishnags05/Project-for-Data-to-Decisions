@@ -668,7 +668,7 @@ ggplot(data = HFS.Hispanic.cleaned, aes(x =ethnic_identity , y =program_unit_des
      labs(title = "Scatter plot with three variables", y = "Unit Description of the Program", x = "Ethnicity")
 ```
 
-![](GIT_Data-Cleaning_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/R_2.jpeg)
 
 The above scatter plot is composed of three variables: ethnic_identity,
 program_unit description and program_name. from this plot , we can say
