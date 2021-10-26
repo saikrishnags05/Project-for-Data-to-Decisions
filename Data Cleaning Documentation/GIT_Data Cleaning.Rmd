@@ -238,7 +238,7 @@ There are no NAs for the ethnic_identity column. The ethnic identities are categ
 ggplot(ethnicity) + geom_point(mapping = aes(x = reorder(ethnic_identity,-n), y = n)) +
 ggtitle("Count of Rows for each Ethnicity") +
 xlab("Ethnicity") +
-ylab("Count of Job Title's Occurrence") +
+ylab("Count of Ethnicity") +
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
 ```
 
