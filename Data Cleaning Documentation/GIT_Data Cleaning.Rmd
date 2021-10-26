@@ -303,10 +303,11 @@ tibble_data <- as_tibble(data)
 head(tibble_data$recordID)
 record_counts <- tibble_data %>% group_by(recordID) %>% count(sort=TRUE) %>% filter(n > 2)
 ggplot(record_counts) + geom_point(mapping = aes(x = reorder(recordID,-n), y = n)) +
-ggtitle("Count of Rows for Show vs NoShow") +
-xlab("Appointment Show or No Show") +
-ylab("Count of Category") +
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+ggtitle("Plot of Repeated Record Count per Person") +
+xlab("Person's RecordId") +
+ylab("Count of Person's Appointments") +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
 ```
 
 There are only 460 records with more than one appointment with HFS, which is only 5% of all HFS records. From this we learn that almost all appointments are single-time appointments. Considering the few number of records with multiple appointments, it might not be worth looking further into the factors affecting duration or the number of appointments.
