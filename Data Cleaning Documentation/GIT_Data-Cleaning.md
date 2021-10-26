@@ -691,7 +691,7 @@ ggplot(data = HFS.Hispanic.cleaned, aes(facility,ethnic_identity)) +
     facet_wrap(.~program_type)
 ```
 
-![](GIT_Data-Cleaning_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![](GIT_Data-Cleaning_files/figure-gfm/unnamed-chunk-18-1.png)
 
 # Thing explored:
 
