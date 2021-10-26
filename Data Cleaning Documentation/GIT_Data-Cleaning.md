@@ -39,19 +39,18 @@ community.
 
 #### RQ 1
 
-**My Research Question is to tell that how much time of delay it take to
-takes for enrolling into the event, Entering into system and Approving
-the enrollment.** **(Sai Krishna)**
+**My Research Question is to show the time it takes to cmpletely enroll for services.(i.e. Entering into system and Approving
+the enrollment).** **(Sai Krishna)**
 
 Reason:- This will help in analyzing the time taking per enrolling from
 starting to ending state. And what kind of people are enrolling on the
-day of the even or before the event and total time taken for individual
-event. This will help the HFS to improve the speed of enrollment and
-also can increate the event of that type in that location.
+day of the service or before the service and total time taken for individual
+service. This will help the HFS to improve the speed of enrollment and
+also can increste the type service in that location.
 
 ### Data cleaning:
 
-I have created a new data set based on attributes that I choice from
+I have created a new data set based on attributes that I chose from
 Dataset to analyze my desired Research Question. Attributes are
 mentioned bellow.
 
@@ -82,28 +81,26 @@ a supervisor? (Days after enrollment)
 `ethnic_identity` this is about the people of different groups who
 attend the events
 
-### Cleaning procidure :-
+### Cleaning procedure :-
 
-**step 1:-** Since i am using Data format so i have to find the
-difference between each and every even that is been taken place. So, i
+**step 1:-** Since I am using Data format, I need to find the
+difference between each and every service that has taken place. So, i
 have used as.Date() function to get the actual date format.
 
 **step 2:-** Apply step1 to all the date column to verify it in next
 phase.
 
 **step 3:-** Now create a new column add subtract the dates if we get
-the values in negatives then it is enroled before the event,if 0 then
-they resisted at the moment and if greater the 0 then it is after the
-event.
+the values as negatives then enrollment is before the service,if 0 then
+they resisted at the moment and if greater thsn 0 then it is after the
+service.
 
 **step 4:-** Later total we have 5 states in the data set which is
 mentioned in short form
 
 **step 5:-** Subset each and every State are in short form like
 `IA`,`NE`,`CO`,`NC`,`SC`and later updated to full form of user
-understanding `iowa`, `Nebrska` `colorado`,
-`north carolina`,`south carolina`
-
+understanding `Iowa`, `Nebraska` Colorado`,"North Carolina","South Carolina"
 and we can observe many different plots based on state and there zip
 code.
 
@@ -145,7 +142,7 @@ regions
 
     ## [1] "IA" "NE" "CO" "NC" "SC"
 
-Now we update all the states name into full form and them into the
+Now we update all the states name into full form and then into the
 dataset for easy understanding.
 
 ``` r
@@ -163,10 +160,10 @@ After Changing the Short form of the state:-
 c(unique(HFS_data$state))
 ```
 
-    ## [1] "iowa"           "nebrska"        "colorado"       "north carolina"
+    ## [1] "iowa"           "nebraska"        "colorado"       "north carolina"
     ## [5] "south carolina"
 
-# Speliting the individual data accoring to the region:-
+# Splitting the individual data accoring to the region:-
 
 # IA(iowa):
 
@@ -178,10 +175,9 @@ p + geom_point()+geom_violin() +facet_wrap(IA$zip~IA$program_name,scales='free')
 ```
 
 ![](GIT_Data-Cleaning_files/figure-gfm/unnamed-chunk-7-1.png)<!-- --> In
-the above graph you can understand that most of the people who from Iowa
-joining events are **Not Spanish/Hispanic/Latino** most of them are
-opting Gambling where as other ethnic_identity groups are attending the
-events like **Mental Health** and **Substance Use** and most of them are
+the above graph you can understand that most of the people from Iowa
+that receive services are **Not Spanish/Hispanic/Latino** most of them are
+opting Gambling services where as other ethnic_identity groups are receiving services like **Mental Health** and **Substance Use** and most of them are
 from Zip code 0. ### NE(nebraska)
 
 ``` r
@@ -699,8 +695,8 @@ ggplot(data = HFS.Hispanic.cleaned, aes(facility,ethnic_identity)) +
 
 # Thing explored:
 
-We have explored may different types of attributes that are required to
-solve the 3 research questions and also we analysed the data that we
+We have explored many different types of attributes that are required to
+solve the 3 research questions and we analysed the data that we
 have now can also get other results.Further We can subset each and every
 Character data and get additional information.
 
