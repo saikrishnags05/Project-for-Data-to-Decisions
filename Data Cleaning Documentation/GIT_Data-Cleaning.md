@@ -581,7 +581,7 @@ ggplot(data = HFS.Hispanic.cleaned, aes(facility,ethnic_identity)) +
     facet_wrap(.~program_type)
 ```
 
-![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Faceted.jpeg)
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Faceted.jpeg)   
 
 # Thing explored:
 
