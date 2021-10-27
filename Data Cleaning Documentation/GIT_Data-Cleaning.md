@@ -583,6 +583,9 @@ ggplot(data = HFS.Hispanic.cleaned, aes(facility,ethnic_identity)) +
 
 ![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Faceted.jpeg)   
 
+I have divided the plot using the ethnic_identity of the clients. This plot uses two variables Ethnic Identity and Facility. We can say from the plot that due to uncollected data or unknown/missing values there are more separations in the plot. However , with the data in hand, the created plot shows the differences of programs being served from the various facilities accross various ethnicities.
+
+
 # Thing explored:
 
 We have explored many different types of attributes that are required to
