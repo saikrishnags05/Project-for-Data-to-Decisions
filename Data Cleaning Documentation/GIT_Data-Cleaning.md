@@ -591,68 +591,17 @@ str(HFS.Hispanic)
     ##  $ gender_identity         : chr  "Not Obtained" NA NA NA ...
     ##  $ sexual_orientation      : chr  "Not Obtained" NA NA NA ...
 
-### To see the names of Columns
+### Cleaning procedure :-
+1. I removed 41 of 51 variables (columns) that did not have pertinent information regarding my research question leaving the database titled HFS.Ethnic_Identity.cleaned with 10 variables.
+    gender, program_name, facility, event_name, program_unit_description, age, simple_race, ethnic_identity, gender_identity,sexual_orientation    
+2.  I deleted the rows that had "Not Collected" in the variable Ethnic_Identity
+3.  I replaced "Not Spanish/Hispanic/Latino" with "Not Latino" for appearance sake
+4.  I replaced "Other Hispanic or Latino" with "Other Latino"
 
-``` r
-names(HFS.Hispanic)  
-```
 
-    ##  [1] "gender"                   "program_name"            
-    ##  [3] "program_type"             "facility"                
-    ##  [5] "job_title"                "staff_name"              
-    ##  [7] "actual_date"              "duration"                
-    ##  [9] "event_name"               "activity_type"           
-    ## [11] "encounter_with"           "is_client_involved"      
-    ## [13] "is_noshow"                "is_locked"               
-    ## [15] "is_billed"                "is_paid"                 
-    ## [17] "date_entered"             "user_entered_name"       
-    ## [19] "approved_date"            "approved_staff_name"     
-    ## [21] "submitted"                "is_approved"             
-    ## [23] "is_notapproved"           "is_notapproved_subm"     
-    ## [25] "program_unit_description" "sc_code"                 
-    ## [27] "duration_num"             "do_not_bill"             
-    ## [29] "do_not_pay"               "general_location"        
-    ## [31] "program_modifier"         "program_modifier_code"   
-    ## [33] "NormalWorkHours"          "duration_other_num"      
-    ## [35] "duration_other"           "travel_time_num"         
-    ## [37] "travel_time"              "planning_time_num"       
-    ## [39] "planning_time"            "total_duration_num"      
-    ## [41] "total_duration"           "reason_for_no_show"      
-    ## [43] "is_billable"              "zip"                     
-    ## [45] "state"                    "age"                     
-    ## [47] "recordID"                 "simple_race"             
-    ## [49] "ethnic_identity"          "gender_identity"         
-    ## [51] "sexual_orientation"
 
-``` r
-### Deleted Columns that I didn't need and named it HFS.Hispanic.cleaned
-```
+   
 
-``` r
-HFS.Hispanic.cleaned<-HFS.Hispanic[c(1:4,7,9,17,25,30,46,48,49:51)]
-```
-
-``` r
-names(HFS.Hispanic.cleaned)
-```
-
-    ##  [1] "gender"                   "program_name"            
-    ##  [3] "program_type"             "facility"                
-    ##  [5] "actual_date"              "event_name"              
-    ##  [7] "date_entered"             "program_unit_description"
-    ##  [9] "general_location"         "age"                     
-    ## [11] "simple_race"              "ethnic_identity"         
-    ## [13] "gender_identity"          "sexual_orientation"
-
-\*\* I now have 14 columns & 8745 rows
-
-``` r
-ncol(HFS.Hispanic.cleaned);nrow(HFS.Hispanic.cleaned)
-```
-
-    ## [1] 14
-
-    ## [1] 8745
 
 1.  **One scatter plot with three variables, properly labeled; choose
     your representation of the third variable based on what’s best for
