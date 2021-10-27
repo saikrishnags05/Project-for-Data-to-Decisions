@@ -554,11 +554,11 @@ HFS.Hispanic
     -   Adding a third variable in geom point using colour=program_name
 
 ``` r
-ggplot(data = HFS.Ethnic_Identity.cleaned, aes(x =ethnic_identity , y =program_unit_description , colour=program_name)) +geom_point(size = 3)+
+ggplot(data = HFS.Ethnic_Identity.cleaned, aes(x=ethnic_identity , y =program_unit_description , colour=program_name)) +geom_point(size = 3)+
      labs(title = "Scatter plot with three variables", y = "Unit Description of the Program", x = "Ethnicity")
 ```
 
-![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/R_2.jpeg)
+![Scatter](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/R_2.jpeg)
 
 The above scatter plot is composed of three variables: ethnic_identity,
 program_unit description and program_name. from this plot , we can say
