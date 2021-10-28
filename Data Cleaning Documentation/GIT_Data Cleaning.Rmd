@@ -1,7 +1,8 @@
 ---
 title: "Data Cleaning"
 author: "Author:- Sai Krishna,Chad Crowe,Rhonda Silva"
-output: github_document
+output:
+  md_document: default
 ---
 ## Introduction
 Heartland Family Service, which was founded in Omaha in 1875, served more than 79,000 individuals and families last year through direct services, education, and outreach from more than 15 facilities in east central Nebraska and southwest Iowa. In the following focus areas, our programs provide important human services to children, individuals, and families:
@@ -69,7 +70,7 @@ I have created a new data set based on attributes that I choice from Dataset to 
  **step 5:-** Subset each and every State are in short form like `IA`,`NE`,`CO`,`NC`,`SC`and later updated to full form of user understanding `iowa`, `Nebrska`        `colorado`, `north carolina`,`south carolina`
 
  and we can observe many different plots based on state and there zip code.
- ```{r}
+```{r}
 HFS_data<-read.csv("HFS Service Data.csv")
 #before cleasing the Na values
 #head(HFS_data)
@@ -211,7 +212,6 @@ xlab("Job Title") +
 ylab("Count of Job Title's Occurrence") +
  #ylim(0, 130) + 
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
-
 ```
 
 Most job titles have fewer than fifty instances. Job titles with many instances include therapist, clinical supervisor, case managers, and admin assists. Of those job titles, there are five types of therapists. Given most of the primary job titles are therapists, the exploration of job titles will focus on therapists. We filter the job titles to the various therapist job positions.
@@ -333,7 +333,7 @@ names(HFS.Hispanic)
 ### Deleted Columns that I didn't need and named it HFS.Hispanic.cleaned
 ```
 ```{r}
-HFS.Hispanic.cleaned<-HFS.Hispanic[c(1:4,7,9,17,25,30,46,48,49:51)]
+HFS.Hispanic.cleaned<-HFS.Hispanic[c(1:4,7,9,17,24,25,30,46,48,49:51)]
 ```
 
 ```{r}
