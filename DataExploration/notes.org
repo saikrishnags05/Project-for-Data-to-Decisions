@@ -1,0 +1,54 @@
+
+
+* RQs
+Why are the success outcomes higher when persons receive more time with staff whose pay is higher than the average across each service?
+
+** DONE ?? Try to look into no-show counts by group
+   CLOSED: [2021-09-30 Thu 15:21]
+
+What are the implications for HFS' usage of higher-paid staff positions for producing a higher success outcome for more at-risk patients?
+
+** TODO also show no-show percents by experience by the type of population
+
+What is the potential increase in expected return if HFS increases the face-time of higher-paid staff with more at-risk patients? We define success outcomes as those with lower than average duration times who also show for their appointments.
+
+auto-mpg-csv
+
+* Assignment
+You will individually do some initial exploration of your project data using R, based on the techniques introduced in class on Week 6. You will create a directory containing exported plots and a Markdown document to summarize your findings. Starting on this as soon as possible is highly recommended, as you will likely need to do some troubleshooting.
+
+At a minimum, this must include:
+
+The name of the project (as a header)
+At least three of the following:
+– Two scatter plots of two different variables, properly labeled
+– One scatter plot with three variables, properly labeled; choose your representation of the third variable based on what’s best for representing the data
+– One scatter plot of two variables, properly labeled, with a trend line added in
+– One faceted plot of two variables, properly labeled
+– One bar chart, properly labeled
+For each plot, the code you used to create the plot, inserted after the plot and formatted as a code block
+For each plot, 1-2 sentences of observations about what the plot tells you, which may be interesting trends, strange outliers, or important details for data cleaning
+You will need to export each plot from R and save it in the same directory as the Markdown document, and then embed the plots into the file properly so that they display well. If you have multiple data files, select just one to work on; if this is the case, you should coordinate with your team so that each person explores a different part of the data set and you get more of it evaluated through this assignment. Some of the plots may not work well, or may not be the most sensible due to the specifics of your data – that is OK, the goal here is to begin exploring it and diagnosing data cleaning needs or interesting features of the data.
+
+After the assignment is submitted, you should compare notes with your teammates, but please work independently for the assignment (you can help one another with data loading, just do the exploration part yourself). You should find that any plots of the same variables appear approximately the same; if not, you’ll need to do some diagnostic work to identify the cause of the variation.
+
+Submit the URL for your Readme.md on Canvas, which must be updated with a link to the DataExploration.md in its own directory.
+
+* Notes
+Dr. Juarez...
+
+- Not sure that shorter duration times are good...might rush the encounter too much.
+- or you might leave early and result in a poorer quality of important
+- why might clients not show up for appointments?
+- Not sure it's possible to find a staff member's pay rate...credentials are not listed in the service data.
+
+
+- on paper, the types of services are dictated by the program and regulatory requirements.
+
+- hispanic/latino.  The question is more about different client populations by office.  What are the implications of offices that serve more of one type of client or another.
+  - from their point of view.
+  - are there patterns about patterns.
+  - suspect based upon the services.
+  - this is a much higher risk situation.
+
+    
