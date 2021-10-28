@@ -601,7 +601,7 @@ Mexican, how many received services at which branch
 
     ggplot(data = HFS.Hispanic.cleaned, aes(x =ethnic_identity , y =program_unit_description , colour=program_name)) +geom_point(size = 3)+
          labs(title = "Scatter plot with three variables", y = "Unit Description of the Program", x = "Ethnicity")+ 
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ![](GIT_Data-Cleaning_files/figure-markdown_strict/unnamed-chunk-17-1.png)
 
@@ -625,7 +625,7 @@ programs.
       geom_point(color = "steelblue") +
        labs(title = "Faceted plot of two variables Ethnic Identity vs Facility", y = "ethnic_identity", x = "facility") +
         facet_wrap(.~program_type) + 
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
 ![](GIT_Data-Cleaning_files/figure-markdown_strict/unnamed-chunk-18-1.png)
 
