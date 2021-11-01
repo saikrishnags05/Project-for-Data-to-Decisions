@@ -319,42 +319,79 @@ There are only 460 records with more than one appointment with HFS, which is onl
 
 Of the clients receiving services that identified as Hispanic or Mexican, how many received services at which branch
 
-
 ### Dataset Used
 
-```{r}
-library(ggplot2)
-HFS.Hispanic<-read.csv("HFS Service Data.csv")
-str(HFS.Hispanic)
-```
-### To see the names of Columns
-```{r}
-names(HFS.Hispanic)  
-### Deleted Columns that I didn't need and named it HFS.Hispanic.cleaned
-```
-```{r}
-HFS.Hispanic.cleaned<-HFS.Hispanic[c(1:4,7,9,17,24,25,30,46,48,49:51)]
-```
+> HFS.Hispanic<-HFS
 
-```{r}
-names(HFS.Hispanic.cleaned)
-```
+> str(HFS.Hispanic)
+
+### To see the names of Columns
+
+> names(HFS.Hispanic)  
+
+### Deleted Columns that I didn't need and named it HFS.Hispanic.cleaned
+
+> HFS.Hispanic.cleaned<-HFS.Hispanic[c(1:4,7,9,17,25,30,46,48,49:51)]5
+> names(HFS.Hispanic.cleaned)
+
+"gender"                   "program_name"             "program_type"            
+"facility"                 "actual_date"              "event_name"              
+"date_entered"             "program_unit_description" "general_location"        
+"age"                      "simple_race"              "ethnic_identity"         
+"gender_identity"          "sexual_orientation"
 
  
 ** I now have 14 columns & 8745 rows
 
-```{R}
-ncol(HFS.Hispanic.cleaned);nrow(HFS.Hispanic.cleaned)
-```
+> ncol(HFS.Hispanic.cleaned);nrow(HFS.Hispanic.cleaned)
+ 14
+ 
+ 8745
+ 
+ ###  apply count function
+count (df, ethnic_identity)
+###  RESULTS
+1 Mexican                       148
+2 Not Collected                 165
+3 Not Spanish/Hispanic/Latino  7820
+4 Other Hispanic or Latino      471
+5 Unknown                       141
+
+###Clean NA & "Not Collected"
+###Find missing values
+is.na(HFS.Hispanic.cleaned)
+
+### Count missing values
+sum(is.na(HFS.Hispanic.cleaned))
+### Result is 2,608
+
+###Delete Rows that have "Not Collected" in variable Ethnic_Identity
+HFS.Ethnic_Identity.cleaned = HFS.Ethnic_Identity[HFS.Ethnic_Identity$ethnic_identity  != "Not Collected",]
+
+ncol(HFS.Ethnic_Identity.cleaned);nrow(HFS.Ethnic_Identity.cleaned)
+[1] 10
+[1] 8580
+
+###Replace "Not Spanish/Hispanic/Latino" with "Not Latino"
+HFS.Ethnic_Identity.cleaned$ethnic_identity[HFS.Ethnic_Identity.cleaned$ethnic_identity== "Not Spanish/Hispanic/Latino"]<- "Not Latino"
+
+###Replace "Other Hispanic or Latino" with "Other Latino"
+HFS.Ethnic_Identity.cleaned$ethnic_identity[HFS.Ethnic_Identity.cleaned$ethnic_identity== "Other Hispanic or Latino"]<- "Other Latino"
+### New Count of Ethnic Identity
+1 Mexican           148
+2 Not Latino       7820
+3 Other Latino      471
+4 Unknown           141
+
 
 
 1. **One scatter plot with three variables, properly labeled; choose your representation of the third variable based on what’s best for representing the data.**  
 * Three used variables are:
   * ethnic_identity
-  * program_unit_description  
-  * Adding a third variable in geom point using colour=program_name 
+  * facility  
+  * Adding a third variable in geom point using color=program_name 
 ```{r}
-ggplot(data = HFS.Hispanic.cleaned, aes(x =ethnic_identity , y =program_unit_description , colour=program_name)) +geom_point(size = 3)+
+ggplot(data = HFS.Ethnic_identity.cleaned, aes(x =ethnic_identity , y =program_unit_description , colour=program_name)) +geom_point(size = 3)+
      labs(title = "Scatter plot with three variables", y = "Unit Description of the Program", x = "Ethnicity")+ 
   theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 ```
@@ -366,14 +403,26 @@ The above scatter plot is composed of three variables: ethnic_identity, program_
   * ethnic_identity
   * facility  
   
-```{r}
-ggplot(data = HFS.Hispanic.cleaned, aes(y = ethnic_identity, x = facility)) +
- geom_line(color = "steelblue", size = 1) +
-  geom_point(color = "steelblue") +
-   labs(title = "Faceted plot of two variables Ethnic Identity vs Facility", y = "ethnic_identity", x = "facility") +
-    facet_wrap(.~program_type) + 
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+ggplot(data = HFS.Ethnic_Identity.cleaned, aes(ethnic_identity,facility)) +
++     geom_line(color = "steelblue", size = 1) +
++     geom_point(color = "steelblue") +
++     labs(title = "Faceted plot of two variables Ethnic Identity vs Facility", x = "ethnic_identity", y = "facility") +
++     facet_wrap(.~program_name)
+
+I have divided the plot using the ethnic_identity of the clients. This plot uses two variables Ethnic Identity and Facility. We can say from the plot that due to uncollected data or unknown/missing values there are more separations in the plot. However , with the data in hand, the created plot shows the differences of programs being served from the various facilities accross various ethnicities.
+
+3. **One bar chart, properly labeled.**  
+* Used variable is:
+  * ethnic Identity  
+```r
+ggplot(data = HFS.Ethnic_Identity.cleaned)+
+    geom_bar(mapping = aes(x=ethnic_identity),colour="white",fill="blue")+
+    labs(title = "One bar chart of Ethnic Identity", y = "Count of Clients of Each Ethnicity", x = "Client Ethnicity")
 ```
+| ![Bar Chart](https://github.com/Rsilva68/Assignment1/blob/main/Bar%20Chart.png)
+| -
+This Bar chart is composed of only the Ethnicity of the Client of HFS. It shows how many clients are in each ethnicity group. The charts shows that most clients of HFS are Not Latino. Also we can observe that out of almost 8000 clients approximately 400 clients are Other Latino or Unknown 
+
 
 # Thing explored:
 We have explored may different types of attributes that are required to solve the 3 research questions and also we analysed the data that we have now can also get other results.Further We can subset each and every Character data and get additional information.
