@@ -223,6 +223,22 @@ therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title ==
 
 If we filter out therapists there are only `r nrow(therapists)` rows, so 1500 fewer rows. 
 
+#### Plot - Histogram of Duration for All Therapist Job Titles
+
+Firstly we filter the dataset for therapist job titles. Most of the data concerns therapists, more than 80% of the dataset. 
+
+```{r filter}
+data <- as_tibble(read.csv("/Users/ccrowe/github/isqa8600_ChadCrowe/programs/data/HFS Service Data.csv"))
+therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title == "THERAPIST II" | data$job_title == "THERAPIST III" | data$job_title == "LEAD THERAPIST")
+#nrow(therapists)# 1500 fewer rows
+```
+
+We want to explore the relationship of duration for each of the therapist job titles. Therefore, we create a histogram of duration for each therapist job title.
+
+```{r therapists_vs_duration}
+hist(therapists$total_duration_num, breaks=50,xlim=c(0,150),main="Histogram of Duration for All Records\n With a Therapist Job Title", xlab="Duration (minutes)", ylab = "Count")
+```
+
 #### Ethnicity
 
 ```{r ethnicity_breakdown}
@@ -274,6 +290,34 @@ tibble_data %>% filter(facility == NA) %>% count()
 
 From the graph we see nine main facilities with more than two-hundred records. There are three facilities with more than one-thousand rows. We want to avoid aggregating smaller facilities together since each facility might be very different.  For now, we will leave the smaller facilities in the data.  Later on, we might remove facilities with very few users. No rows are NA so there is no need to handle NAs or missing data in this column. 
 
+#### Plot: Count of each Zip Code for Therapists
+
+This plot aims to get an idea of zip code and whether it will be helpful in any location analysis. In the below graph, we group by zip code, plot the count, and sort descending.
+
+```{r location}
+counts <- therapists %>% group_by(zip) %>% count(sort = TRUE)
+plot(counts$n, main = "Plot of Record Count per Zip",xlab="Zip Index (Descending)", ylab="Count of Records per Zip")
+```
+
+The graph shows only two main zip-codes, 681, 680, and 0, which is not very informative. The other zip codes had fewer than fifty records.
+
+We'll use the facility's name now that we've decided not to use general location or zip code.  We'll also keep exploring job title, duration, and ethnicity.
+
+
+#### Plot of General Location for Therapist Work
+
+There are a few columns I'm interested in using, such as general location and the zip code.  In the below plots, I'll explore these columns.
+
+```{r general_location}
+counts <- therapists %>% group_by(general_location) %>% count(sort = TRUE)
+plot(counts$n, main = "Plot of Record Count per Location",xlab="Location Index (Descending)", ylab="Count of Records per Location")
+```
+
+The data exploration looked into general location data.  We thought we might find insights about where treatment tends to occur.  We firstly group by location, get the count and plot the counts. We see there are seven main locations with more than two hundred records. The rest of the locations contain 25 or fewer records.  For the sake of data readability, we will filter out these sparse locations for understanding larger trends. It is worth noting that most of the data is not location-specific, including the telehealth video, phone, and where there is no location. This data might not be useful for understanding location trends but lets us know that many services are outside the HFS office.
+
+A lot of the general location data is telehealth - video.  I assume this means location does not matter.
+
+
 #### Appointment No Shows
 
 The column is_noshow is interesting because these are costly events for both HFS and for the potential benefactor. No_shows consume HFS appointment time and the person loses out on an opportunity for therapy. 
@@ -294,7 +338,7 @@ tibble_data %>% filter(is_noshow == NA) %>% count()
 
 We see that 15% of all rows are no shows. 15% seems like a surprisingly high number of appointment no shows for any organization. This metric is worth looking into further. There are no NAs in the column or values we want to filter.
 
-### Number of Appointments per Person
+#### Number of Appointments per Person
 
 HFS has voiced an interest in the number of appointments and total duration spent per patient. While duration length or the number of appointments does not connotate to organizational success, they are metrics that HFS reports to funders. 
 
@@ -313,6 +357,223 @@ ylab("Count of Person's Appointments") +
 
 There are only 460 records with more than one appointment with HFS, which is only 5% of all HFS records. From this we learn that almost all appointments are single-time appointments. Considering the few number of records with multiple appointments, it might not be worth looking further into the factors affecting duration or the number of appointments.
 
+
+#### Plot: Total Duration for each Therapist Job Title, Faceted by Program Name
+
+The next goal is to visualize the relationship between job title, duration, ethnicity, and the program. We'll show a few plots below that begin to explore this relationship.  Firstly, we will look at job title vs. duration across programs. Next, we'll include ethnicity as a color, but it doesn't tell us much about ethnicity.
+
+```{r therapist_type_vs_duration}
+ggplot(data = therapists) + geom_point(mapping = aes(x = job_title, y = total_duration_num, color=ethnic_identity)) +  facet_wrap(~ program_name, nrow = 2) +
+ggtitle("Total Appointment Duration for Each Therapist Job Title\nFacet by Program Name") +
+xlab("Job Title") +
+ylab("Duration (minutes)") + 
+  ylim(0, 130) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+The primary observation is the distribution of appointments across both program types and job titles. Therapist III only exists in their Mental Health program. Gambling only has Therapist I and II. Gambling duration is much lower and Mental Health appointment duration has a higher range. Most importantly, we see differences in the duration range, variance, and range by job title for each program. The implication of different durations across job titles might indicate that "job title" affects the duration of appointments or the type of appointments assigned to each therapist job title. 
+
+It isn't easy from the graph's colors to distinguish ethnicity. Using shape instead of color is even more challenging to read. 
+
+
+#### Plot: Duration vs. Job Title, Faceted by Program Name
+
+```{r job_title_vs_therapists}
+# therapist 1 is far less effective.  therapist is faster, possibly a different title?
+ggplot(data = therapists) + 
+  stat_summary(
+    mapping = aes(x = job_title, y = total_duration_num),
+    #fun.min = min,
+    #fun.max = max,
+    fun = median
+  ) + facet_grid(~ program_name) +
+ggtitle("Duration vs Job Title, Facet by Program Type") +
+xlab("Job Title") +
+ylab("Duration (minutes)") + 
+  ylim(0, 130) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+# we do get an equal or decrease in the mean time by experience.  What about the variance?  
+# therapist 3 are only seen in mental health
+# in substance abuse duration goes up from therapist 1 to 2, though it is lower than therapist and lead therapist.
+
+```
+
+#### Plot: Total Appointment Duration For Each Therapist Job Title, Faceted by Ethnicity, Colored for Location
+
+```{r}
+# but total_duration goes down with increase experience
+# I wonder if clients are more likely to show up in the future based on the previous experience who rendered the service.
+# durations do total together!
+# BEAUTIFUL, it shows the efficiency across types
+ggplot(data = therapists) + geom_point(mapping = aes(x = job_title, y = duration_num, color=facility)) + facet_wrap(~ ethnic_identity) +
+ggtitle("Total Appointment Duration for Each Therapist Job Title,\nFacet by Ethnicity, colored for Location") +
+xlab("Job Title") +
+ylab("Duration (minutes)") +
+ ylim(0, 130) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+
+```
+
+```{r include=FALSE}
+ethnicity <- therapists %>% group_by(ethnic_identity) %>% group_by(job_title)
+ethnicity %>% summarise(
+  mean_total = mean(total_duration_num),
+  variance_total = var(total_duration_num),
+  mean_other = mean(duration_other_num),
+  variance_other = var(duration_other_num),
+  mean = mean(duration_num),
+  variance = var(duration_num)  
+)
+
+title <- therapists %>% group_by(job_title) %>% group_by(ethnic_identity)
+title %>% summarise(
+  mean_total = mean(total_duration_num),
+  variance_total = var(total_duration_num),
+  mean_other = mean(duration_other_num),
+  variance_other = var(duration_other_num),
+  mean = mean(duration_num),
+  variance = var(duration_num)
+)
+
+```
+  
+This graph is extremely complicated but also informative. Coloring by location is informative and tells us where ethnicities and job titles congregate. I hid the legend since I am less concerned with the actual location and more concerned with the general area.
+
+
+# Plot: No show by Ethnicity
+
+```{r noshow_ethnicity}
+noshow_stats <- therapists %>% group_by(ethnic_identity) %>% count(is_noshow) %>% filter(n > 10)
+noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
+shows <- noshow_stats %>% filter(is_noshow == "TRUE")
+noshow_stats_consolidated <- inner_join(shows,noshows,by=c("ethnic_identity"), suffix = c("no", "yes"))
+noshow_stats_consolidated <- select(noshow_stats_consolidated, -c(is_noshowno, is_noshowyes))
+noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
+df <- noshow_percent
+
+ggplot(data = df) + geom_point(mapping = aes(x = ethnic_identity, y = noshow_percent)) + coord_flip() +
+ggtitle("Average No Show Percent\n by Ethnicity") +
+xlab("Ethnicity") +
+ylab("Average Percentage of No Shows")
+```
+
+This shows that the groups with the highest no-show rate across all programs looks like it is the Mexican ethnic identity. It is worthwhile to break down ethnic identity by the program to understand if this relationship still holds.  If it does, this research can explore how one might decrease the no show rate across the groups experiencing the highest rates of no-shows.
+
+# Plot: Break down no show for ethnicity across program types
+
+```{r ethnicity_by_program_noshows}
+noshow_stats <- therapists %>% group_by(ethnic_identity, program_name) %>% count(is_noshow) %>% filter(n > 10)
+noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
+shows <- noshow_stats %>% filter(is_noshow == "TRUE")
+noshow_stats_consolidated <- inner_join(shows,noshows,by=c("ethnic_identity","program_name"), suffix = c("no", "yes"))
+noshow_stats_consolidated <- select(noshow_stats_consolidated, -c(is_noshowno, is_noshowyes))
+noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
+df <- noshow_percent
+
+ggplot(data = df) + geom_point(mapping = aes(x = ethnic_identity, y = noshow_percent)) +  facet_wrap(~ program_name, nrow = 2) +
+ggtitle("No Show Percentage for Each Ethnicity\nFacet by Program Name") +
+xlab("Job Title") +
+ylab("Duration (minutes)") + 
+  ylim(10, 25) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
+
+We see a similar dropout rate for both "Non-Spanish/Hispanic/Latino and Other Hispanic or Latino"  On the other hand, we see a far higher, even double, no show rate for those who are identified as the Mexican ethnic identity, which only exists in the "Mental Health" program type. This research should explore the Mexican ethnic identity within the "Mental Health Program."
+
+# Plot: Mexican Dropout Percentage by Job Title within the Mental Health Program
+
+We can then go one step further and see if we see a difference in drop out, within the "Mental Health" program for the "Mexican" ethnic identity.
+
+```{r}
+mexican_ethnic_identity <- therapists %>% filter(program_name == "Mental Health" & ethnic_identity == "Mexican") %>% group_by(ethnic_identity,job_title)  %>% count(is_noshow)
+noshow_stats <- mexican_ethnic_identity
+noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
+shows <- noshow_stats %>% filter(is_noshow == "TRUE")
+noshow_stats_consolidated <- inner_join(shows,noshows,by=c("ethnic_identity","job_title"), suffix = c("no", "yes"))
+noshow_stats_consolidated <- select(noshow_stats_consolidated, -c(is_noshowno, is_noshowyes))
+noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
+df <- noshow_percent
+
+ggplot(data = df) + geom_point(mapping = aes(x = job_title, y = noshow_percent)) +
+ggtitle("No Show Percentage for the Mexican Ethnic Identity\nfor the Mental Health Program by Therapist Job Title") +
+xlab("Job Title") +
+ylab("Duration (minutes)") + 
+  ylim(20, 55) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+Now this looks AMAZING and like we've found something truly significant. However, when we look at the data we find only eight instances of the Mexican ethnic identity for Therapist II.  It is possible this relationship is significant but more data is needed to confirm this phenomenon. Otherwise, no-show rate is mostly similar across all ethnicities.
+
+# Plot: Average No Show Percent for Each Therapist Job Title\n by Ethnicity, Faceted by Program Name
+
+There is now an opportunity to look at no-show rate across therapist job title, program name, and ethnicity.  The graph separates the data into facets for each program type and graphs no show percentage for each ethnicity, colored for therapist job title.  
+
+```{r noshows}
+
+noshow_stats <- therapists %>% group_by(job_title) %>% count(is_noshow)
+noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
+shows <- noshow_stats %>% filter(is_noshow == "TRUE")
+noshow_stats_consolidated <- inner_join(shows,noshows,by=c("job_title"), suffix = c("no", "yes")) 
+noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
+noshow_percent
+
+# All shows and no-shows are under
+noshow_stats <- therapists %>% group_by(job_title, ethnic_identity, program_name) %>% count(is_noshow) %>% filter(n > 10)
+noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
+shows <- noshow_stats %>% filter(is_noshow == "TRUE")
+noshow_stats_consolidated <- inner_join(shows,noshows,by=c("job_title","ethnic_identity","program_name"), suffix = c("no", "yes"))
+noshow_stats_consolidated <- select(noshow_stats_consolidated, -c(is_noshowno, is_noshowyes))
+noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
+df <- noshow_percent
+
+ggplot(data = df) + geom_point(mapping = aes(x = ethnic_identity, y = noshow_percent, color = job_title)) + 
+facet_wrap(~ program_name, nrow = 2) +
+ggtitle("Average No Show Percent for Each Therapist Job Title\n by Ethnicity, Faceted by Program Name") +
+xlab("Ethnicity") +
+ylab("Average Percentage of No Shows\n for Each Therapist Job Title") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
+
+Noticeable takeaway is a general trend for more experienced job titles to have a lower no-show percentage by graphed by ethnicity. You also notice that some ethnicities are only treated by one level of therapist by each program type. On average, mental health has lower no-show rates.
+
+# Simple Linear Model of No Show Percentage vs Job Title + Ethnicity + Program
+
+Since we've created some insightful plots, it's worth getting a feeling of how strong the relationship is between no-show percentage and the other variables we've investigated.
+
+```{r linear_model}
+score_model <- lm(df$noshow_percent ~ df$job_title + df$ethnic_identity + df$program_name, data = df)
+summary(score_model)
+```
+
+Most notable is no significant relationship between the no-show percentage with other variables. However, both the mental health program and most common ethnicity contained more extreme values. It gives us feedback that no-show percentage is likely more complicated than job title alone. However, I noticed that some facilities had much higher no-show rates.  I bet if I include facility it might change a lot in the model.
+
+# Linear Model with Facility
+
+This time we heavily filter to the main few facility locations and include it in the linear model. Again, I only want a few main facilities since too many locations will heavily bias the model toward significance.
+
+```{r with_facility}
+
+main_facilities <- unique(therapists %>% group_by(facility) %>% count(is_noshow) %>% filter(n > 100))
+
+noshow_stats <- therapists %>% group_by(job_title, ethnic_identity, program_name, facility) %>% count(is_noshow)
+noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
+shows <- noshow_stats %>% filter(is_noshow == "TRUE")
+noshow_stats_consolidated <- inner_join(shows,noshows,by=c("job_title","ethnic_identity","program_name","facility"), suffix = c("no", "yes"))
+noshow_stats_consolidated <- select(noshow_stats_consolidated, -c(is_noshowno, is_noshowyes))
+noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
+df <- noshow_percent
+# filter by major facilities
+df <- inner_join(df,main_facilities,by=c("facility"), suffix = c("no", "yes"))
+
+facility.model <- lm(df$noshow_percent ~ df$job_title + df$program_name + df$ethnic_identity + df$facility, data = df)
+summary(facility.model)
+
+```
+
+What I'm most interested in is the relationship between the main variables by facility. We then find a relationship between Therapist I, ethnicity, and a few locations, which might be insightful since one might expect more no-shows with a newer therapist.  Also, we might expect that certain locations are less able to handle certain ethnicities, such as a lack of support for Spanish. However, depending on the facility filter I use the stats change, which makes me think that some of the significance is due to the sheer number of facilities. Further work should categorize facilities based on size or primary ethnicities and try to remodel with fewer variables.
 
 #### RQ 3
 
