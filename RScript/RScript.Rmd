@@ -228,7 +228,7 @@ If we filter out therapists there are only `r nrow(therapists)` rows, so 1500 fe
 Firstly we filter the dataset for therapist job titles. Most of the data concerns therapists, more than 80% of the dataset. 
 
 ```{r filter}
-data <- as_tibble(read.csv("/Users/ccrowe/github/isqa8600_ChadCrowe/programs/data/HFS Service Data.csv"))
+data <- as_tibble(read.csv("HFS Service Data.csv"))
 therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title == "THERAPIST II" | data$job_title == "THERAPIST III" | data$job_title == "LEAD THERAPIST")
 #nrow(therapists)# 1500 fewer rows
 ```
