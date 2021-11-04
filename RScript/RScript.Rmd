@@ -322,18 +322,18 @@ Of the clients receiving services that identified as Hispanic or Mexican, how ma
 
 ### Dataset Used
 
-> HFS.Hispanic<-HFS
+`r HFS.Ethnic_Identity<-HFS_data`
 
-> str(HFS.Hispanic)
+`r str(HFS.Ethnic_Identity)`
 
 ### To see the names of Columns
 
-> names(HFS.Hispanic)  
+`r names(HFS.Ethnic_Identity)`
 
 ### Deleted Columns that I didn't need and named it HFS.Hispanic.cleaned
 
-> HFS.Hispanic.cleaned<-HFS.Hispanic[c(1:4,7,9,17,25,30,46,48,49:51)]5
-> names(HFS.Hispanic.cleaned)
+`r HFS.Ethnic_identity.cleaned<-HFS.Ethnic_Identity[c(1:4,7,9,17,24,25,30,46,48,49:51)]`
+`r names(HFS.Ethnic_identity.cleaned)`
 
 "gender"                   "program_name"             "program_type"            
 "facility"                 "actual_date"              "event_name"              
@@ -344,7 +344,10 @@ Of the clients receiving services that identified as Hispanic or Mexican, how ma
  
 ** I now have 14 columns & 8745 rows
 
-> ncol(HFS.Hispanic.cleaned);nrow(HFS.Hispanic.cleaned)
+```{r}
+ncol(HFS.Ethnic_identity.cleaned)
+nrow(HFS.Ethnic_identity.cleaned)
+```
  14
  
  8745
@@ -360,24 +363,26 @@ count (df, ethnic_identity)
 
 ###Clean NA & "Not Collected"
 ###Find missing values
-is.na(HFS.Hispanic.cleaned)
+`r `is.na(HFS.Ethnic_identity.cleaned)`
 
 ### Count missing values
-sum(is.na(HFS.Hispanic.cleaned))
+`r  sum(is.na(HFS.Ethnic_identity.cleaned))`
 ### Result is 2,608
 
 ###Delete Rows that have "Not Collected" in variable Ethnic_Identity
+```{r}
 HFS.Ethnic_Identity.cleaned = HFS.Ethnic_Identity[HFS.Ethnic_Identity$ethnic_identity  != "Not Collected",]
 
 ncol(HFS.Ethnic_Identity.cleaned);nrow(HFS.Ethnic_Identity.cleaned)
+```
 [1] 10
 [1] 8580
 
 ###Replace "Not Spanish/Hispanic/Latino" with "Not Latino"
-HFS.Ethnic_Identity.cleaned$ethnic_identity[HFS.Ethnic_Identity.cleaned$ethnic_identity== "Not Spanish/Hispanic/Latino"]<- "Not Latino"
+`r `HFS.Ethnic_Identity.cleaned$ethnic_identity[HFS.Ethnic_Identity.cleaned$ethnic_identity== "Not Spanish/Hispanic/Latino"]<- "Not Latino"`
 
 ###Replace "Other Hispanic or Latino" with "Other Latino"
-HFS.Ethnic_Identity.cleaned$ethnic_identity[HFS.Ethnic_Identity.cleaned$ethnic_identity== "Other Hispanic or Latino"]<- "Other Latino"
+`r HFS.Ethnic_Identity.cleaned$ethnic_identity[HFS.Ethnic_Identity.cleaned$ethnic_identity== "Other Hispanic or Latino"]<- "Other Latino"`
 ### New Count of Ethnic Identity
 1 Mexican           148
 2 Not Latino       7820
@@ -418,7 +423,7 @@ I have divided the plot using the ethnic_identity of the clients. This plot uses
 3. **One bar chart, properly labeled.**  
 * Used variable is:
   * ethnic Identity  
-```r
+```{r}
 ggplot(data = HFS.Ethnic_Identity.cleaned)+
     geom_bar(mapping = aes(x=ethnic_identity),colour="white",fill="blue")+
     labs(title = "One bar chart of Ethnic Identity", y = "Count of Clients of Each Ethnicity", x = "Client Ethnicity")
