@@ -29,11 +29,6 @@ families:
 
 • Counseling & Prevention
 
-Staff can hand-craft an integrated, multi-service, trauma-informed
-strategy to help clients toward safety, well-being, and, ultimately,
-self-sufficiency, thanks to their programs and services. A sliding
-pricing scale is available for some of their counseling services.
-
 Heartland Family Service’s objective is to enhance communities by
 providing education, counseling, and support services to individuals and
 families. Last year, Heartland Family Service, which was founded in
@@ -47,77 +42,75 @@ community.
 
 # Cleaning Process
 
-### Rearch Questions Over View:
+## RQ 1
 
-#### RQ 1
+The first reserach question explores datetime relationships per person.
+Specifically, we look at the time delay between signup and the first
+appointment, as well as appointment volumes by datetime for HFS.
 
-**My Research Question is to tell that how much time of delay it take to
-takes for enrolling into the event, Entering into system and Approving
-the enrollment.** **(Sai Krishna)**
+### Reason
 
-Reason:- This will help in analyzing the time taking per enrolling from
-starting to ending state. And what kind of people are enrolling on the
-day of the even or before the event and total time taken for individual
-event. This will help the HFS to improve the speed of enrollment and
-also can increate the event of that type in that location.
+This will help in analyzing the time taken per enrolling; from the
+signup to the appointment date. It will also give us insights concerning
+demographic breakdowns per customer, e.g., their ethnic identity and
+location. We will also explore the total time taken for each event. This
+analysis will provide HFS data concerning their enrollment speed by
+different customer facets.
 
 ### Data cleaning:
 
-I have created a new data set based on attributes that I choice from
-Dataset to analyze my desired Research Question. Attributes are
-mentioned bellow.
+The data cleaning results in a new subset of data based on the
+attributes analyzed in the first research question. Important columns
+within this data cleaning are listed below:
 
 `facility`, `actual_date`, `event_name`, `date_entered`,
 `approved_date`, `program_unit_description`, `zip`,
 `state`,`ethnic_identity`
 
-#### In the new data set there 3 variables that talks about the dates in numeric form.
+#### Numeric Data Columns
 
 `actual_date` is about the actual data of the program admission.
 
-`date_entered` is about when was the service entered (days after
-enrollment or days before enrollment)
+`date_entered` is when the appointment occurred (days after enrollment
+or days before enrollment)
 
-`approved_date` is about when was the service documentation approved by
-a supervisor? (Days after enrollment)
+`approved_date` is when the appointment is approved by a supervisor?
+(Days after enrollment)
 
-#### Other Attributes:
+#### Other Columns:
 
-`event_name` is about the name of the event.
+`event_name` is the name of the event.
 
-`program_unit_description` is about the event description
+`program_unit_description`is the event description
 
-`zip` Zip of the location
+`zip` The zip code of the location
 
-`state` Which location is the
+`state` The state for the appointment
 
-`ethnic_identity` this is about the people of different groups who
-attend the events
+`ethnic_identity` Describes the affiliated ethnic identity for the
+person.
 
-### Cleaning procidure :-
+### Cleaning procidure
 
-**step 1:-** Since i am using Data format so i have to find the
-difference between each and every even that is been taken place. So, i
-have used as.Date() function to get the actual date format.
+**step 1:-** Since I am using Data format I have to find the difference
+between each and every even that has taken place. I have used as.Date()
+function to get the actual date format.
 
-**step 2:-** Apply step1 to all the date column to verify it in next
+**step 2:-** Apply step1 to all the date columns to verify it in next
 phase.
 
-**step 3:-** Now create a new column add subtract the dates if we get
-the values in negatives then it is enroled before the event,if 0 then
-they resisted at the moment and if greater the 0 then it is after the
-event.
+**step 3:-** Now we create a new column and subtract the dates. Negative
+values imply an enrollment before the event. Zero implies day-of
+enrollment.
 
-**step 4:-** Later total we have 5 states in the data set which is
-mentioned in short form
+**step 4:-** We have 5 states in the data set which are shown via
+abbreviations.
 
 **step 5:-** Subset each and every State are in short form like
 `IA`,`NE`,`CO`,`NC`,`SC`and later updated to full form of user
-understanding `iowa`, `Nebrska` `colorado`,
-`north carolina`,`south carolina`
-
-and we can observe many different plots based on state and there zip
-code.
+understanding `Iowa`, `Nebrska` `Colorado`,
+`North Carolina`,`South Carolina`. We will also plot against the state
+and zip code.
 
     HFS_data<-read.csv("HFS Service Data.csv")
     #before cleasing the Na values
@@ -128,11 +121,9 @@ Libraries used
     library('ggplot2')
     #library('')
 
-As the Information for the sources of the data that is fatched out to
-csv on **25th August 2021**.
+The latest date we fetch from the CSV is **25th August 2021**.
 
-By using this date i have created original data of the events. with the
-help of **as.Date()** function in R
+We use the function as.Date in R to generate the date of events in R.
 
     HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
     HFS_data$ED<-as.Date(-(HFS_data$date_entered), origin = '2021-08-25')
@@ -143,15 +134,15 @@ help of **as.Date()** function in R
 
 ### Cleaning State Names:
 
-We have a total of five states
+We then look at the time data by state.
 
     regions<-c(unique(HFS_data$state))
     regions
 
     ## [1] "IA" "NE" "CO" "NC" "SC"
 
-Now we update all the states name into full form and them into the
-dataset for easy understanding.
+Now we update all the states names in the dataset, which helps with
+overall readability.
 
     HFS_data$state<- as.character(HFS_data$state)
     HFS_data$state[HFS_data$state == "NE"] <- "nebrska"
@@ -167,9 +158,9 @@ After Changing the Short form of the state:-
     ## [1] "iowa"           "nebrska"        "colorado"       "north carolina"
     ## [5] "south carolina"
 
-# Speliting the individual data accoring to the region:-
+# Splitting dates by region
 
-# IA(iowa):
+# IA(Iowa):
 
     IA<- subset(HFS_data,state=='iowa')
     #str(IA)
@@ -177,19 +168,21 @@ After Changing the Short form of the state:-
     p + geom_point()+geom_violin() +facet_wrap(IA$zip~IA$program_name,scales='free')
 
 ![](RScript_files/figure-markdown_strict/unnamed-chunk-7-1.png) In the
-above graph you can understand that most of the people who from Iowa
-joining events are **Not Spanish/Hispanic/Latino** most of them are
-opting Gambling where as other ethnic\_identity groups are attending the
-events like **Mental Health** and **Substance Use** and most of them are
-from Zip code 0. \#\#\# NE(nebraska)
+above graph you can understand that most people who are from Iowa join
+events and are **Not Spanish/Hispanic/Latino**. Most of them are
+affiliated with Gambling whereas other ethnic\_identity groups tend to
+participate to a large degree in the programs for **Mental Health** and
+**Substance Use**. A lot of these people are from small zip codes that
+are coded as 0. \#\#\# NE(nebraska)
 
     NE<- subset(HFS_data,state=='nebrska')
     #head(NE)
     p <- ggplot(data = NE, aes(y =NE$AD, x =NE$AD_1,color=ethnic_identity ))
     p + geom_point() +geom_violin()+facet_wrap(zip~program_name,scales='free')
 
-![](RScript_files/figure-markdown_strict/unnamed-chunk-8-1.png) In this
-graph we can under stand how the date \#\#\# CO(colorado)
+![](RScript_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+
+### CO(colorado)
 
     CO<- subset(HFS_data,state=='colorado')
     #head(CO)

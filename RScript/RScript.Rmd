@@ -63,17 +63,15 @@ The data cleaning results in a new subset of data based on the attributes analyz
 
 ### Cleaning procidure
 
- **step 1:-** Since i am using Data format so i have to find the difference between each and every even that is been taken place. So, i have used as.Date() function to get the actual date format.
+ **step 1:-** Since I am using Data format I have to find the difference between each and every even that has taken place. I have used as.Date() function to get the actual date format.
  
- **step 2:-** Apply step1 to all the date column to verify it in next phase.
+ **step 2:-** Apply step1 to all the date columns to verify it in next phase.
  
- **step 3:-** Now create a new column add subtract the dates if we get the values in negatives then it is enroled before the event,if 0 then they resisted at the moment and if greater the 0 then it is  after the event.
+ **step 3:-** Now we create a new column and subtract the dates. Negative values imply an enrollment before the event. Zero implies day-of enrollment.
  
- **step 4:-** Later total we have 5 states in the data set which is mentioned in short form
+ **step 4:-** We have 5 states in the data set which are shown via abbreviations.
  
- **step 5:-** Subset each and every State are in short form like `IA`,`NE`,`CO`,`NC`,`SC`and later updated to full form of user understanding `iowa`, `Nebrska`        `colorado`, `north carolina`,`south carolina`
-
- and we can observe many different plots based on state and there zip code.
+ **step 5:-** Subset each and every State are in short form like `IA`,`NE`,`CO`,`NC`,`SC`and later updated to full form of user understanding `Iowa`, `Nebrska`        `Colorado`, `North Carolina`,`South Carolina`.  We will also plot against the state and zip code.
 ```{r}
 HFS_data<-read.csv("HFS Service Data.csv")
 #before cleasing the Na values
@@ -85,9 +83,9 @@ library('ggplot2')
 #library('')
 ```
 
-As the Information for the sources of the data that is fatched out to csv on **25th August 2021**.
+The latest date we fetch from the CSV is **25th August 2021**.
 
-By using this date i have created  original data of the events. with the help of **as.Date()** function in R
+We use the function as.Date in R to generate the date of events in R.
 
 ```{r}
 HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
@@ -100,13 +98,13 @@ HFS_data$AD_1<-(HFS_data$actual_date-HFS_data$date_entered)
 
 ### Cleaning State Names:
 
-We have a total of five states
+We then look at the time data by state.
 
 ```{r}
 regions<-c(unique(HFS_data$state))
 regions
 ```
-Now we update all the states name into full form and them into the dataset for easy understanding.
+Now we update all the states names in the dataset, which helps with overall readability.
 ```{r}
 HFS_data$state<- as.character(HFS_data$state)
 HFS_data$state[HFS_data$state == "NE"] <- "nebrska"
@@ -121,16 +119,16 @@ After Changing the Short form of the state:-
 c(unique(HFS_data$state))
 ```
 
-# Speliting the individual data accoring to the region:-
+# Splitting dates by region
 
-# IA(iowa):
+# IA(Iowa):
 ```{r warning=FALSE}
 IA<- subset(HFS_data,state=='iowa')
 #str(IA)
 p <- ggplot(data = IA, aes(y =IA$AD, x =IA$AD_1,color=ethnic_identity ))
 p + geom_point()+geom_violin() +facet_wrap(IA$zip~IA$program_name,scales='free')
 ```
-In the above graph you can understand that most of the people who from Iowa joining events  are **Not Spanish/Hispanic/Latino** most of them are opting Gambling where as other ethnic_identity groups are attending the events like **Mental Health** and **Substance Use** and most of them are from Zip code 0.
+In the above graph you can understand that most people who are from Iowa join events and are **Not Spanish/Hispanic/Latino**.  Most of them are affiliated with Gambling whereas other ethnic_identity groups tend to participate to a large degree in the programs for **Mental Health** and **Substance Use**. A lot of these people are from small zip codes that are coded as 0.
 ### NE(nebraska)
 ```{r warning=FALSE}
 NE<- subset(HFS_data,state=='nebrska')
@@ -138,7 +136,7 @@ NE<- subset(HFS_data,state=='nebrska')
 p <- ggplot(data = NE, aes(y =NE$AD, x =NE$AD_1,color=ethnic_identity ))
 p + geom_point() +geom_violin()+facet_wrap(zip~program_name,scales='free')
 ```
-In this graph we can under stand how the date 
+
 ### CO(colorado)
 ```{r warning=FALSE}
 CO<- subset(HFS_data,state=='colorado')
