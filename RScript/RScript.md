@@ -630,7 +630,7 @@ location is informative and tells us where ethnicities and job titles
 congregate. I hid the legend since I am less concerned with the actual
 location and more concerned with the general area.
 
-# Plot: No show by Ethnicity
+#### Plot: No show by Ethnicity
 
     noshow_stats <- therapists %>% group_by(ethnic_identity) %>% count(is_noshow) %>% filter(n > 10)
     noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
@@ -654,7 +654,7 @@ relationship still holds. If it does, this research can explore how one
 might decrease the no show rate across the groups experiencing the
 highest rates of no-shows.
 
-# Plot: Break down no show for ethnicity across program types
+#### Plot: Break down no show for ethnicity across program types
 
     noshow_stats <- therapists %>% group_by(ethnic_identity, program_name) %>% count(is_noshow) %>% filter(n > 10)
     noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
@@ -680,7 +680,7 @@ identity, which only exists in the “Mental Health” program type. This
 research should explore the Mexican ethnic identity within the “Mental
 Health Program.”
 
-# Plot: Mexican Dropout Percentage by Job Title within the Mental Health Program
+#### Plot: Mexican Dropout Percentage by Job Title within the Mental Health Program
 
 We can then go one step further and see if we see a difference in drop
 out, within the “Mental Health” program for the “Mexican” ethnic
@@ -711,7 +711,7 @@ relationship is significant but more data is needed to confirm this
 phenomenon. Otherwise, no-show rate is mostly similar across all
 ethnicities.
 
-# Plot: Average No Show Percent for Each Therapist Job Titleby Ethnicity, Faceted by Program Name
+#### Plot: Average No Show Percent for Each Therapist Job Titleby Ethnicity, Faceted by Program Name
 
 There is now an opportunity to look at no-show rate across therapist job
 title, program name, and ethnicity. The graph separates the data into
@@ -757,7 +757,7 @@ to have a lower no-show percentage by graphed by ethnicity. You also
 notice that some ethnicities are only treated by one level of therapist
 by each program type. On average, mental health has lower no-show rates.
 
-# Simple Linear Model of No Show Percentage vs Job Title + Ethnicity + Program
+#### Simple Linear Model of No Show Percentage vs Job Title + Ethnicity + Program
 
 Since we’ve created some insightful plots, it’s worth getting a feeling
 of how strong the relationship is between no-show percentage and the
@@ -835,7 +835,7 @@ title alone. However, I noticed that some facilities had much higher
 no-show rates. I bet if I include facility it might change a lot in the
 model.
 
-# Linear Model with Facility
+#### Linear Model with Facility
 
 This time we heavily filter to the main few facility locations and
 include it in the linear model. Again, I only want a few main facilities
@@ -978,6 +978,83 @@ filter I use the stats change, which makes me think that some of the
 significance is due to the sheer number of facilities. Further work
 should categorize facilities based on size or primary ethnicities and
 try to remodel with fewer variables.
+
+### Integrating RQ 1 and RQ2
+
+#### Looking at Day Lapse from Signup to Appointment by Facility
+
+Sai did a lot of useful work concerning the date on which appointment
+data is entered. I thought it would be interesting to explore whether
+this data looks the same across all the primary facilities for HFS. If
+the data varies, maybe we can glean differences in the busyness of
+facilities due to needing to create appointments further in the future.
+From these observations, we might be able to better understand which
+facilities are more difficult for customers to use.
+
+    average_lapse <- HFS_data %>% select(facility, AD_1) %>% group_by(facility) %>% drop_na() %>% summarise(mean = mean(AD_1)) %>% arrange(mean)
+
+    filter_to_large_facilities <- inner_join(average_lapse,main_facilities,by=c("facility"), suffix = c(".1", ".2"))
+
+    plot(filter_to_large_facilities$mean,xlab = "Facility, Ordered by Mean", ylab = "Day Lapse from Data Entry to Appointment", main = "Plot of Day Lapse to Appointments by Facility")
+
+![](RScript_files/figure-markdown_strict/appointment_entry_lapse_by_facility-1.png)
+
+From the above plot we can see that HFS is fairly efficient at getting
+customers registered and into appointments for all of their facilities
+that handled at least 100 customers in the dataset. Given the discovered
+efficiency for HFS when processing new persons, it might be not be worth
+digging deeper into this lapse between signup to appointment day.
+
+#### Looking at Timestamp Volumes per Facility, no Facet
+
+If we look across all facilities, we can see how the HFS volumes
+increase over time. This is particularly noticeable in 2021, where HFS
+volume substantially increased.
+
+    facility_timestamp_count <- HFS_data %>% select(facility, AD) %>% group_by(facility, AD) %>% drop_na() %>% count(sort=TRUE) %>% arrange(n)
+
+    ggplot(facility_timestamp_count, aes(y =facility_timestamp_count$AD, x =facility_timestamp_count$n)) + 
+      geom_point() +
+    ggtitle("Daily Facility Volume per Day") +
+    xlab("Date Time") +
+    ylab("Count of Appointments per Day at the Facility") + 
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+![](RScript_files/figure-markdown_strict/timestamp_appointment_entry_lapse_by_facility-1.png)
+
+#### Looking at Timestamp Volumes by Facility, Facet by Facility
+
+    facility_timestamp_count <- HFS_data %>% select(facility, AD) %>% group_by(facility, AD) %>% drop_na() %>% count(sort=TRUE) %>% arrange(n)
+
+    filter_to_large_facilities <- inner_join(facility_timestamp_count,main_facilities,by=c("facility"), suffix = c(".1", ".2"))
+
+    sorted <- filter_to_large_facilities %>% group_by(facility) %>% summarise(mean = mean(n.2)) %>% arrange(mean)
+
+    with_averages <- inner_join(sorted,filter_to_large_facilities,by=c("facility"), suffix = c(".1", ".2"))
+
+    ggplot(filter_to_large_facilities, aes(y =filter_to_large_facilities$AD, x=filter_to_large_facilities$n.1)) + 
+      geom_point() +
+    ggtitle("Facility Volume per Day, Facet by Facility") +
+    xlab("Date Time") +
+    ylab("Count of Appointments per Day at the Facility") + 
+      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+      geom_violin()+
+      facet_wrap(~filter_to_large_facilities$facility, labeller = labeller(groupwrap = label_wrap_gen(5)))
+
+![](RScript_files/figure-markdown_strict/timestamp_appointment_entry_lapse_by_facility_facet-1.png)
+
+The goal of the above graph is to visualize how volume has changed over
+time at the primary facilities for HFS. With this knowledge, our
+research can better understand what HFS growth has looked like at its
+primary facilities over the past few years. As is expected, most
+facilities have a constant or slight increase in volume over time.
+However, Some facilities like HFS - C. Have had substantial growth,
+maybe 5x growth since 2020. However, most facilities show a slow growth
+in daily appointments over time.
+
+Per future analysis, from this information it might be useful to
+calculate facility capacity as a function of therapist count per
+facility.
 
 #### RQ 3
 
