@@ -22,51 +22,46 @@ Heartland Family Service, which was founded in Omaha in 1875, served more than 7
 
 •	Counseling & Prevention
 
-Staff can hand-craft an integrated, multi-service, trauma-informed strategy to help clients toward safety, well-being, and, ultimately, self-sufficiency, thanks to their programs and services. A sliding pricing scale is available for some of their counseling services.
-
-Heartland Family Service's objective is to enhance communities by providing education, counseling, and support services to individuals and families. Last year, Heartland Family Service, which was founded in Omaha in 1875, served 60,309 individuals and families through direct services, education, and outreach from more than 15 locations in east central Nebraska and southwest Iowa. In the following target areas:
-Child & Family Well-Being, Counseling & Prevention, and Housing, Safety, & Financial Stability,their programs provide important human services to the individuals and families that ultimately create the future of our community.
+Heartland Family Service's objective is to enhance communities by providing education, counseling, and support services to individuals and families. Last year, Heartland Family Service, which was founded in Omaha in 1875, served 60,309 individuals and families through direct services, education, and outreach from more than 15 locations in east central Nebraska and southwest Iowa. In the following target areas: Child & Family Well-Being, Counseling & Prevention, and Housing, Safety, & Financial Stability,their programs provide important human services to the individuals and families that ultimately create the future of our community.
 
 
 # Cleaning Process
 
-### Rearch Questions Over View:
-#### RQ 1
+## RQ 1
 
+The first reserach question explores datetime relationships per person.  Specifically, we look at the time delay between signup and the first appointment, as well as appointment volumes by datetime for HFS.
 
-**My Research Question is to tell that how much time of delay it take to takes for enrolling into the event, Entering into system and Approving the enrollment.** **(Sai Krishna)**
+### Reason
 
-Reason:-
-This will help in analyzing the time taking per enrolling from starting to ending state. And what kind of people are enrolling on the day of the even or before the event and total time taken for individual event.
-This will help the HFS to improve the speed of enrollment and also can increate the event of that type in that location.
+This will help in analyzing the time taken per enrolling; from the signup to the appointment date.  It will also give us insights concerning demographic breakdowns per customer, e.g., their ethnic identity and location.  We will also explore the total time taken for each event. This analysis will provide HFS data concerning their enrollment speed by different customer facets.
 
 ### Data cleaning:
 
-I have created a new data set based on attributes that I choice from Dataset to analyze my desired Research Question. Attributes are mentioned bellow.
+The data cleaning results in a new subset of data based on the attributes analyzed in the first research question.  Important columns within this data cleaning are listed below:
 
 `facility`, `actual_date`, `event_name`, `date_entered`, `approved_date`, `program_unit_description`, `zip`, `state`,`ethnic_identity`
 
-#### In the new data set there 3  variables that talks about the dates in numeric form.
+#### Numeric Data Columns
 
 `actual_date` is about the actual data of the program admission.
 
-`date_entered` is about when was the service entered (days after enrollment or days before enrollment)
+`date_entered` is when the appointment occurred (days after enrollment or days before enrollment)
 
-`approved_date` is about when was the service documentation approved by a supervisor? (Days after enrollment)
+`approved_date` is when the appointment is approved by a supervisor? (Days after enrollment)
 
-#### Other Attributes:
+#### Other Columns:
 
-`event_name`  is about the name of the event.
+`event_name`  is the name of the event.
 
-`program_unit_description`  is about the event description
+`program_unit_description`is the event description
 
-`zip`	Zip of the location
+`zip`	The zip code of the location
 
-`state`	Which location is the 
+`state` The state for the appointment
 
-`ethnic_identity` this is about the people of different groups who attend the events 
+`ethnic_identity` Describes the affiliated ethnic identity for the person.
 
-### Cleaning procidure :- 
+### Cleaning procidure
 
  **step 1:-** Since i am using Data format so i have to find the difference between each and every even that is been taken place. So, i have used as.Date() function to get the actual date format.
  
