@@ -4,6 +4,15 @@ author: "Author:- Sai Krishna,Chad Crowe,Rhonda Silva"
 output:
   md_document: default
 ---
+## Contributor Statement
+Chad, Sai and Rhonda each contributed to the project plan.
+Sai worked on Research Question 1
+Chad worked on Research Question 2
+Rhonda worked on Research Question 3
+Chad proofread
+
+The entire group is performing data exploration concerning location and its relationship to other columns, such as the onboarding duration, ethnicity, program name, and job title. Given this general direction of interest, each of us explored a related research question. Fortunately, based on the data exploration documentation, we are updating the direction of our research. Specifically, how does onboarding duration change when enhanced by interesting findings concerning ethnicity, program name, and job title. Part of the progress demonstrated by this assignment intertwines these aspects.
+
 ## Introduction
 Heartland Family Service, which was founded in Omaha in 1875, served more than 79,000 individuals and families last year through direct services, education, and outreach from more than 15 facilities in east central Nebraska and southwest Iowa. In the following focus areas, our programs provide important human services to children, individuals, and families:
 
@@ -541,10 +550,19 @@ Noticeable takeaway is a general trend for more experienced job titles to have a
 
 # Simple Linear Model of No Show Percentage vs Job Title + Ethnicity + Program
 
-Since we've created some insightful plots, it's worth getting a feeling of how strong the relationship is between no-show percentage and the other variables we've investigated.
+Since we've created some insightful plots, it's worth getting a feeling of how strong the relationship is between no-show percentage and the other variables we've investigated. Moreover, the residuals and standard residuals are somewhat constant. 
+
+```{r linear_model_assumptions}
+score_model <- lm(df$noshow_percent ~ df$job_title + df$ethnic_identity + df$program_name, data = df)
+plot(score_model)
+shapiro.test(df$noshow_percent)
+```
+
+From the four plots, it seems the distribution might be a good candidate for a linear model.  Most of the data is normal in the qqplot and all the lines have a manageable leverage. Moreover, a Shapiro-Wilk's test shows the data is not significantly different from normal.
+
+R allows us to create a linear model and investigate the properties expected within a linear model.
 
 ```{r linear_model}
-score_model <- lm(df$noshow_percent ~ df$job_title + df$ethnic_identity + df$program_name, data = df)
 summary(score_model)
 ```
 
@@ -567,10 +585,13 @@ noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nn
 df <- noshow_percent
 # filter by major facilities
 df <- inner_join(df,main_facilities,by=c("facility"), suffix = c("no", "yes"))
+```
 
+Above, we already showed that noshow_percent is not statistically different from normal and the assumptions of normality are generally held by the data. Below, we show the relationship between noshow_percent and other important varaibles like job title, ethnicity, and facility.
+
+```{r normal_check_facilities}
 facility.model <- lm(df$noshow_percent ~ df$job_title + df$program_name + df$ethnic_identity + df$facility, data = df)
 summary(facility.model)
-
 ```
 
 What I'm most interested in is the relationship between the main variables by facility. We then find a relationship between Therapist I, ethnicity, and a few locations, which might be insightful since one might expect more no-shows with a newer therapist.  Also, we might expect that certain locations are less able to handle certain ethnicities, such as a lack of support for Spanish. However, depending on the facility filter I use the stats change, which makes me think that some of the significance is due to the sheer number of facilities. Further work should categorize facilities based on size or primary ethnicities and try to remodel with fewer variables.

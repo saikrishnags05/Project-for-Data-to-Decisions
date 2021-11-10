@@ -1,3 +1,19 @@
+## Contributor Statement
+
+Chad, Sai and Rhonda each contributed to the project plan. Sai worked on
+Research Question 1 Chad worked on Research Question 2 Rhonda worked on
+Research Question 3 Chad proofread
+
+The entire group is performing data exploration concerning location and
+its relationship to other columns, such as the onboarding duration,
+ethnicity, program name, and job title. Given this general direction of
+interest, each of us explored a related research question. Fortunately,
+based on the data exploration documentation, we are updating the
+direction of our research. Specifically, how does onboarding duration
+change when enhanced by interesting findings concerning ethnicity,
+program name, and job title. Part of the progress demonstrated by this
+assignment intertwines these aspects.
+
 ## Introduction
 
 Heartland Family Service, which was founded in Omaha in 1875, served
@@ -745,9 +761,33 @@ by each program type. On average, mental health has lower no-show rates.
 
 Since we’ve created some insightful plots, it’s worth getting a feeling
 of how strong the relationship is between no-show percentage and the
-other variables we’ve investigated.
+other variables we’ve investigated. Moreover, the residuals and standard
+residuals are somewhat constant.
 
     score_model <- lm(df$noshow_percent ~ df$job_title + df$ethnic_identity + df$program_name, data = df)
+    plot(score_model)
+
+    ## Warning: not plotting observations with leverage one:
+    ##   3, 4, 11
+
+![](RScript_files/figure-markdown_strict/linear_model_assumptions-1.png)![](RScript_files/figure-markdown_strict/linear_model_assumptions-2.png)![](RScript_files/figure-markdown_strict/linear_model_assumptions-3.png)![](RScript_files/figure-markdown_strict/linear_model_assumptions-4.png)
+
+    shapiro.test(df$noshow_percent)
+
+    ## 
+    ##  Shapiro-Wilk normality test
+    ## 
+    ## data:  df$noshow_percent
+    ## W = 0.98644, p-value = 0.9915
+
+From the four plots, it seems the distribution might be a good candidate
+for a linear model. Most of the data is normal in the qqplot and all the
+lines have a manageable leverage. Moreover, a Shapiro-Wilk’s test shows
+the data is not significantly different from normal.
+
+R allows us to create a linear model and investigate the properties
+expected within a linear model.
+
     summary(score_model)
 
     ## 
@@ -813,6 +853,12 @@ significance.
     df <- noshow_percent
     # filter by major facilities
     df <- inner_join(df,main_facilities,by=c("facility"), suffix = c("no", "yes"))
+
+Above, we already showed that noshow\_percent is not statistically
+different from normal and the assumptions of normality are generally
+held by the data. Below, we show the relationship between
+noshow\_percent and other important varaibles like job title, ethnicity,
+and facility.
 
     facility.model <- lm(df$noshow_percent ~ df$job_title + df$program_name + df$ethnic_identity + df$facility, data = df)
     summary(facility.model)
