@@ -779,3 +779,146 @@ ylab("Count of Appointments per Day at the Facility") +
 The goal of the above graph is to visualize how volume has changed over time at the primary facilities for HFS. With this knowledge, our research can better understand what HFS growth has looked like at its primary facilities over the past few years. As is expected, most facilities have a constant or slight increase in volume over time.  However, Some facilities like HFS - C. Have had substantial growth, maybe 5x growth since 2020. However, most facilities show a slow growth in daily appointments over time. 
 
 Per future analysis, from this information it might be useful to calculate facility capacity as a function of therapist count per facility. 
+
+#### RQ 3
+
+###  RQ Rhonda
+
+Of the clients receiving services that identified as Hispanic or Mexican, how many received services at which branch
+
+### Dataset Used
+
+```{r}
+HFS_data<-read.csv("HFS Service Data.csv")
+HFS.Ethnic_Identity<-HFS_data
+```
+
+```{r}
+str(HFS.Ethnic_Identity)
+```
+
+### To see the names of Columns
+
+```{r} 
+names(HFS.Ethnic_Identity)
+```
+
+### Deleted Columns that I didn't need and named it HFS.Hispanic.cleaned
+
+```{r}
+HFS.Ethnic_identity.cleaned <- HFS.Ethnic_Identity %>% select(c(1:4,7,9,17,24,25,30,46,48,49:51))
+```
+```{r}
+names(HFS.Ethnic_identity.cleaned)
+```
+
+"gender"                   "program_name"             "program_type"            
+"facility"                 "actual_date"              "event_name"              
+"date_entered"             "program_unit_description" "general_location"        
+"age"                      "simple_race"              "ethnic_identity"         
+"gender_identity"          "sexual_orientation"
+
+ 
+** I now have 14 columns & 8745 rows
+
+```{r}
+ncol(HFS.Ethnic_identity.cleaned)
+nrow(HFS.Ethnic_identity.cleaned)
+```
+ 14
+ 
+ 8745
+ 
+ ###  apply count function
+count (df, ethnic_identity)
+###  RESULTS
+1 Mexican                       148
+2 Not Collected                 165
+3 Not Spanish/Hispanic/Latino  7820
+4 Other Hispanic or Latino      471
+5 Unknown                       141
+
+###Clean NA & "Not Collected"
+###Find missing values
+```{r}
+is.na(HFS.Ethnic_identity.cleaned)
+```
+
+### Count missing values
+```{r}
+sum(is.na(HFS.Ethnic_identity.cleaned))
+```
+### Result is 2,608
+
+###Delete Rows that have "Not Collected" in variable Ethnic_Identity
+```{r}
+HFS.Ethnic_Identity.cleaned = HFS.Ethnic_Identity[HFS.Ethnic_Identity$ethnic_identity  != "Not Collected",]
+ncol(HFS.Ethnic_Identity.cleaned);nrow(HFS.Ethnic_Identity.cleaned)
+```
+[1] 10
+[1] 8580
+
+###Replace "Not Spanish/Hispanic/Latino" with "Not Latino"
+```{r}
+HFS.Ethnic_Identity.cleaned$ethnic_identity[HFS.Ethnic_Identity.cleaned$ethnic_identity== "Not Spanish/Hispanic/Latino"]<- "Not Latino"
+```
+
+###Replace "Other Hispanic or Latino" with "Other Latino"
+```{r}
+HFS.Ethnic_Identity.cleaned$ethnic_identity[HFS.Ethnic_Identity.cleaned$ethnic_identity== "Other Hispanic or Latino"]<- "Other Latino"
+```
+### New Count of Ethnic Identity
+1 Mexican           148
+2 Not Latino       7820
+3 Other Latino      471
+4 Unknown           141
+
+
+
+1. **One scatter plot with three variables, properly labeled; choose your representation of the third variable based on what’s best for representing the data.**  
+* Three used variables are:
+  * ethnic_identity
+  * facility  
+  * Adding a third variable in geom point using color=program_name 
+```{r}
+ggplot(data = HFS.Ethnic_identity.cleaned, aes(x =ethnic_identity , y =program_unit_description , colour=program_name)) +geom_point(size = 3)+
+     labs(title = "Scatter plot with three variables", y = "Unit Description of the Program", x = "Ethnicity")+ 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+[](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Scatter_Plot.jpeg)
+The above scatter plot is composed of three variables: ethnic_identity, program_unit description and program_name. from this plot , we can say that people have mostly participated in the mental health program. The second major program is for the substance use program. The plot also describes that NON HISPANIC clients are most likely  to be treated in the programs.
+
+2. **One faceted plot of two variables, properly labeled.**  
+* Two used variables are:
+  * ethnic_identity
+  * facility 
+   
+  | [Faceted Chart](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Faceted.jpeg)
+| -
+ggplot(data = HFS.Ethnic_Identity.cleaned, aes(ethnic_identity,facility)) +
++     geom_line(color = "steelblue", size = 1) +
++     geom_point(color = "steelblue") +
++     labs(title = "Faceted plot of two variables Ethnic Identity vs Facility", x = "ethnic_identity", y = "facility") +
++     facet_wrap(.~program_name)
+
+
+I have divided the plot using the ethnic_identity of the clients. This plot uses two variables Ethnic Identity and Facility. We can say from the plot that due to uncollected data or unknown/missing values there are more separations in the plot. However , with the data in hand, the created plot shows the differences of programs being served from the various facilities accross various ethnicities.
+
+3. **One bar chart, properly labeled.**  
+* Used variable is:
+  * ethnic Identity  
+```{r}
+ggplot(data = HFS.Ethnic_Identity.cleaned)+
+    geom_bar(mapping = aes(x=ethnic_identity),colour="white",fill="blue")+
+    labs(title = "One bar chart of Ethnic Identity", y = "Count of Clients of Each Ethnicity", x = "Client Ethnicity")
+```
+| ![Bar Chart](https://raw.githubusercontent.com/saikrishnags05/Project-for-Data-to-Decisions/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Bar_Chart.jpeg)
+| -
+This Bar chart is composed of only the Ethnicity of the Client of HFS. It shows how many clients are in each ethnicity group. The charts shows that most clients of HFS are Not Latino. Also we can observe that out of almost 8000 clients approximately 400 clients are Other Latino or Unknown 
+
+
+# Thing explored:
+We have explored many different types of attributes that are required to solve the 3 research questions and also we analysed the data that we have now can also get other results.Further We can subset each and every Character data and get additional information.
+
+# Results
+All the Data is perfectly cleaned and analysed. We can get clear and beautiful plots or results from the cleaned data.
