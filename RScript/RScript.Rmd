@@ -873,8 +873,6 @@ HFS.Ethnic_Identity.cleaned$ethnic_identity[HFS.Ethnic_Identity.cleaned$ethnic_i
 3 Other Latino      471
 4 Unknown           141
 
-
-
 1. **One scatter plot with three variables, properly labeled; choose your representation of the third variable based on what’s best for representing the data.**  
 * Three used variables are:
   * ethnic_identity
@@ -893,14 +891,14 @@ The above scatter plot is composed of three variables: ethnic_identity, program_
   * ethnic_identity
   * facility 
    
-  | [Faceted Chart](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Faceted.jpeg)
-| -
-ggplot(data = HFS.Ethnic_Identity.cleaned, aes(ethnic_identity,facility)) +
-+     geom_line(color = "steelblue", size = 1) +
-+     geom_point(color = "steelblue") +
-+     labs(title = "Faceted plot of two variables Ethnic Identity vs Facility", x = "ethnic_identity", y = "facility") +
-+     facet_wrap(.~program_name)
-
+```{r}
+library(ggplot2)
+ggplot(HFS.Ethnic_Identity.cleaned) + aes(x = ethnic_identity,y = facility) +
+     geom_line(color = "steelblue", size = 1) +
+     geom_point(color = "steelblue") +
+     labs(title = "Faceted plot of two variables Ethnic Identity vs Facility", x = "ethnic_identity", y = "facility") +
+     facet_wrap(.~program_name)
+```
 
 I have divided the plot using the ethnic_identity of the clients. This plot uses two variables Ethnic Identity and Facility. We can say from the plot that due to uncollected data or unknown/missing values there are more separations in the plot. However , with the data in hand, the created plot shows the differences of programs being served from the various facilities accross various ethnicities.
 
@@ -912,8 +910,7 @@ ggplot(data = HFS.Ethnic_Identity.cleaned)+
     geom_bar(mapping = aes(x=ethnic_identity),colour="white",fill="blue")+
     labs(title = "One bar chart of Ethnic Identity", y = "Count of Clients of Each Ethnicity", x = "Client Ethnicity")
 ```
-| ![Bar Chart](https://raw.githubusercontent.com/saikrishnags05/Project-for-Data-to-Decisions/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Bar_Chart.jpeg)
-| -
+
 This Bar chart is composed of only the Ethnicity of the Client of HFS. It shows how many clients are in each ethnicity group. The charts shows that most clients of HFS are Not Latino. Also we can observe that out of almost 8000 clients approximately 400 clients are Other Latino or Unknown 
 
 
