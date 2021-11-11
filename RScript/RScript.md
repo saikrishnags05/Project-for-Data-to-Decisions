@@ -327,16 +327,16 @@ We now do some data modeling using caret for machine learning.
     model <- train(aov_group_hfs.model.program_name~.,sub_set, trControl=train_control, method="nb")
 
     ## Warning: model fit failed for Resample01: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample02: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
     ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample03: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2018, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample04: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2019
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample05: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
     ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
@@ -345,16 +345,16 @@ We now do some data modeling using caret for machine learning.
     ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample07: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2019
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample08: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2018, aov_group_hfs.mode.AD_year2019
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample09: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
     ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample10: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2018, aov_group_hfs.mode.AD_year2019
 
     ## Warning in nominalTrainWorkflow(x = x, y = y, wts = weights, info = trainInfo, :
     ## There were missing values in resampled performance measures.
@@ -376,9 +376,9 @@ We now do some data modeling using caret for machine learning.
     ## Summary of sample sizes: 1532, 1532, 1532, 1532, 1532, 1532, ... 
     ## Resampling results across tuning parameters:
     ## 
-    ##   usekernel  Accuracy   Kappa
-    ##   FALSE            NaN  NaN  
-    ##    TRUE      0.7483122    0  
+    ##   usekernel  Accuracy   Kappa       
+    ##   FALSE            NaN           NaN
+    ##    TRUE      0.7557843  0.0004349305
     ## 
     ## Tuning parameter 'fL' was held constant at a value of 0
     ## Tuning
