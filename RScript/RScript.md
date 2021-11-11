@@ -278,7 +278,7 @@ outliers.
     ## 5      0 Mental Health nebraska        Center Mall Office    2021    0
     ## 6      0 Mental Health nebraska             HFS - Central    2021    0
 
-Below is the plot once we remove the outliers.
+plot we used to remove the outliers.
 
     ggbetweenstats(eliminated, state, mean, outlier.tagging = TRUE)
 
@@ -394,13 +394,13 @@ We see this via a linear model.
     percentage <- prop.table(table(HFS_data$facility,HFS_data$program_name)) * 100
     data<-data.frame(cbind(freq=table(HFS_data$facility), percentage=percentage))
 
-Below is the model’s training accuracy.
+Below code is used for model to get it's Accuracy
 
     control <- trainControl(method="cv", number=10)
     metric <- "Accuracy"
     sub<-data.frame(eliminated$program_name,eliminated$AD_year,eliminated$mean)
 
-then we can create the linear model.
+then we can create the linear model acn c the confidence between the columns
 
     (model1 <- lm(eliminated.AD_year ~ eliminated.mean + eliminated.program_name, data=sub))
 
