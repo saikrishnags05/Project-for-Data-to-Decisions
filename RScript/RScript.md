@@ -336,25 +336,25 @@ We now do some data modeling using caret for machine learning.
     ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample04: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample05: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2019
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample06: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
     ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample07: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample08: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2018, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample09: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2018, aov_group_hfs.mode.AD_year2019
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
 
     ## Warning: model fit failed for Resample10: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2019
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
 
     ## Warning in nominalTrainWorkflow(x = x, y = y, wts = weights, info = trainInfo, :
     ## There were missing values in resampled performance measures.
@@ -376,9 +376,9 @@ We now do some data modeling using caret for machine learning.
     ## Summary of sample sizes: 1532, 1532, 1532, 1532, 1532, 1532, ... 
     ## Resampling results across tuning parameters:
     ## 
-    ##   usekernel  Accuracy   Kappa        
-    ##   FALSE            NaN            NaN
-    ##    TRUE      0.7423612  -0.0003338312
+    ##   usekernel  Accuracy   Kappa
+    ##   FALSE            NaN  NaN  
+    ##    TRUE      0.7483122    0  
     ## 
     ## Tuning parameter 'fL' was held constant at a value of 0
     ## Tuning
@@ -21483,26 +21483,16 @@ programs.
     -   ethnic\_identity
     -   facility
 
-    <table>
-    <thead>
-    <tr class="header">
-    <th><a href="https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Faceted.jpeg">Faceted Chart</a></th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-    </table>
+<!-- -->
 
-    ggplot(data = HFS.Ethnic\_Identity.cleaned,
-    aes(ethnic\_identity,facility)) +
+    library(ggplot2)
+    ggplot(HFS.Ethnic_Identity.cleaned) + aes(x = ethnic_identity,y = facility) +
+         geom_line(color = "steelblue", size = 1) +
+         geom_point(color = "steelblue") +
+         labs(title = "Faceted plot of two variables Ethnic Identity vs Facility", x = "ethnic_identity", y = "facility") +
+         facet_wrap(.~program_name)
 
--   geom_line(color = "steelblue", size = 1) +
-
--   geom_point(color = "steelblue") +
-
--   labs(title = "Faceted plot of two variables Ethnic Identity vs Facility", x = "ethnic_identity", y = "facility") +
-
--   facet_wrap(.~program_name)
+![](RScript_files/figure-markdown_strict/unnamed-chunk-39-1.png)
 
 I have divided the plot using the ethnic\_identity of the clients. This
 plot uses two variables Ethnic Identity and Facility. We can say from
@@ -21522,12 +21512,12 @@ various facilities accross various ethnicities.
         geom_bar(mapping = aes(x=ethnic_identity),colour="white",fill="blue")+
         labs(title = "One bar chart of Ethnic Identity", y = "Count of Clients of Each Ethnicity", x = "Client Ethnicity")
 
-![](RScript_files/figure-markdown_strict/unnamed-chunk-39-1.png) | ![Bar
-Chart](https://raw.githubusercontent.com/saikrishnags05/Project-for-Data-to-Decisions/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Bar_Chart.jpeg)
-| - This Bar chart is composed of only the Ethnicity of the Client of
-HFS. It shows how many clients are in each ethnicity group. The charts
-shows that most clients of HFS are Not Latino. Also we can observe that
-out of almost 8000 clients approximately 400 clients are Other Latino or
+![](RScript_files/figure-markdown_strict/unnamed-chunk-40-1.png)
+
+This Bar chart is composed of only the Ethnicity of the Client of HFS.
+It shows how many clients are in each ethnicity group. The charts shows
+that most clients of HFS are Not Latino. Also we can observe that out of
+almost 8000 clients approximately 400 clients are Other Latino or
 Unknown
 
 # Thing explored:
