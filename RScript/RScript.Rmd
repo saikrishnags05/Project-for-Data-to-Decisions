@@ -841,7 +841,7 @@ count (df, ethnic_identity)
 ###Clean NA & "Not Collected"
 ###Find missing values
 ```{r}
-is.na(HFS.Ethnic_identity.cleaned)
+#is.na(HFS.Ethnic_identity.cleaned) # too long to show
 ```
 
 ### Count missing values
