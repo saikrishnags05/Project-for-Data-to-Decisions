@@ -41,8 +41,8 @@ The data cleaning results in a new subset of data based on the attributes analyz
 
 `facility`, `actual_date`, `event_name`, `date_entered`, `approved_date`, `program_unit_description`, `zip`, `state`,`ethnic_identity`
 
-```{r warning=FALSE }
-library('tidyr') 
+```{r}
+library('tidyverse') 
 library('ggplot2') # for sample plot if required
 library('dplyr') # to use pipelines '%>%' for data set
 ```
@@ -68,6 +68,18 @@ HFS_data$facility <- sub("North Omaha Intergenerational Campus (Service)", "NOIC
 # using Regex to compress the name of Facility
 
 #sapply(HFS_data, function(x) sum(is.na(x)))
+```
+
+The latest date we fetch from the CSV is **25th August 2021**.
+
+We use the function as.Date in R to generate the date of events in R.
+
+```{r}
+HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
+HFS_data$ED<-as.Date(-(HFS_data$date_entered), origin = '2021-08-25')
+HFS_data$Date_of_approved_date<-as.Date(-(HFS_data$approved_date), origin = '2021-08-25')
+HFS_data$AD_1<-(HFS_data$actual_date-HFS_data$date_entered)
+#str(HFS_data)
 ```
 
 #### Numeric Data Columns
@@ -112,7 +124,7 @@ We then look at the time data by state.
 
 Now we update all the states names in the dataset, which helps with overall readability.
 
-```{r warning=FALSE}
+```{r}
 # clean NA values.
 HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
 HFS_data$ED<-as.Date(-(HFS_data$date_entered), origin = '2021-08-25')
@@ -121,13 +133,13 @@ HFS_data$AD_year<-(format(as.Date(HFS_data$ED), "%Y"))
 ```
 The above code with create two different columns for `YEAR`, `Month`, and `Year` 
 
-```{r warning=FALSE}
+```{r}
 HFS_data$AD_ED<-(HFS_data$actual_date-HFS_data$date_entered)
 HFS_data$ED_APD<-(HFS_data$date_entered-HFS_data$approved_date)
 HFS_data$AD_APD<-(abs(HFS_data$actual_date-HFS_data$approved_date))
 ```
 
-```{r warning=FALSE}
+```{r}
 HFS_data$state[HFS_data$state == "NE"] <- "nebraska"
 HFS_data$state[HFS_data$state == "IA"] <- "iowa"
 HFS_data$state[HFS_data$state == "SC"] <- "south carolina"
@@ -137,7 +149,7 @@ HFS_data$state[HFS_data$state == "CO"] <- "colorado"
 
 In the below code I created a data set via the function `group by`.  This fetches all the information concerning the enrollment process.
 
-```{r warning=FALSE}
+```{r}
 library(dplyr)
 #FUN = quantile,probs = c(0.05, 0.95)
 aggregate_wrt_year<-(aggregate(AD_APD~AD_M_Y+program_name+event_name+state+facility,HFS_data,FUN = quantile,probs = c(0.05, 0.95)))
@@ -151,29 +163,23 @@ names(group_hfs)[names(group_hfs)=='HFS_data$facility'] <-'facility'
 ```
 
 We can look at the normality of the dates of enrollment
-```{r anova_check}
+```{r}
 shapiro.test(group_hfs$AD_APD)
 ```
 
-We then use ANOVA to get the relationship between many of the variables.
+We then use ANOVA to get the relationship between many of the variables.  This might not be valid since the distribution is not normal.
 
-```{r warning=FALSE}
+```{r}
+options(ggrepel.max.overlaps = Inf)
 aov_group_hfs <- aov(cbind(AD_APD)~program_name+state+facility+AD_year+mean, data = group_hfs)
 summary_group_hfs<-summary(aov_group_hfs)
 summary_group_hfs
 ```
 According to the Summary Statistics we can tell that mean of State,facility and years are similar to one another.
 
-Let us take a sample output of an boxplot to identify the outliers based on years.
-```{r warning=FALSE}
-#aov_group_hfs$model$program_name
-#ggplot(aov_group_hfs$model, aes(x=AD_year, y=mean, fill=state)) +  # This is the plot function
-#  geom_boxplot()
-```
-
 We can then remove the outliers in the data set which contains data of 2021:
 
-```{r warning=FALSE}
+```{r}
 library(ggstatsplot)
 #Create a boxplot that labels the outliers  
 df2021<-filter(aov_group_hfs$model,aov_group_hfs$model$AD_year==2021)
@@ -182,13 +188,13 @@ df2021<-filter(aov_group_hfs$model,aov_group_hfs$model$AD_year==2021)
  
  and then plot the outliers.
 
-```{r warning=FALSE}
+```{r}
 ggbetweenstats(df2021,state,mean,outlier.tagging = TRUE)
 ```
 
 And here are some sample statistics, such as the quartiles and even outliers. 
-````{r warning=FALSE}
-Q <- quantile(df2021$mean, probs=c(.05, .95), na.rm = FALSE)
+```{r}
+Q <- quantile(df2021$mean, probs=c(.05, .95))
 iqr <- IQR(df2021$mean)
 up <-  Q[2]+1.5*iqr # Upper Range  
 low<- Q[1]-1.5*iqr # Lower Range
@@ -204,19 +210,19 @@ ggbetweenstats(eliminated, state, mean, outlier.tagging = TRUE)
 
 After verifying the initial boxplot we found out that the year data includes 2020 and 2021.
 
-```{r warning=FALSE}
+```{r}
 library(ggstatsplot)
 #Create a boxplot that labels the outliers  
 df2020<-filter(aov_group_hfs$model,aov_group_hfs$model$AD_year==2020)
 # In df2020 i filter the data based on year 2020 to get in depth idea about the average time taken for registeration process.
 ```
 
-```{r warning=FALSE}
+```{r}
 ggbetweenstats(df2020,state,mean,outlier.tagging = TRUE) # final plot for outliers 
 ```
 
 We remove the top and bottom 5% of the data.
-````{r warning=FALSE}
+```{r}
 Q <- quantile(df2020$mean, probs=c(.05, .95), na.rm = FALSE)
 iqr <- IQR(df2020$mean)
 up <-  Q[2]+1.5*iqr # Upper Range  
@@ -227,10 +233,10 @@ ggbetweenstats(eliminated, state, mean, outlier.tagging = TRUE)
 
 We now do some data modeling using caret for machine learning.
 
-```{r warning=FALSE}
+```{r}
 library('caret')
 # define training control
-train_control <- trainControl(method="boot", number=100)
+train_control <- trainControl(method="boot", number=10)
 # train the model
 sub_set<-data.frame(aov_group_hfs$model$program_name,aov_group_hfs$mode$AD_year,aov_group_hfs$model$mean)
 model <- train(aov_group_hfs.model.program_name~.,sub_set, trControl=train_control, method="nb")
@@ -773,128 +779,3 @@ ylab("Count of Appointments per Day at the Facility") +
 The goal of the above graph is to visualize how volume has changed over time at the primary facilities for HFS. With this knowledge, our research can better understand what HFS growth has looked like at its primary facilities over the past few years. As is expected, most facilities have a constant or slight increase in volume over time.  However, Some facilities like HFS - C. Have had substantial growth, maybe 5x growth since 2020. However, most facilities show a slow growth in daily appointments over time. 
 
 Per future analysis, from this information it might be useful to calculate facility capacity as a function of therapist count per facility. 
-
-#### RQ 3
-
-###  RQ Rhonda
-
-Of the clients receiving services that identified as Hispanic or Mexican, how many received services at which branch
-
-### Dataset Used
-
-`r HFS.Ethnic_Identity<-HFS_data`
-
-`r str(HFS.Ethnic_Identity)`
-
-### To see the names of Columns
-
-`r names(HFS.Ethnic_Identity)`
-
-### Deleted Columns that I didn't need and named it HFS.Hispanic.cleaned
-
-`r HFS.Ethnic_identity.cleaned<-HFS.Ethnic_Identity[c(1:4,7,9,17,24,25,30,46,48,49:51)]`
-`r names(HFS.Ethnic_identity.cleaned)`
-
-"gender"                   "program_name"             "program_type"            
-"facility"                 "actual_date"              "event_name"              
-"date_entered"             "program_unit_description" "general_location"        
-"age"                      "simple_race"              "ethnic_identity"         
-"gender_identity"          "sexual_orientation"
-
- 
-** I now have 14 columns & 8745 rows
-
-```{r}
-ncol(HFS.Ethnic_identity.cleaned)
-nrow(HFS.Ethnic_identity.cleaned)
-```
- 14
- 
- 8745
- 
- ###  apply count function
-count (df, ethnic_identity)
-###  RESULTS
-1 Mexican                       148
-2 Not Collected                 165
-3 Not Spanish/Hispanic/Latino  7820
-4 Other Hispanic or Latino      471
-5 Unknown                       141
-
-###Clean NA & "Not Collected"
-###Find missing values
-`r `is.na(HFS.Ethnic_identity.cleaned)`
-
-### Count missing values
-`r  sum(is.na(HFS.Ethnic_identity.cleaned))`
-### Result is 2,608
-
-###Delete Rows that have "Not Collected" in variable Ethnic_Identity
-```{r}
-HFS.Ethnic_Identity.cleaned = HFS.Ethnic_Identity[HFS.Ethnic_Identity$ethnic_identity  != "Not Collected",]
-
-ncol(HFS.Ethnic_Identity.cleaned);nrow(HFS.Ethnic_Identity.cleaned)
-```
-[1] 10
-[1] 8580
-
-###Replace "Not Spanish/Hispanic/Latino" with "Not Latino"
-`r `HFS.Ethnic_Identity.cleaned$ethnic_identity[HFS.Ethnic_Identity.cleaned$ethnic_identity== "Not Spanish/Hispanic/Latino"]<- "Not Latino"`
-
-###Replace "Other Hispanic or Latino" with "Other Latino"
-`r HFS.Ethnic_Identity.cleaned$ethnic_identity[HFS.Ethnic_Identity.cleaned$ethnic_identity== "Other Hispanic or Latino"]<- "Other Latino"`
-### New Count of Ethnic Identity
-1 Mexican           148
-2 Not Latino       7820
-3 Other Latino      471
-4 Unknown           141
-
-
-
-1. **One scatter plot with three variables, properly labeled; choose your representation of the third variable based on what’s best for representing the data.**  
-* Three used variables are:
-  * ethnic_identity
-  * facility  
-  * Adding a third variable in geom point using color=program_name 
-```{r}
-ggplot(data = HFS.Ethnic_identity.cleaned, aes(x =ethnic_identity , y =program_unit_description , colour=program_name)) +geom_point(size = 3)+
-     labs(title = "Scatter plot with three variables", y = "Unit Description of the Program", x = "Ethnicity")+ 
-  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-```
-[](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Scatter_Plot.jpeg)
-The above scatter plot is composed of three variables: ethnic_identity, program_unit description and program_name. from this plot , we can say that people have mostly participated in the mental health program. The second major program is for the substance use program. The plot also describes that NON HISPANIC clients are most likely  to be treated in the programs.
-
-2. **One faceted plot of two variables, properly labeled.**  
-* Two used variables are:
-  * ethnic_identity
-  * facility 
-   
-  | [Faceted Chart](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Faceted.jpeg)
-| -
-ggplot(data = HFS.Ethnic_Identity.cleaned, aes(ethnic_identity,facility)) +
-+     geom_line(color = "steelblue", size = 1) +
-+     geom_point(color = "steelblue") +
-+     labs(title = "Faceted plot of two variables Ethnic Identity vs Facility", x = "ethnic_identity", y = "facility") +
-+     facet_wrap(.~program_name)
-
-
-I have divided the plot using the ethnic_identity of the clients. This plot uses two variables Ethnic Identity and Facility. We can say from the plot that due to uncollected data or unknown/missing values there are more separations in the plot. However , with the data in hand, the created plot shows the differences of programs being served from the various facilities accross various ethnicities.
-
-3. **One bar chart, properly labeled.**  
-* Used variable is:
-  * ethnic Identity  
-```{r}
-ggplot(data = HFS.Ethnic_Identity.cleaned)+
-    geom_bar(mapping = aes(x=ethnic_identity),colour="white",fill="blue")+
-    labs(title = "One bar chart of Ethnic Identity", y = "Count of Clients of Each Ethnicity", x = "Client Ethnicity")
-```
-| ![Bar Chart](https://raw.githubusercontent.com/saikrishnags05/Project-for-Data-to-Decisions/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Bar_Chart.jpeg)
-| -
-This Bar chart is composed of only the Ethnicity of the Client of HFS. It shows how many clients are in each ethnicity group. The charts shows that most clients of HFS are Not Latino. Also we can observe that out of almost 8000 clients approximately 400 clients are Other Latino or Unknown 
-
-
-# Thing explored:
-We have explored many different types of attributes that are required to solve the 3 research questions and also we analysed the data that we have now can also get other results.Further We can subset each and every Character data and get additional information.
-
-# Results
-All the Data is perfectly cleaned and analysed. We can get clear and beautiful plots or results from the cleaned data.

@@ -67,6 +67,57 @@ within this data cleaning are listed below:
 `approved_date`, `program_unit_description`, `zip`,
 `state`,`ethnic_identity`
 
+    library('tidyverse') 
+
+    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
+
+    ## ✓ ggplot2 3.3.5     ✓ purrr   0.3.4
+    ## ✓ tibble  3.1.4     ✓ dplyr   1.0.7
+    ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
+    ## ✓ readr   2.0.1     ✓ forcats 0.5.1
+
+    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
+    ## x dplyr::filter() masks stats::filter()
+    ## x dplyr::lag()    masks stats::lag()
+
+    library('ggplot2') # for sample plot if required
+    library('dplyr') # to use pipelines '%>%' for data set
+
+    HFS_data<-read.csv("HFS Service Data.csv") # read data set
+
+
+    selected_columns<-c("program_name","facility","actual_date","event_name","date_entered",   
+     "approved_date","zip","state","age","ethnic_identity")
+    # Above list is used for selecting the columns in the dataset 
+
+    HFS_data<-HFS_data %>%
+      select(selected_columns)  # this command is used for selecting the required columns
+
+    ## Note: Using an external vector in selections is ambiguous.
+    ## ℹ Use `all_of(selected_columns)` instead of `selected_columns` to silence this message.
+    ## ℹ See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
+    ## This message is displayed once per session.
+
+    HFS_data<-HFS_data %>% drop_na() # we use this to delete NA values
+
+    HFS_data<-HFS_data[!(HFS_data$ethnic_identity=="Not Collected" | HFS_data$ethnic_identity=="Unknown"),] # delete unwanted rows from a single column
+
+    HFS_data$facility <- sub("Heartland Family Service", "HFS", HFS_data$facility)
+    HFS_data$facility <- sub("North Omaha Intergenerational Campus (Service)", "NOICS", HFS_data$facility)
+    # using Regex to compress the name of Facility
+
+    #sapply(HFS_data, function(x) sum(is.na(x)))
+
+The latest date we fetch from the CSV is **25th August 2021**.
+
+We use the function as.Date in R to generate the date of events in R.
+
+    HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
+    HFS_data$ED<-as.Date(-(HFS_data$date_entered), origin = '2021-08-25')
+    HFS_data$Date_of_approved_date<-as.Date(-(HFS_data$approved_date), origin = '2021-08-25')
+    HFS_data$AD_1<-(HFS_data$actual_date-HFS_data$date_entered)
+    #str(HFS_data)
+
 #### Numeric Data Columns
 
 `actual_date` is about the actual data of the program admission.
@@ -112,102 +163,303 @@ understanding `Iowa`, `Nebrska` `Colorado`,
 `North Carolina`,`South Carolina`. We will also plot against the state
 and zip code.
 
-    HFS_data<-read.csv("HFS Service Data.csv")
-    #before cleasing the Na values
-    #head(HFS_data)
-
-Libraries used
-
-    library('ggplot2')
-    #library('')
-
 The latest date we fetch from the CSV is **25th August 2021**.
 
 We use the function as.Date in R to generate the date of events in R.
-
-    HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
-    HFS_data$ED<-as.Date(-(HFS_data$date_entered), origin = '2021-08-25')
-    HFS_data$Date_of_approved_date<-as.Date(-(HFS_data$approved_date), origin = '2021-08-25')
-
-    HFS_data$AD_1<-(HFS_data$actual_date-HFS_data$date_entered)
-    #str(HFS_data)
 
 ### Cleaning State Names:
 
 We then look at the time data by state.
 
-    regions<-c(unique(HFS_data$state))
-    regions
-
-    ## [1] "IA" "NE" "CO" "NC" "SC"
-
 Now we update all the states names in the dataset, which helps with
 overall readability.
 
-    HFS_data$state<- as.character(HFS_data$state)
-    HFS_data$state[HFS_data$state == "NE"] <- "nebrska"
+    # clean NA values.
+    HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
+    HFS_data$ED<-as.Date(-(HFS_data$date_entered), origin = '2021-08-25')
+    HFS_data$AD_M_Y <- format(as.Date(HFS_data$AD), "%Y-%m")
+    HFS_data$AD_year<-(format(as.Date(HFS_data$ED), "%Y"))
+
+The above code with create two different columns for `YEAR`, `Month`,
+and `Year`
+
+    HFS_data$AD_ED<-(HFS_data$actual_date-HFS_data$date_entered)
+    HFS_data$ED_APD<-(HFS_data$date_entered-HFS_data$approved_date)
+    HFS_data$AD_APD<-(abs(HFS_data$actual_date-HFS_data$approved_date))
+
+    HFS_data$state[HFS_data$state == "NE"] <- "nebraska"
     HFS_data$state[HFS_data$state == "IA"] <- "iowa"
     HFS_data$state[HFS_data$state == "SC"] <- "south carolina"
     HFS_data$state[HFS_data$state == "NC"] <- "north carolina"
     HFS_data$state[HFS_data$state == "CO"] <- "colorado"
 
-After Changing the Short form of the state:-
+In the below code I created a data set via the function `group by`. This
+fetches all the information concerning the enrollment process.
 
-    c(unique(HFS_data$state))
+    library(dplyr)
+    #FUN = quantile,probs = c(0.05, 0.95)
+    aggregate_wrt_year<-(aggregate(AD_APD~AD_M_Y+program_name+event_name+state+facility,HFS_data,FUN = quantile,probs = c(0.05, 0.95)))
+    group_hfs<-group_by(HFS_data,AD_APD, program_name,facility,AD_year,state) %>%
+      summarise(
+        count = n(),
+        mean = mean(AD_APD, na.rm = TRUE),
+      )
 
-    ## [1] "iowa"           "nebrska"        "colorado"       "north carolina"
-    ## [5] "south carolina"
+    ## `summarise()` has grouped output by 'AD_APD', 'program_name', 'facility', 'AD_year'. You can override using the `.groups` argument.
 
-# Splitting dates by region
+    names(group_hfs)[names(group_hfs)=='HFS_data$program_name'] <-'program_name'
+    names(group_hfs)[names(group_hfs)=='HFS_data$facility'] <-'facility'
 
-# IA(Iowa):
+We can look at the normality of the dates of enrollment
 
-    IA<- subset(HFS_data,state=='iowa')
-    #str(IA)
-    p <- ggplot(data = IA, aes(y =IA$AD, x =IA$AD_1,color=ethnic_identity ))
-    p + geom_point()+geom_violin() +facet_wrap(IA$zip~IA$program_name,scales='free')
+    shapiro.test(group_hfs$AD_APD)
 
-![](RScript_files/figure-markdown_strict/unnamed-chunk-7-1.png) In the
-above graph you can understand that most people who are from Iowa join
-events and are **Not Spanish/Hispanic/Latino**. Most of them are
-affiliated with Gambling whereas other ethnic\_identity groups tend to
-participate to a large degree in the programs for **Mental Health** and
-**Substance Use**. A lot of these people are from small zip codes that
-are coded as 0. \#\#\# NE(nebraska)
+    ## 
+    ##  Shapiro-Wilk normality test
+    ## 
+    ## data:  group_hfs$AD_APD
+    ## W = 0.6828, p-value < 2.2e-16
 
-    NE<- subset(HFS_data,state=='nebrska')
-    #head(NE)
-    p <- ggplot(data = NE, aes(y =NE$AD, x =NE$AD_1,color=ethnic_identity ))
-    p + geom_point() +geom_violin()+facet_wrap(zip~program_name,scales='free')
+We then use ANOVA to get the relationship between many of the variables.
+This might not be valid since the distribution is not normal.
 
-![](RScript_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+    options(ggrepel.max.overlaps = Inf)
+    aov_group_hfs <- aov(cbind(AD_APD)~program_name+state+facility+AD_year+mean, data = group_hfs)
+    summary_group_hfs<-summary(aov_group_hfs)
+    summary_group_hfs
 
-### CO(colorado)
+    ##                Df Sum Sq Mean Sq   F value Pr(>F)    
+    ## program_name    2   1778     889 1.363e+32 <2e-16 ***
+    ## state           4   7894    1973 3.025e+32 <2e-16 ***
+    ## facility       24  32580    1358 2.081e+32 <2e-16 ***
+    ## AD_year         9  10260    1140 1.748e+32 <2e-16 ***
+    ## mean            1 377068  377068 5.780e+34 <2e-16 ***
+    ## Residuals    1491      0       0                     
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-    CO<- subset(HFS_data,state=='colorado')
-    #head(CO)
-    p <- ggplot(data = CO, aes(y =CO$AD, x =CO$AD_1,color=ethnic_identity ))
-    p + geom_point() +geom_violin()+facet_wrap(~zip,scales='free')
+According to the Summary Statistics we can tell that mean of
+State,facility and years are similar to one another.
 
-![](RScript_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+We can then remove the outliers in the data set which contains data of
+2021:
 
-### NC(north carolina)
+    library(ggstatsplot)
 
-    NC<- subset(HFS_data,state=='north carolina')
-    #head(NC)
-    p <- ggplot(data = NC, aes(y =NC$AD, x =NC$AD_1,color=ethnic_identity ))
-    p + geom_point() +geom_violin()+facet_wrap(~zip,scales='free')
+    ## You can cite this package as:
+    ##      Patil, I. (2021). Visualizations with statistical details: The 'ggstatsplot' approach.
+    ##      Journal of Open Source Software, 6(61), 3167, doi:10.21105/joss.03167
 
-![](RScript_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+    #Create a boxplot that labels the outliers  
+    df2021<-filter(aov_group_hfs$model,aov_group_hfs$model$AD_year==2021)
+    # In df2021 i filter the data based on year 2020 to get in depth idea about the average time taken for registeration process.
 
-### SC(south carolina)
+and then plot the outliers.
 
-    SC<- subset(HFS_data,state=='south carolina')
-    #head(SC)
-    p <- ggplot(data = SC, aes(y =SC$AD, x =SC$AD_1,color=ethnic_identity ))
-    p + geom_point() +geom_violin()+facet_wrap(~zip,scales='free')
+    ggbetweenstats(df2021,state,mean,outlier.tagging = TRUE)
 
 ![](RScript_files/figure-markdown_strict/unnamed-chunk-11-1.png)
+
+And here are some sample statistics, such as the quartiles and even
+outliers.
+
+    Q <- quantile(df2021$mean, probs=c(.05, .95))
+    iqr <- IQR(df2021$mean)
+    up <-  Q[2]+1.5*iqr # Upper Range  
+    low<- Q[1]-1.5*iqr # Lower Range
+    eliminated<- subset(df2021, df2021$mean > (Q[1] - 1.5*iqr) & df2021$mean < (Q[2]+1.5*iqr))
+    head(eliminated,6)
+
+    ##   AD_APD  program_name    state                  facility AD_year mean
+    ## 1      0      Gambling     iowa             HFS - Gendler    2021    0
+    ## 2      0      Gambling nebraska             HFS - Gendler    2021    0
+    ## 3      0 Mental Health nebraska Bellevue Reporting Center    2021    0
+    ## 4      0 Mental Health     iowa        Center Mall Office    2021    0
+    ## 5      0 Mental Health nebraska        Center Mall Office    2021    0
+    ## 6      0 Mental Health nebraska             HFS - Central    2021    0
+
+Below is the plot once we remove the outliers.
+
+    ggbetweenstats(eliminated, state, mean, outlier.tagging = TRUE)
+
+![](RScript_files/figure-markdown_strict/unnamed-chunk-13-1.png)
+
+After verifying the initial boxplot we found out that the year data
+includes 2020 and 2021.
+
+    library(ggstatsplot)
+    #Create a boxplot that labels the outliers  
+    df2020<-filter(aov_group_hfs$model,aov_group_hfs$model$AD_year==2020)
+    # In df2020 i filter the data based on year 2020 to get in depth idea about the average time taken for registeration process.
+
+    ggbetweenstats(df2020,state,mean,outlier.tagging = TRUE) # final plot for outliers 
+
+![](RScript_files/figure-markdown_strict/unnamed-chunk-15-1.png)
+
+We remove the top and bottom 5% of the data.
+
+    Q <- quantile(df2020$mean, probs=c(.05, .95), na.rm = FALSE)
+    iqr <- IQR(df2020$mean)
+    up <-  Q[2]+1.5*iqr # Upper Range  
+    low<- Q[1]-1.5*iqr # Lower Range
+    eliminated<- subset(df2020, df2020$mean > (Q[1] - 1.5*iqr) & df2020$mean < (Q[2]+1.5*iqr))
+    ggbetweenstats(eliminated, state, mean, outlier.tagging = TRUE)
+
+![](RScript_files/figure-markdown_strict/unnamed-chunk-16-1.png)
+
+We now do some data modeling using caret for machine learning.
+
+    library('caret')
+
+    ## Loading required package: lattice
+
+    ## 
+    ## Attaching package: 'caret'
+
+    ## The following object is masked from 'package:purrr':
+    ## 
+    ##     lift
+
+    # define training control
+    train_control <- trainControl(method="boot", number=10)
+    # train the model
+    sub_set<-data.frame(aov_group_hfs$model$program_name,aov_group_hfs$mode$AD_year,aov_group_hfs$model$mean)
+    model <- train(aov_group_hfs.model.program_name~.,sub_set, trControl=train_control, method="nb")
+
+    ## Warning: model fit failed for Resample01: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
+
+    ## Warning: model fit failed for Resample02: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2018, aov_group_hfs.mode.AD_year2019
+
+    ## Warning: model fit failed for Resample03: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2019
+
+    ## Warning: model fit failed for Resample04: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
+
+    ## Warning: model fit failed for Resample05: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
+
+    ## Warning: model fit failed for Resample06: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2019
+
+    ## Warning: model fit failed for Resample07: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
+
+    ## Warning: model fit failed for Resample08: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
+
+    ## Warning: model fit failed for Resample09: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2018, aov_group_hfs.mode.AD_year2019
+
+    ## Warning: model fit failed for Resample10: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
+    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
+
+    ## Warning in nominalTrainWorkflow(x = x, y = y, wts = weights, info = trainInfo, :
+    ## There were missing values in resampled performance measures.
+
+    ## Warning in train.default(x, y, weights = w, ...): missing values found in
+    ## aggregated results
+
+    # summarize results
+    print(model)
+
+    ## Naive Bayes 
+    ## 
+    ## 1532 samples
+    ##    2 predictor
+    ##    3 classes: 'Gambling', 'Mental Health', 'Substance Use' 
+    ## 
+    ## No pre-processing
+    ## Resampling: Bootstrapped (10 reps) 
+    ## Summary of sample sizes: 1532, 1532, 1532, 1532, 1532, 1532, ... 
+    ## Resampling results across tuning parameters:
+    ## 
+    ##   usekernel  Accuracy   Kappa       
+    ##   FALSE            NaN           NaN
+    ##    TRUE      0.7480694  -0.002947493
+    ## 
+    ## Tuning parameter 'fL' was held constant at a value of 0
+    ## Tuning
+    ##  parameter 'adjust' was held constant at a value of 1
+    ## Accuracy was used to select the optimal model using the largest value.
+    ## The final values used for the model were fL = 0, usekernel = TRUE and adjust
+    ##  = 1.
+
+This allows us to see the overall percentage for different facilities.
+We see this via a linear model.
+
+    # summarize the class distribution
+    percentage <- prop.table(table(HFS_data$facility,HFS_data$program_name)) * 100
+    data<-data.frame(cbind(freq=table(HFS_data$facility), percentage=percentage))
+
+Below is the model’s training accuracy.
+
+    control <- trainControl(method="cv", number=10)
+    metric <- "Accuracy"
+    sub<-data.frame(eliminated$program_name,eliminated$AD_year,eliminated$mean)
+
+then we can create the linear model.
+
+    (model1 <- lm(eliminated.AD_year ~ eliminated.mean + eliminated.program_name, data=sub))
+
+    ## 
+    ## Call:
+    ## lm(formula = eliminated.AD_year ~ eliminated.mean + eliminated.program_name, 
+    ##     data = sub)
+    ## 
+    ## Coefficients:
+    ##                          (Intercept)                       eliminated.mean  
+    ##                            2.020e+03                             3.858e-17  
+    ## eliminated.program_nameMental Health  eliminated.program_nameSubstance Use  
+    ##                           -1.827e-13                            -1.833e-13
+
+, and do a similar operation for month.
+
+    library(dplyr)
+    group_hfs_m_y<-group_by(HFS_data,AD_APD, program_name,facility,AD_M_Y,state) %>%
+      summarise(
+        count = n(),
+        mean = mean(AD_APD, na.rm = TRUE),
+      )
+
+    ## `summarise()` has grouped output by 'AD_APD', 'program_name', 'facility', 'AD_M_Y'. You can override using the `.groups` argument.
+
+    names(group_hfs_m_y)[names(group_hfs_m_y)=='HFS_data$program_name'] <-'program_name'
+    names(group_hfs_m_y)[names(group_hfs_m_y)=='HFS_data$facility'] <-'facility'
+
+I have aggregated the with the help of Probability to find the
+confidence and error rate for probality at `5%` and `95%` probabilities.
+
+    aggregate_wrt_M_Y<-(aggregate(AD_APD~AD_M_Y+program_name+event_name+state+facility,HFS_data,FUN = quantile,probs = c(0.05, 0.95)))
+
+We then used Anova to get the overall confidence and average time taken
+for a person to be approved for an event in terms of months and years.
+
+    aov_group_hfs <- aov(cbind(AD_APD)~program_name+state+facility+AD_M_Y, data = aggregate_wrt_M_Y)
+    summary_group_hfs<-summary(aov_group_hfs)
+    summary_group_hfs
+
+    ##  Response 5% :
+    ##                Df Sum Sq Mean Sq F value    Pr(>F)    
+    ## program_name    2    545  272.71  2.8075   0.06056 .  
+    ## state           4   4418 1104.57 11.3712 3.861e-09 ***
+    ## facility       24  12680  528.33  5.4390 4.253e-16 ***
+    ## AD_M_Y         93   5935   63.82  0.6570   0.99519    
+    ## Residuals    2305 223902   97.14                      
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+    ## 
+    ##  Response 95% :
+    ##                Df Sum Sq Mean Sq F value    Pr(>F)    
+    ## program_name    2   1513  756.66  4.7541  0.008701 ** 
+    ## state           4   7962 1990.47 12.5062 4.567e-10 ***
+    ## facility       24  23324  971.81  6.1060 < 2.2e-16 ***
+    ## AD_M_Y         93  14880  160.00  1.0053  0.467598    
+    ## Residuals    2305 366859  159.16                      
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ## RQ 2
 
@@ -265,30 +517,7 @@ description of the approach and the code required for replication.
 #### Job Title (Therapists I, II, and III)
 
     library('dplyr')
-
-    ## 
-    ## Attaching package: 'dplyr'
-
-    ## The following objects are masked from 'package:stats':
-    ## 
-    ##     filter, lag
-
-    ## The following objects are masked from 'package:base':
-    ## 
-    ##     intersect, setdiff, setequal, union
-
     library('tidyverse')
-
-    ## ── Attaching packages ─────────────────────────────────────── tidyverse 1.3.1 ──
-
-    ## ✓ tibble  3.1.4     ✓ purrr   0.3.4
-    ## ✓ tidyr   1.1.3     ✓ stringr 1.4.0
-    ## ✓ readr   2.0.1     ✓ forcats 0.5.1
-
-    ## ── Conflicts ────────────────────────────────────────── tidyverse_conflicts() ──
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
     library('moderndive')
     #data <- read.csv("/Users/ccrowe/github/isqa8600_ChadCrowe/programs/data/HFS Service Data.csv")
     data <- read.csv("HFS Service Data.csv")
@@ -616,7 +845,7 @@ shape instead of color is even more challenging to read.
 
     ## Warning: Removed 2 rows containing missing values (geom_point).
 
-![](RScript_files/figure-markdown_strict/unnamed-chunk-12-1.png)
+![](RScript_files/figure-markdown_strict/unnamed-chunk-24-1.png)
 
 This graph is extremely complicated but also informative. Coloring by
 location is informative and tells us where ethnicities and job titles
@@ -695,7 +924,7 @@ identity.
       ylim(20, 55) + 
       theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
 
-![](RScript_files/figure-markdown_strict/unnamed-chunk-14-1.png)
+![](RScript_files/figure-markdown_strict/unnamed-chunk-26-1.png)
 
 Now this looks AMAZING and like we’ve found something truly significant.
 However, when we look at the data we find only eight instances of the
@@ -1048,177 +1277,3 @@ in daily appointments over time.
 Per future analysis, from this information it might be useful to
 calculate facility capacity as a function of therapist count per
 facility.
-
-#### RQ 3
-
-### RQ Rhonda
-
-Of the clients receiving services that identified as Hispanic or
-Mexican, how many received services at which branch
-
-### Dataset Used
-
-### To see the names of Columns
-
-gender, program\_name, program\_type, facility, job\_title, staff\_name,
-actual\_date, event\_name, activity\_type, encounter\_with,
-is\_client\_involved, is\_noshow, is\_locked, is\_billed, is\_paid,
-date\_entered, user\_entered\_name, approved\_date,
-approved\_staff\_name, submitted, is\_approved, is\_notapproved,
-is\_notapproved\_subm, program\_unit\_description, sc\_code,
-duration\_num, do\_not\_bill, do\_not\_pay, general\_location,
-program\_modifier, program\_modifier\_code, NormalWorkHours,
-duration\_other\_num, duration\_other, travel\_time\_num, travel\_time,
-planning\_time\_num, planning\_time, total\_duration\_num,
-total\_duration, reason\_for\_no\_show, is\_billable, zip, state, age,
-duration, recordID, simple\_race, ethnic\_identity, gender\_identity,
-sexual\_orientation, AD, ED, Date\_of\_approved\_date, AD\_1
-
-### Deleted Columns that I didn’t need and named it HFS.Hispanic.cleaned
-
-gender, program\_name, program\_type, facility, actual\_date,
-activity\_type, user\_entered\_name, program\_unit\_description,
-sc\_code, program\_modifier, duration, simple\_race, ethnic\_identity,
-gender\_identity, sexual\_orientation
-
-“gender” “program\_name” “program\_type”  
-“facility” “actual\_date” “event\_name”  
-“date\_entered” “program\_unit\_description” “general\_location”  
-“age” “simple\_race” “ethnic\_identity”  
-“gender\_identity” “sexual\_orientation”
-
-\*\* I now have 14 columns & 8745 rows
-
-    ncol(HFS.Ethnic_identity.cleaned)
-
-    ## [1] 15
-
-    nrow(HFS.Ethnic_identity.cleaned)
-
-    ## [1] 8745
-
-14
-
-8745
-
-\#\#\# apply count function count (df, ethnic\_identity) \#\#\# RESULTS
-1 Mexican 148 2 Not Collected 165 3 Not Spanish/Hispanic/Latino 7820 4
-Other Hispanic or Latino 471 5 Unknown 141
-
-\#\#\#Clean NA & “Not Collected” \#\#\#Find missing values
-`r`is.na(HFS.Ethnic\_identity.cleaned)\`
-
-### Count missing values
-
-1572 \#\#\# Result is 2,608
-
-\#\#\#Delete Rows that have “Not Collected” in variable Ethnic\_Identity
-
-    HFS.Ethnic_Identity.cleaned = HFS.Ethnic_Identity[HFS.Ethnic_Identity$ethnic_identity  != "Not Collected",]
-
-    ncol(HFS.Ethnic_Identity.cleaned);nrow(HFS.Ethnic_Identity.cleaned)
-
-    ## [1] 55
-
-    ## [1] 8580
-
-\[1\] 10 \[1\] 8580
-
-\#\#\#Replace “Not Spanish/Hispanic/Latino” with “Not Latino”
-`r`HFS.Ethnic\_Identity.cleaned*e**t**h**n**i**c*<sub>*i*</sub>*d**e**n**t**i**t**y*\[*H**F**S*.*E**t**h**n**i**c*<sub>*I*</sub>*d**e**n**t**i**t**y*.*c**l**e**a**n**e**d*ethnic\_identity==
-“Not Spanish/Hispanic/Latino”\]&lt;- “Not Latino”\`
-
-\#\#\#Replace “Other Hispanic or Latino” with “Other Latino”
-
-### New Count of Ethnic Identity
-
-1 Mexican 148 2 Not Latino 7820 3 Other Latino 471 4 Unknown 141
-
-1.  **One scatter plot with three variables, properly labeled; choose
-    your representation of the third variable based on what’s best for
-    representing the data.**  
-
--   Three used variables are:
-    -   ethnic\_identity
-    -   facility  
-    -   Adding a third variable in geom point using color=program\_name
-
-<!-- -->
-
-    ggplot(data = HFS.Ethnic_identity.cleaned, aes(x =ethnic_identity , y =program_unit_description , colour=program_name)) +geom_point(size = 3)+
-         labs(title = "Scatter plot with three variables", y = "Unit Description of the Program", x = "Ethnicity")+ 
-      theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
-
-![](RScript_files/figure-markdown_strict/unnamed-chunk-17-1.png)
-[](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Scatter_Plot.jpeg)
-The above scatter plot is composed of three variables: ethnic\_identity,
-program\_unit description and program\_name. from this plot , we can say
-that people have mostly participated in the mental health program. The
-second major program is for the substance use program. The plot also
-describes that NON HISPANIC clients are most likely to be treated in the
-programs.
-
-1.  **One faceted plot of two variables, properly labeled.**  
-
--   Two used variables are:
-    -   ethnic\_identity
-    -   facility
-
-    <table>
-    <thead>
-    <tr class="header">
-    <th><a href="https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Faceted.jpeg">Faceted Chart</a></th>
-    </tr>
-    </thead>
-    <tbody>
-    </tbody>
-    </table>
-
-    ggplot(data = HFS.Ethnic\_Identity.cleaned,
-    aes(ethnic\_identity,facility)) +
-
--   geom_line(color = "steelblue", size = 1) +
-
--   geom_point(color = "steelblue") +
-
--   labs(title = "Faceted plot of two variables Ethnic Identity vs Facility", x = "ethnic_identity", y = "facility") +
-
--   facet_wrap(.~program_name)
-
-I have divided the plot using the ethnic\_identity of the clients. This
-plot uses two variables Ethnic Identity and Facility. We can say from
-the plot that due to uncollected data or unknown/missing values there
-are more separations in the plot. However , with the data in hand, the
-created plot shows the differences of programs being served from the
-various facilities accross various ethnicities.
-
-1.  **One bar chart, properly labeled.**  
-
--   Used variable is:
-    -   ethnic Identity
-
-<!-- -->
-
-    ggplot(data = HFS.Ethnic_Identity.cleaned)+
-        geom_bar(mapping = aes(x=ethnic_identity),colour="white",fill="blue")+
-        labs(title = "One bar chart of Ethnic Identity", y = "Count of Clients of Each Ethnicity", x = "Client Ethnicity")
-
-![](RScript_files/figure-markdown_strict/unnamed-chunk-18-1.png) | ![Bar
-Chart](https://raw.githubusercontent.com/saikrishnags05/Project-for-Data-to-Decisions/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-gfm/Bar_Chart.jpeg)
-| - This Bar chart is composed of only the Ethnicity of the Client of
-HFS. It shows how many clients are in each ethnicity group. The charts
-shows that most clients of HFS are Not Latino. Also we can observe that
-out of almost 8000 clients approximately 400 clients are Other Latino or
-Unknown
-
-# Thing explored:
-
-We have explored many different types of attributes that are required to
-solve the 3 research questions and also we analysed the data that we
-have now can also get other results.Further We can subset each and every
-Character data and get additional information.
-
-# Results
-
-All the Data is perfectly cleaned and analysed. We can get clear and
-beautiful plots or results from the cleaned data.
