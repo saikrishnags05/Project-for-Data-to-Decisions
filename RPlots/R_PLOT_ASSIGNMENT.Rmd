@@ -1,0 +1,33 @@
+---
+title: "R_Plot_Assignment"
+author: "Rhonda Silva"
+date: "11/16/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+library(ggplot2)
+
+```{r HFS.Ethnicity2, include=FALSE}
+ggplot(HFS.Ethnicity2) +
+ aes(x = program_unit_description, y = age, colour = ethnic_identity) +
+ geom_boxplot(shape = "circle", 
+ fill = "#112446") +
+ scale_color_hue(direction = 1) +
+ coord_flip() +
+ theme_minimal()
+```
+ ##Bar chart of Ethnicity & Facility
+
+```{r Facility, include=FALSE}
+ggplot(HFS.Ethnicity) +
+ aes(x = facility, fill = ethnic_identity) +
+ geom_bar() +
+ scale_fill_hue(direction = 1) +
+ coord_flip() +
+ theme_minimal() +
+ theme(axis.title.x = element_text(size = 9L))
+```
