@@ -23,17 +23,14 @@ library('tidyverse')
 library('dplyr')
 HFS <- read.csv("HFS Service Data.csv")
 HFS.Ethnicity2<-HFS [c(2,3,4,24,25,45,49)]
-```
-```r
+HFS.Ethnicity2 = HFS.Ethnicity2[HFS.Ethnicity2$ethnic_identity != "Not Collected",]
+
 HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Not Spanish/Hispanic/Latino"]<- "Not Latino"
-```
-```r
+
 HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Mexican"]<- "Latino"
-```
-```r
+
 HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Other Hispanic or Latino"]<- "Latino"
 ```
-
 
 ## RQ 3
 
@@ -55,8 +52,7 @@ ggplot(HFS.Ethnicity2) +
   theme_minimal()
 ```
 
-![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/RQ3_1.jpeg)<!-- -->
-
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/RQ_3_1.jpeg)<!-- -->
 
 ##Bar chart of Ethnicity & Facility
 
@@ -66,4 +62,5 @@ North Omaha Campus and the Heartland Family Service-Central location.
 ``` r
 p
 ```
-  ![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/RQ3_2.jpeg)<!-- -->
+
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/RQ3_2.jpeg)<!-- -->
