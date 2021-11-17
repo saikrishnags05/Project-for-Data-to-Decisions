@@ -75,6 +75,14 @@ If we observe the Graph we can tell that over all behavior of enrollment
 process w.r.t the time taken for per person to enroll for an event from
 past **8 years** in the state of **Iowa**.
 
+
+* There are few facilities where it is taking more time to enroll for a person compared to the previous year.
+* Most of the facilities conduct events on **Mental Health**
+* We can notice that in the enrolling time is so less in schools and we can even assume that most of the people who enroll to the course are children.
+* In **Substance Use** we can clearly tell that out of 5 facilities only 1 facility have organized for more years and their time of enrollment is also almost equal
+* From the plot, I can tell that all the enrollments are been late for the past 2 years there may be multiple reasons.
+**Example: -** lockdown because Covid-19 which stopped the process
+
 ``` r
 p <- ggplot(data = ag_ia, aes(y=`IA$AD_APD`,x=`IA$facility`,color= `IA$AD_year` ))
 p + geom_point()+facet_wrap(~`IA$program_name`,scale='free')+
@@ -90,9 +98,17 @@ ag_ne<-aggregate(ne$AD_APD~ne$facility+ne$AD_year+ne$program_name,ne,mean)
 ag_ne$`ne$AD_APD`<-round(ag_ne$`ne$AD_APD`,0)
 ```
 
-If we observe the Graph we can tell that over all behavior of enrollment
+If we observe the Graph, we can tell that overall behavior of enrollment
 process w.r.t the time taken for per person to enroll for an event from
 past **10 years** in the state of **Nebraska**.
+
+* There are few facilities where it is taking more time to enroll for a person compared to the previous year.
+* Most of the facilities conduct events on **Mental Health**
+* We can also tell that the entire enrollment process is late in all the regions in Nebraska when it is compared to previous years
+* From the plot I can tell that all the enrollments are being late for the past 2 years there may be multiple reasons. 
+
+**Example: -** lockdown because Covid-19 which stopped the process
+
 
 ``` r
 #,out.width = "1200",out.height='800'
