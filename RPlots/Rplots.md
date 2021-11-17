@@ -82,7 +82,7 @@ theme(axis.text.x = element_text(angle=90, vjust=1, hjust=1))+
   labs(title = "Average Time taken for a person to enroll for a program") +ylab('Average days for a person to register')+xlab('Facility in Iowa')+ labs(colour = "Years")
 ```
 
-![](Rplots_files/figure-gfm/Sai_krishna_IA.jpng)<!-- -->
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/Sai_Krishna_IA.jpeg)<!-- -->
 
 ``` r
 ne<-filter(HFS_data,HFS_data$state=="nebraska")#,HFS_data$program_name=='Mental Health')
@@ -102,4 +102,4 @@ p + geom_point()+facet_wrap(~`ne$program_name`,scale='free')+
   labs(title = "Average Time taken for a person to enroll for a program") +ylab('Average days for a person to register')+xlab('Facility in Nebraska')+ labs(colour = "Years")
 ```
 
-![](Rplots_files/figure-gfm/Sai_krishna_NE.jpng)<!-- -->
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/Sai_Krishna_NE.jpeg)<!-- -->
