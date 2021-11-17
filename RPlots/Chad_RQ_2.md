@@ -87,7 +87,7 @@ ylab("Percentage of Clients Who Miss Appointments") +
  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none") 
 ```
 
-![](Chad_RQ_2_files/figure-gfm/facility-1.png)<!-- -->
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/NoShow_By_Location.png)<!-- -->
 
 The purpose of the above graph is to highlight the stark different in
 the y-axis for each facet. The y-axis shows no show percentage, which
