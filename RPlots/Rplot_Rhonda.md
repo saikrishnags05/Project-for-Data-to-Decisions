@@ -24,6 +24,16 @@ library('dplyr')
 HFS <- read.csv("HFS Service Data.csv")
 HFS.Ethnicity2<-HFS [c(2,3,4,24,25,45,49)]
 ```
+```r
+HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Not Spanish/Hispanic/Latino"]<- "Not Latino"
+```
+```r
+HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Mexican"]<- "Latino"
+```
+```r
+HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Other Hispanic or Latino"]<- "Latino"
+```
+
 
 ## RQ 3
 
