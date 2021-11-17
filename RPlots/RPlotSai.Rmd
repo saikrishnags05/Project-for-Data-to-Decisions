@@ -71,8 +71,9 @@ If we observe the Graph we can tell that over all behavior of enrollment process
 
 ```{r}
 #, out.width = "1900px",out.height='800px'
-p <- ggplot(data = ag_ne, aes(y=ag_ne$`ne$AD_APD`,x=ag_ne$`ne$facility`,color= ag_ne$`ne$AD_year` ))
-p + geom_point()+facet_wrap(~ag_ne$`ne$program_name`,scale='free')+
-theme(axis.text.x = element_text(angle=90, vjust=1, hjust=1))+
+p <- ggplot(data = ag_ne, aes(y=`ne$AD_APD`,x=`ne$facility`,color=`ne$AD_year` ))
+p + geom_point()+facet_wrap(~`ne$program_name`,scale='free')+
+  theme(axis.text.x = element_text(angle=90, vjust=1, hjust=1))+
   labs(title = "Average Time taken for a person to enroll for a program") +ylab('Average days for a person to register')+xlab('Facility in Nebraska')+ labs(colour = "Years")
+
 ```
