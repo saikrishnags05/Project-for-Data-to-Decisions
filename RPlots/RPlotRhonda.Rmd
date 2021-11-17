@@ -1,16 +1,56 @@
 ---
-title: "RPlot"
-author: "Group 4"
+title: "R_Plot_Assignment"
+author: "Rhonda Silva"
 date: "11/16/2021"
-output: html_document
+output: github_document
 ---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+```{r}
+library('ggplot2')
+library('tidyverse')
+library('dplyr')
+HFS <- read.csv("HFS Service Data.csv")
+HFS.Ethnicity2<-HFS [c(2,3,4,24,25,45,49)]
+HFS.Ethnicity2 = HFS.Ethnicity2[HFS.Ethnicity2$ethnic_identity != "Not Collected",]
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Not Spanish/Hispanic/Latino"]<- "Not Latino"
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Mexican"]<- "Latino"
+
+HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Other Hispanic or Latino"]<- "Latino"
+```
+## RQ 3
+The data cleaning results in a new subset of 5 variables based on the attributes analyzed in the first research question. Important columns within this data cleaning are listed below:
+  program_unit_desc ethnic_identity   age facility   program_type
+
+This BoxPlot identifies that most Latinos receive services for Mental Health Programs and are between the ages of 18 and 50.
+```{r}
+ggplot(HFS.Ethnicity2) +
+  aes(x = program_unit_description, y = age, colour = ethnic_identity) +
+  geom_boxplot(shape = "circle", 
+               fill = "#112446") +
+  scale_color_hue(direction = 1) +
+  coord_flip() +
+  theme_minimal()
+```
+
+##Bar chart of Ethnicity & Facility
+
+This BarChart shows us that the majority of Latinos served attend the North Omaha Campus and the Heartland Family Service-Central location. 
+
+```{r Facility, include=FALSE}
+p<-ggplot(HFS.Ethnicity2) +
+  aes(x = facility, fill = ethnic_identity) +
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  coord_flip() +
+  theme_minimal() +  theme(axis.title.x = element_text(size = 9L),)
+```
+
+```{r}
+p
+```
