@@ -45,7 +45,8 @@ ggplot(HFS.Ethnicity2) +
   theme_minimal()
 ```
 
-![](Rplot_Rhonda_files/figure-gfm/unnamed-chunk-2-1.png)<!-- -->
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/RQ3_1.jpeg)<!-- -->
+
 
 ##Bar chart of Ethnicity & Facility
 
@@ -55,5 +56,4 @@ North Omaha Campus and the Heartland Family Service-Central location.
 ``` r
 p
 ```
-
-![](Rplot_Rhonda_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+  ![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/RQ3_2.jpeg)<!-- -->
