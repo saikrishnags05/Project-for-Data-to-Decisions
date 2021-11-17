@@ -70,7 +70,7 @@ ag_ne$`ne$AD_APD`<-round(ag_ne$`ne$AD_APD`,0)
 If we observe the Graph we can tell that over all behavior of enrollment process w.r.t the  time taken for per person to enroll for an event from past **`r length(unique(ne$AD_year))` years** in the state of **Nebraska**.
 
 ```{r}
-#, out.width = "1900px",out.height='800px'
+#,out.width = "1200",out.height='800'
 p <- ggplot(data = ag_ne, aes(y=`ne$AD_APD`,x=`ne$facility`,color=`ne$AD_year` ))
 p + geom_point()+facet_wrap(~`ne$program_name`,scale='free')+
   theme(axis.text.x = element_text(angle=90, vjust=1, hjust=1))+
