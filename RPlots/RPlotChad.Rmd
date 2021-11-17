@@ -58,8 +58,6 @@ ylab("Percentage of Clients Who Miss Appointments") +
 
 ```
 
-1-2 paragraph description of what the plot represents and how it should be interpreted,
-
 The purpose of the above graph is to highlight the stark different in the y-axis for each facet.  The y-axis shows no show percentage, which captures the percentage of appointments that are missed, e.g., clients do not show up for their appointments. The facet is facility, such as the "Center Mall Office" and "Omaha (Blondo) Reporting Center." The graph shows significant differences in no show percentage by facility. The range itself varies from around 5% to almost 30%, depending on the facility. The plot also separates out job function since it has a significant effect on no show percentage and tends to drop from Therapist I to Therapist II. 
 
 The takeaway is that no show percentage is tightly related to the facility. This means that the rate at which clients skip or miss appointments is tightly coupled with the specific facility. This means that some facilities show much higher rates of appointment misses than others. For example, the Gendler HFS location should expect very high appointment no shows, up to 25% contrasted with the Sarpy location that averages fewer than 10% no shows. 
