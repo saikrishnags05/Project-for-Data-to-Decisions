@@ -103,8 +103,6 @@ ag_ne$`ne$AD_APD`<-round(ag_ne$`ne$AD_APD`,0)
 
 The below graph displays the average time taken for enrollment within Nebraska for HFS, over the past ten years. We notice:
 
-HFS should seek to understand why location is closely coupled to missing appointments. This might be related to particular locations being more difficult to access, such as difficult traffic or limited parking. On the other hand, each location might have very different populations, whether via ethnicity or financial differences that provide different levels of privilege, which in turn affect the client’s ability to allocate time for appointments. Further research should seek to understand what about location or the clients that visit these locations affect missed appointments.
-
 - There are few facilities where it is taking more time to enroll for a person compared to the previous year.
 - Most of the facilities conduct events on Mental Health
 - We can also tell that the entire enrollment process is late in all the regions in Nebraska when it is compared to previous years
@@ -181,6 +179,8 @@ ylab("Percentage of Clients Who Miss Appointments") +
 The purpose of the above graph is to highlight the stark difference in the y-axis for each facet. The y-axis shows the no-show percentage, which captures the percentage of appointments that are missed, e.g., clients do not show up for their appointments. The facet is a facility, such as the “Center Mall Office” and “Omaha (Blondo) Reporting Center.” The graph shows significant differences in no-show percentage by facility. The range itself varies from around 5% to almost 30%, depending on the facility. The plot also separates out job function since it has a significant effect on no-show percentage and tends to drop from Therapist I to Therapist II.
 
 The takeaway is that no-show percentage is tightly related to the facility. This means that the rate at which clients skip or miss appointments are tightly coupled with the specific facility. This means that some facilities show much higher rates of appointment misses than others. For example, the Gendler HFS location should expect very high appointment no shows, up to 25% contrasted with the Sarpy location that averages fewer than 10% no shows.
+
+HFS should seek to understand why location is closely coupled to missing appointments. This might be related to particular locations being more difficult to access, such as difficult traffic or limited parking. On the other hand, each location might have very different populations, whether via ethnicity or financial differences that provide different levels of privilege, which in turn affect the client’s ability to allocate time for appointments. Further research should seek to understand what about location or the clients that visit these locations affect missed appointments.
 
 ## Research Question 3
 
