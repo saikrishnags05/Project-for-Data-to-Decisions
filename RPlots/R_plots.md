@@ -117,6 +117,35 @@ If we observe the Graph, we can tell that overall behavior of enrollment
 process w.r.t the time taken for per person to enroll for an event from
 past **10 years** in the state of **Nebraska**.
 
+HFS should seek to understand why location is closely coupled to missing
+appointments. This might be related to particular locations being more
+difficult to access, such as difficult traffic or limited parking. On
+the other hand, each location might have very different populations,
+whether via ethnicity or financial differences that provide different
+levels of privilege, which in turn affect client’s ability to allocate
+time for appointments. Further research should seek to understand what
+about location or the clients that visit these locations affect missed
+appointments.
+
+* There are few facilities where it is taking more time to enroll for a person compared to the previous year.
+* Most of the facilities conduct events on **Mental Health**
+* We can also tell that the entire enrollment process is late in all the regions in Nebraska when it is compared to previous years
+* From the plot I can tell that all the enrollments are being late for the past 2 years there may be multiple reasons. 
+
+**Example: -** lockdown because Covid-19 which stopped the process
+
+
+``` r
+#,out.width = "1200",out.height='800'
+p <- ggplot(data = ag_ne, aes(y=`ne$AD_APD`,x=`ne$facility`,color=`ne$AD_year` ))
+p + geom_point()+facet_wrap(~`ne$program_name`,scale='free')+
+  theme(axis.text.x = element_text(angle=90, vjust=1, hjust=1))+
+  labs(title = "Average Time taken for a person to enroll for a program") +ylab('Average days for a person to register')+xlab('Facility in Nebraska')+ labs(colour = "Years")
+```
+
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/Sai_Krishna_NE.jpeg)<!-- -->
+
+
 # Research Question 2
 
 HFS facility locations have a significant effect on the number of missed
@@ -209,35 +238,6 @@ that some facilities show much higher rates of appointment misses than
 others. For example, the Gendler HFS location should expect very high
 appointment no shows, up to 25% contrasted with the Sarpy location that
 averages fewer than 10% no shows.
-
-HFS should seek to understand why location is closely coupled to missing
-appointments. This might be related to particular locations being more
-difficult to access, such as difficult traffic or limited parking. On
-the other hand, each location might have very different populations,
-whether via ethnicity or financial differences that provide different
-levels of privilege, which in turn affect client’s ability to allocate
-time for appointments. Further research should seek to understand what
-about location or the clients that visit these locations affect missed
-appointments.
-
-* There are few facilities where it is taking more time to enroll for a person compared to the previous year.
-* Most of the facilities conduct events on **Mental Health**
-* We can also tell that the entire enrollment process is late in all the regions in Nebraska when it is compared to previous years
-* From the plot I can tell that all the enrollments are being late for the past 2 years there may be multiple reasons. 
-
-**Example: -** lockdown because Covid-19 which stopped the process
-
-
-``` r
-#,out.width = "1200",out.height='800'
-p <- ggplot(data = ag_ne, aes(y=`ne$AD_APD`,x=`ne$facility`,color=`ne$AD_year` ))
-p + geom_point()+facet_wrap(~`ne$program_name`,scale='free')+
-  theme(axis.text.x = element_text(angle=90, vjust=1, hjust=1))+
-  labs(title = "Average Time taken for a person to enroll for a program") +ylab('Average days for a person to register')+xlab('Facility in Nebraska')+ labs(colour = "Years")
-```
-
-![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/Sai_Krishna_NE.jpeg)<!-- -->
-
 
 ## Research Question 3
 
