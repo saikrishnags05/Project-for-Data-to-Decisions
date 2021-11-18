@@ -67,7 +67,7 @@ HFS_data$AD_ED<-(HFS_data$actual_date-HFS_data$date_entered)
 HFS_data$ED_APD<-(HFS_data$date_entered-HFS_data$approved_date)
 HFS_data$AD_APD<-(abs(HFS_data$actual_date-HFS_data$approved_date))
 ```
-##  (Links to an external site.)Average days Taken for Enrollment (Iowa)
+##  Average days Taken for Enrollment in Iowa
 ``` r
 HFS_data$state[HFS_data$state == "IA"] <- "iowa"
 IA<-filter(HFS_data,HFS_data$state=="iowa")#,HFS_data$program_name=='Mental Health')
@@ -93,7 +93,7 @@ theme(axis.text.x = element_text(angle=90, vjust=1, hjust=1))+
 ![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/Sai_Krishna_IA.jpeg)<!-- -->
 
 
-## Average days Taken for Enrollment (Nebraska)
+## Average days Taken for Enrollment in Nebraska
 ``` r
 HFS_data$state[HFS_data$state == "NE"] <- "nebraska"
 ne<-filter(HFS_data,HFS_data$state=="nebraska")#,HFS_data$program_name=='Mental Health')
