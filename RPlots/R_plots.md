@@ -123,26 +123,9 @@ p + geom_point()+facet_wrap(~`ne$program_name`,scale='free')+
 
 # Research Question 2
 
-HFS facility locations have a significant effect on the number of missed
-appointments.
+HFS facility locations have a significant effect on the number of missed appointments.
 
-The research question builds on existing knowledge that Omaha and Iowa
-contain pockets of segregated populations, both in terms of ethnicity,
-finances, and priviledge. The research question poses that location
-might have a significant effect on missed appointments. If a particular
-location has a population with financial access to vehicles, or even
-multiple vehicles, they might be more able to make their appointments.
-Initially, we hope to identify that facility location affects missed
-appointments. If we can show this is true, we can further explore what
-about the facility location negatively affects client’s ability to make
-their appointments. This research data specifically looks at the mental
-health program, the largest for HFS. This research also breaks down no
-shows by the type of therapist, knowing that different types of
-therapists might handle different appointments, each of which might be
-related to the likelihood of missing appointments. This research
-quesiton does not break down the data by ethnicity, only because the
-ethnicity counts were not large enough to be meaningful for each
-facility and job title.
+The research question builds on existing knowledge that Omaha and Iowa contain pockets of segregated populations, both in terms of ethnicity, finances, and priviledge. The research question poses that location might have a significant effect on missed appointments. If a particular location has a population with financial access to vehicles, or even multiple vehicles, they might be more able to make their appointments. Initially, we hope to identify that facility location affects missed appointments. If we can show this is true, we can further explore what about the facility location negatively affects client's ability to make their appointments. This research data specifically looks at the mental health program, the largest for HFS.  This research also breaks down no shows by the type of therapist, knowing that different types of therapists might handle different appointments, each of which might be related to the likelihood of missing appointments. This research quesiton does not break down the data by ethnicity, only because the ethnicity counts were not large enough to be meaningful for each facility and job title.
 
 ``` r
 library('tidyverse') 
@@ -195,24 +178,10 @@ ylab("Percentage of Clients Who Miss Appointments") +
 
 ![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/NoShow_By_Location.png)<!-- -->
 
-The purpose of the above graph is to highlight the stark different in
-the y-axis for each facet. The y-axis shows no show percentage, which
-captures the percentage of appointments that are missed, e.g., clients
-do not show up for their appointments. The facet is facility, such as
-the “Center Mall Office” and “Omaha (Blondo) Reporting Center.” The
-graph shows significant differences in no show percentage by facility.
-The range itself varies from around 5% to almost 30%, depending on the
-facility. The plot also separates out job function since it has a
-significant effect on no show percentage and tends to drop from
-Therapist I to Therapist II.
+The purpose of the above graph is to highlight the stark different in the y-axis for each facet.  The y-axis shows no show percentage, which captures the percentage of appointments that are missed, e.g., clients do not show up for their appointments. The facet is facility, such as the "Center Mall Office" and "Omaha (Blondo) Reporting Center." The graph shows significant differences in no show percentage by facility. The range itself varies from around 5% to almost 30%, depending on the facility. The plot also separates out job function since it has a significant effect on no show percentage and tends to drop from Therapist I to Therapist II. 
 
-The takeaway is that no show percentage is tightly related to the
-facility. This means that the rate at which clients skip or miss
-appointments is tightly coupled with the specific facility. This means
-that some facilities show much higher rates of appointment misses than
-others. For example, the Gendler HFS location should expect very high
-appointment no shows, up to 25% contrasted with the Sarpy location that
-averages fewer than 10% no shows.
+The takeaway is that no show percentage is tightly related to the facility. This means that the rate at which clients skip or miss appointments is tightly coupled with the specific facility. This means that some facilities show much higher rates of appointment misses than others. For example, the Gendler HFS location should expect very high appointment no shows, up to 25% contrasted with the Sarpy location that averages fewer than 10% no shows. 
+
 
 ## Research Question 3
 

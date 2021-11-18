@@ -65,7 +65,3 @@ The purpose of the above graph is to highlight the stark different in the y-axis
 The takeaway is that no show percentage is tightly related to the facility. This means that the rate at which clients skip or miss appointments is tightly coupled with the specific facility. This means that some facilities show much higher rates of appointment misses than others. For example, the Gendler HFS location should expect very high appointment no shows, up to 25% contrasted with the Sarpy location that averages fewer than 10% no shows. 
 
 HFS should seek to understand why location is closely coupled to missing appointments. This might be related to particular locations being more difficult to access, such as difficult traffic or limited parking.  On the other hand, each location might have very different populations, whether via ethnicity or financial differences that provide different levels of privilege, which in turn affect client's ability to allocate time for appointments. Further research should seek to understand what about location or the clients that visit these locations affect missed appointments.
-
-
-
-
