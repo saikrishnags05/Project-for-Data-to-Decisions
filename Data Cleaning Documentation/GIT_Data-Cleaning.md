@@ -35,9 +35,7 @@ community.
 
 #### RQ 1
 
-**My Research Question is to tell that how much time of delay it take to
-takes for enrolling into the event, Entering into system and Approving
-the enrollment.** **(Sai Krishna)**
+**My Research Question help to know  that "how much time it takes for enrolling into the event,form starting enrollment process to Approving the enrollment.** **(Sai Krishna)**
 
 Reason:- This will help in analyzing the time taking per enrolling from
 starting to ending state. And what kind of people are enrolling on the
