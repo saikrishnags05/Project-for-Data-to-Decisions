@@ -478,36 +478,7 @@ Mexican, how many received services at which branch
     library(ggplot2)
     HFS.Hispanic<-read.csv("HFS Service Data.csv")
     str(HFS.Hispanic)
-### To see the names of Columns
 
-    names(HFS.Hispanic)  
-
-    ##  [1] "gender"                   "program_name"            
-    ##  [3] "program_type"             "facility"                
-    ##  [5] "job_title"                "staff_name"              
-    ##  [7] "actual_date"              "event_name"              
-    ##  [9] "activity_type"            "encounter_with"          
-    ## [11] "is_client_involved"       "is_noshow"               
-    ## [13] "is_locked"                "is_billed"               
-    ## [15] "is_paid"                  "date_entered"            
-    ## [17] "user_entered_name"        "approved_date"           
-    ## [19] "approved_staff_name"      "submitted"               
-    ## [21] "is_approved"              "is_notapproved"          
-    ## [23] "is_notapproved_subm"      "program_unit_description"
-    ## [25] "sc_code"                  "duration_num"            
-    ## [27] "do_not_bill"              "do_not_pay"              
-    ## [29] "general_location"         "program_modifier"        
-    ## [31] "program_modifier_code"    "NormalWorkHours"         
-    ## [33] "duration_other_num"       "duration_other"          
-    ## [35] "travel_time_num"          "travel_time"             
-    ## [37] "planning_time_num"        "planning_time"           
-    ## [39] "total_duration_num"       "total_duration"          
-    ## [41] "reason_for_no_show"       "is_billable"             
-    ## [43] "zip"                      "state"                   
-    ## [45] "age"                      "duration"                
-    ## [47] "recordID"                 "simple_race"             
-    ## [49] "ethnic_identity"          "gender_identity"         
-    ## [51] "sexual_orientation"
 
     ### Deleted Columns that I didn't need and named it HFS.Hispanic.cleaned
 
