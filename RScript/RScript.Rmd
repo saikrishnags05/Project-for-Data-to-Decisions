@@ -35,8 +35,6 @@ The first reserach question explores datetime relationships per person.  Specifi
 
 This will help in analyzing the time taken per enrolling; from the signup to the appointment date.  It will also give us insights concerning demographic breakdowns per customer, e.g., their ethnic identity and location.  We will also explore the total time taken for each event. This analysis will provide HFS data concerning their enrollment speed by different customer facets.
 
-### Data cleaning:
-
 The data cleaning results in a new subset of data based on the attributes analyzed in the first research question.  Important columns within this data cleaning are listed below:
 
 `facility`, `actual_date`, `event_name`, `date_entered`, `approved_date`, `program_unit_description`, `zip`, `state`,`ethnic_identity`
@@ -47,253 +45,104 @@ library('ggplot2') # for sample plot if required
 library('dplyr') # to use pipelines '%>%' for data set
 ```
 
-
+Read the files and Select the required columns 
 ```{r}
+
 HFS_data<-read.csv("HFS Service Data.csv") # read data set
 
 
 selected_columns<-c("program_name","facility","actual_date","event_name","date_entered",   
- "approved_date","zip","state","age","ethnic_identity")
-# Above list is used for selecting the columns in the dataset 
-
+                    "approved_date","zip","state","age","ethnic_identity")
 HFS_data<-HFS_data %>%
   select(selected_columns)  # this command is used for selecting the required columns
-
-HFS_data<-HFS_data %>% drop_na() # we use this to delete NA values
-
-HFS_data<-HFS_data[!(HFS_data$ethnic_identity=="Not Collected" | HFS_data$ethnic_identity=="Unknown"),] # delete unwanted rows from a single column
-
-HFS_data$facility <- sub("Heartland Family Service", "HFS", HFS_data$facility)
-HFS_data$facility <- sub("North Omaha Intergenerational Campus (Service)", "NOICS", HFS_data$facility)
-# using Regex to compress the name of Facility
-
-#sapply(HFS_data, function(x) sum(is.na(x)))
 ```
 
-The latest date we fetch from the CSV is **25th August 2021**.
+As the sources Information is fetched out to csv on 25th August 2021.
 
-We use the function as.Date in R to generate the date of events in R.
-
+By using this date i have created original data of the eventsm with the help of
+as.Date() function in R
 ```{r}
 HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
 HFS_data$ED<-as.Date(-(HFS_data$date_entered), origin = '2021-08-25')
-HFS_data$Date_of_approved_date<-as.Date(-(HFS_data$approved_date), origin = '2021-08-25')
-HFS_data$AD_1<-(HFS_data$actual_date-HFS_data$date_entered)
-#str(HFS_data)
-```
-
-#### Numeric Data Columns
-
-`actual_date` is about the actual data of the program admission.
-
-`date_entered` is when the appointment occurred (days after enrollment or days before enrollment)
-
-`approved_date` is when the appointment is approved by a supervisor? (Days after enrollment)
-
-#### Other Columns:
-
-`event_name`  is the name of the event.
-
-`program_unit_description`is the event description
-
-`zip`	The zip code of the location
-
-`state` The state for the appointment
-
-`ethnic_identity` Describes the affiliated ethnic identity for the person.
-
-### Cleaning procidure
-
- **step 1:-** Since I am using Data format I have to find the difference between each and every even that has taken place. I have used as.Date() function to get the actual date format.
- 
- **step 2:-** Apply step1 to all the date columns to verify it in next phase.
- 
- **step 3:-** Now we create a new column and subtract the dates. Negative values imply an enrollment before the event. Zero implies day-of enrollment.
- 
- **step 4:-** We have 5 states in the data set which are shown via abbreviations.
- 
- **step 5:-** Subset each and every State are in short form like `IA`,`NE`,`CO`,`NC`,`SC`and later updated to full form of user understanding `Iowa`, `Nebrska`        `Colorado`, `North Carolina`,`South Carolina`.  We will also plot against the state and zip code.
- 
-The latest date we fetch from the CSV is **25th August 2021**.
-
-We use the function as.Date in R to generate the date of events in R.
-
-### Cleaning State Names:
-
-We then look at the time data by state.
-
-Now we update all the states names in the dataset, which helps with overall readability.
-
-```{r}
-# clean NA values.
-HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
-HFS_data$ED<-as.Date(-(HFS_data$date_entered), origin = '2021-08-25')
-HFS_data$AD_M_Y <- format(as.Date(HFS_data$AD), "%Y-%m")
 HFS_data$AD_year<-(format(as.Date(HFS_data$ED), "%Y"))
-```
-The above code with create two different columns for `YEAR`, `Month`, and `Year` 
-
-```{r}
 HFS_data$AD_ED<-(HFS_data$actual_date-HFS_data$date_entered)
 HFS_data$ED_APD<-(HFS_data$date_entered-HFS_data$approved_date)
 HFS_data$AD_APD<-(abs(HFS_data$actual_date-HFS_data$approved_date))
 ```
 
+Omit all the **NA** values
+
 ```{r}
-HFS_data$state[HFS_data$state == "NE"] <- "nebraska"
+HFS_data<-na.omit(HFS_data)
+```
+
+Rename all the state name with it's full form
+```{r}
+HFS_data$state<- as.character(HFS_data$state)
+HFS_data$state[HFS_data$state == "NE"] <- "nebrska"
 HFS_data$state[HFS_data$state == "IA"] <- "iowa"
 HFS_data$state[HFS_data$state == "SC"] <- "south carolina"
 HFS_data$state[HFS_data$state == "NC"] <- "north carolina"
 HFS_data$state[HFS_data$state == "CO"] <- "colorado"
 ```
 
-In the below code I created a data set via the function `group by`.  This fetches all the information concerning the enrollment process.
+# Iowa
+
+In the below code i have filtered the original data with the state  name and aggregate the whole data based to get an average time taken for completing the HFS process.
 
 ```{r}
-library(dplyr)
-#FUN = quantile,probs = c(0.05, 0.95)
-aggregate_wrt_year<-(aggregate(AD_APD~AD_M_Y+program_name+event_name+state+facility,HFS_data,FUN = quantile,probs = c(0.05, 0.95)))
-group_hfs<-group_by(HFS_data,AD_APD, program_name,facility,AD_year,state) %>%
-  summarise(
-    count = n(),
-    mean = mean(AD_APD, na.rm = TRUE),
+HFS_data$state[HFS_data$state == "IA"] <- "iowa"
+IA<-subset(HFS_data,HFS_data$state=="iowa")#,HFS_data$program_name=='Mental Health')
+ag_ia<-aggregate(IA$AD_APD~IA$facility+IA$AD_year+IA$program_name,IA,mean)
+ag_ia$`IA$AD_APD`<-round(ag_ia$`IA$AD_APD`,0)
+names(ag_ia)[names(ag_ia) == "IA$facility"] <- "facility"     
+names(ag_ia)[names(ag_ia) == "IA$AD_year"] <-"AD_year"      
+names(ag_ia)[names(ag_ia) == "IA$program_name"] <-"program_name" 
+names(ag_ia)[names(ag_ia) == "IA$AD_APD"] <-"AD_APD"
+```
+
+In the Below code i have build a model to see if it have better confidence in between the attributes in the data frame or not
+```{r}
+# Build the model
+
+model <- lm(AD_APD ~facility+AD_year, data = ag_ia)
+model
+new.ag_ia.avg.time <- data.frame(
+  facility = c("Thomas Jefferson High School","Titan Hill Intermediate School", "Heartland Family Service - Heartland Homes")
+  ,AD_year=c('2021','2020','2020')
   )
-names(group_hfs)[names(group_hfs)=='HFS_data$program_name'] <-'program_name'
-names(group_hfs)[names(group_hfs)=='HFS_data$facility'] <-'facility'
+
+predict(model, newdata = new.ag_ia.avg.time)
+predict(model, newdata = new.ag_ia.avg.time, interval = "confidence")
 ```
 
-We can look at the normality of the dates of enrollment
+tried to get a predict value for over all data for Iowa
 ```{r}
-shapiro.test(group_hfs$AD_APD)
+# 1. Add predictions 
+pred.int <- predict(model, interval = "prediction")
+mydata <- cbind(ag_ia, pred.int)
 ```
 
-We then use ANOVA to get the relationship between many of the variables.  This might not be valid since the distribution is not normal.
-
+Now i have created a plot to see how the predicted value is similar with 
 ```{r}
-options(ggrepel.max.overlaps = Inf)
-aov_group_hfs <- aov(cbind(AD_APD)~program_name+state+facility+AD_year+mean, data = group_hfs)
-summary_group_hfs<-summary(aov_group_hfs)
-summary_group_hfs
-```
-According to the Summary Statistics we can tell that mean of State,facility and years are similar to one another.
-
-We can then remove the outliers in the data set which contains data of 2021:
-
-```{r}
-library(ggstatsplot)
-#Create a boxplot that labels the outliers  
-df2021<-filter(aov_group_hfs$model,aov_group_hfs$model$AD_year==2021)
-# In df2021 i filter the data based on year 2020 to get in depth idea about the average time taken for registeration process.
-```
- 
- and then plot the outliers.
-
-```{r}
-ggbetweenstats(df2021,state,mean,outlier.tagging = TRUE)
-```
-
-And here are some sample statistics, such as the quartiles and even outliers. 
-```{r}
-Q <- quantile(df2021$mean, probs=c(.05, .95))
-iqr <- IQR(df2021$mean)
-up <-  Q[2]+1.5*iqr # Upper Range  
-low<- Q[1]-1.5*iqr # Lower Range
-eliminated<- subset(df2021, df2021$mean > (Q[1] - 1.5*iqr) & df2021$mean < (Q[2]+1.5*iqr))
-head(eliminated,6)
-```
-
-Below is the plot once we remove the outliers.
-
-```{r}
-ggbetweenstats(eliminated, state, mean, outlier.tagging = TRUE)
-```
-
-After verifying the initial boxplot we found out that the year data includes 2020 and 2021.
-
-```{r}
-library(ggstatsplot)
-#Create a boxplot that labels the outliers  
-df2020<-filter(aov_group_hfs$model,aov_group_hfs$model$AD_year==2020)
-# In df2020 i filter the data based on year 2020 to get in depth idea about the average time taken for registeration process.
+# 2. Regression line + confidence intervals
+library("ggplot2")
+p <- ggplot(mydata, aes(y=fit,x=AD_APD,color=AD_year ))+ geom_point()+geom_smooth(method = "lm")+facet_wrap(~AD_year,scales = 'free')
 ```
 
 ```{r}
-ggbetweenstats(df2020,state,mean,outlier.tagging = TRUE) # final plot for outliers 
-```
+# 3. Add prediction intervals
+p + geom_line(aes(x = lwr), color = "red", linetype = "dashed")+
+  geom_line(aes(x = upr), color = "red", linetype = "dashed")
 
-We remove the top and bottom 5% of the data.
+```
+(optional) Now for just verification i am trying to get a Residuals of the data that is present in Iowa
 ```{r}
-Q <- quantile(df2020$mean, probs=c(.05, .95), na.rm = FALSE)
-iqr <- IQR(df2020$mean)
-up <-  Q[2]+1.5*iqr # Upper Range  
-low<- Q[1]-1.5*iqr # Lower Range
-eliminated<- subset(df2020, df2020$mean > (Q[1] - 1.5*iqr) & df2020$mean < (Q[2]+1.5*iqr))
-ggbetweenstats(eliminated, state, mean, outlier.tagging = TRUE)
+aggregate_IA<-(aggregate(AD_APD~state+facility+AD_year,IA,mean))
+aov_group_IA <- aov(AD_APD~facility, data = aggregate_IA)
+summary_group_IA<-summary(aov_group_IA)
+summary_group_IA
 ```
-
-We now do some data modeling using caret for machine learning.
-
-```{r}
-library('caret')
-# define training control
-train_control <- trainControl(method="boot", number=10)
-# train the model
-sub_set<-data.frame(aov_group_hfs$model$program_name,aov_group_hfs$mode$AD_year,aov_group_hfs$model$mean)
-model <- train(aov_group_hfs.model.program_name~.,sub_set, trControl=train_control, method="nb")
-# summarize results
-print(model)
-```
-
-This allows us to see the overall percentage for different facilities.  We see this via a linear model.
-
-```{r}
-# summarize the class distribution
-percentage <- prop.table(table(HFS_data$facility,HFS_data$program_name)) * 100
-data<-data.frame(cbind(freq=table(HFS_data$facility), percentage=percentage))
-
-```
-
-Below is the model's training accuracy.
-
-```{r}
-control <- trainControl(method="cv", number=10)
-metric <- "Accuracy"
-sub<-data.frame(eliminated$program_name,eliminated$AD_year,eliminated$mean)
-```
-
-
-then we can create the linear model.
-```{r}
-(model1 <- lm(eliminated.AD_year ~ eliminated.mean + eliminated.program_name, data=sub))
-```
-
-, and do a similar operation for month.
-
-```{r}
-library(dplyr)
-group_hfs_m_y<-group_by(HFS_data,AD_APD, program_name,facility,AD_M_Y,state) %>%
-  summarise(
-    count = n(),
-    mean = mean(AD_APD, na.rm = TRUE),
-  )
-names(group_hfs_m_y)[names(group_hfs_m_y)=='HFS_data$program_name'] <-'program_name'
-names(group_hfs_m_y)[names(group_hfs_m_y)=='HFS_data$facility'] <-'facility'
-
-```
-
-I have aggregated the with the help of Probability to find the confidence and error rate for probality at `5%` and `95%` probabilities.
-```{r warning=FALSE}
-aggregate_wrt_M_Y<-(aggregate(AD_APD~AD_M_Y+program_name+event_name+state+facility,HFS_data,FUN = quantile,probs = c(0.05, 0.95)))
-```
-
-We then used Anova to get the overall confidence and average time taken for a person to be approved for an event in terms of months and years.
-
-```{r warning=FALSE}
-aov_group_hfs <- aov(cbind(AD_APD)~program_name+state+facility+AD_M_Y, data = aggregate_wrt_M_Y)
-summary_group_hfs<-summary(aov_group_hfs)
-summary_group_hfs
-```
-
 ## RQ 2
 
 ### Job Position, Ethnicity, Location, and Dropped Appointments (Chad Crowe)
