@@ -239,9 +239,16 @@ ggplot(HFS.Ethnicity2) +
 
 This BarChart shows us that the majority of Latinos served attend the
 North Omaha Campus and the Heartland Family Service-Central location.
-
-``` r
-p
+```r
+ggplot(HFS.Ethnicity2) +
+  aes(x = facility, fill = ethnic_identity)+
+  labs(fill = "Ethnicity")+
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  coord_flip() +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 9L))
 ```
+
 
 ![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/RQ3_2.jpeg)<!-- -->
