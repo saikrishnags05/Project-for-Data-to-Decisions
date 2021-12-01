@@ -356,7 +356,7 @@ Now i have created a plot to see how the predicted value is similar with
 
     ## `geom_smooth()` using formula 'y ~ x'
 
-![](R-SCRIPT_git_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RScript/RScript_files/figure-markdown_strict/Sai_Rscripts_10-1.png)
 (optional) Now for just verification i am trying to get a Residuals of
 the data that is present in Iowa
 
@@ -481,7 +481,7 @@ tried to get a predict value for over all data for Nebraska
     ## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
     ## -Inf
 
-![](R-SCRIPT_git_files/figure-markdown_strict/unnamed-chunk-16-1.png)
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RScript/RScript_files/figure-markdown_strict/Sai_Rscripts_16-1.png)
 
 (optional) Now for just verification i am trying to get a Residuals of
 the data that is present in Nebraska.
