@@ -167,297 +167,334 @@ The latest date we fetch from the CSV is **25th August 2021**.
 
 We use the function as.Date in R to generate the date of events in R.
 
-### Cleaning State Names:
+The data cleaning results in a new subset of data based on the
+attributes analyzed in the first research question. Important columns
+within this data cleaning are listed below:
 
-We then look at the time data by state.
+`facility`, `actual_date`, `event_name`, `date_entered`,
+`approved_date`, `program_unit_description`, `zip`,
+`state`,`ethnic_identity`
 
-Now we update all the states names in the dataset, which helps with
-overall readability.
+    library('tidyverse') 
 
-    # clean NA values.
+    ## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
+
+    ## v ggplot2 3.3.5     v purrr   0.3.4
+    ## v tibble  3.1.6     v dplyr   1.0.7
+    ## v tidyr   1.1.4     v stringr 1.4.0
+    ## v readr   2.1.0     v forcats 0.5.1
+
+    ## Warning: package 'tibble' was built under R version 4.1.2
+
+    ## Warning: package 'readr' was built under R version 4.1.2
+
+    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
+    ## x dplyr::filter() masks stats::filter()
+    ## x dplyr::lag()    masks stats::lag()
+
+    library('ggplot2') # for sample plot if required
+    library('dplyr') # to use pipelines '%>%' for data set
+
+Read the files and Select the required columns
+
+    HFS_data<-read.csv("HFS Service Data.csv") # read data set
+
+
+    selected_columns<-c("program_name","facility","actual_date","event_name","date_entered",   
+                        "approved_date","zip","state","age","ethnic_identity")
+    HFS_data<-HFS_data %>%
+      select(selected_columns)  # this command is used for selecting the required columns
+
+    ## Note: Using an external vector in selections is ambiguous.
+    ## i Use `all_of(selected_columns)` instead of `selected_columns` to silence this message.
+    ## i See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
+    ## This message is displayed once per session.
+
+As the sources Information is fetched out to csv on 25th August 2021.
+
+By using this date i have created original data of the eventsm with the
+help of as.Date() function in R
+
     HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
     HFS_data$ED<-as.Date(-(HFS_data$date_entered), origin = '2021-08-25')
-    HFS_data$AD_M_Y <- format(as.Date(HFS_data$AD), "%Y-%m")
     HFS_data$AD_year<-(format(as.Date(HFS_data$ED), "%Y"))
-
-The above code with create two different columns for `YEAR`, `Month`,
-and `Year`
-
     HFS_data$AD_ED<-(HFS_data$actual_date-HFS_data$date_entered)
     HFS_data$ED_APD<-(HFS_data$date_entered-HFS_data$approved_date)
     HFS_data$AD_APD<-(abs(HFS_data$actual_date-HFS_data$approved_date))
 
-    HFS_data$state[HFS_data$state == "NE"] <- "nebraska"
+Omit all the **NA** values
+
+    HFS_data<-na.omit(HFS_data)
+
+Rename all the state name with it’s full form
+
+    HFS_data$state<- as.character(HFS_data$state)
+    HFS_data$state[HFS_data$state == "NE"] <- "nebrska"
     HFS_data$state[HFS_data$state == "IA"] <- "iowa"
     HFS_data$state[HFS_data$state == "SC"] <- "south carolina"
     HFS_data$state[HFS_data$state == "NC"] <- "north carolina"
     HFS_data$state[HFS_data$state == "CO"] <- "colorado"
 
-In the below code I created a data set via the function `group by`. This
-fetches all the information concerning the enrollment process.
+# Iowa
 
-    library(dplyr)
-    #FUN = quantile,probs = c(0.05, 0.95)
-    aggregate_wrt_year<-(aggregate(AD_APD~AD_M_Y+program_name+event_name+state+facility,HFS_data,FUN = quantile,probs = c(0.05, 0.95)))
-    group_hfs<-group_by(HFS_data,AD_APD, program_name,facility,AD_year,state) %>%
-      summarise(
-        count = n(),
-        mean = mean(AD_APD, na.rm = TRUE),
-      )
+In the below code i have filtered the original data with the state name
+and aggregate the whole data based to get an average time taken for
+completing the HFS process.
 
-    ## `summarise()` has grouped output by 'AD_APD', 'program_name', 'facility', 'AD_year'. You can override using the `.groups` argument.
+    HFS_data$state[HFS_data$state == "IA"] <- "iowa"
+    IA<-subset(HFS_data,HFS_data$state=="iowa")#,HFS_data$program_name=='Mental Health')
+    ag_ia<-aggregate(IA$AD_APD~IA$facility+IA$AD_year+IA$program_name,IA,mean)
+    ag_ia$`IA$AD_APD`<-round(ag_ia$`IA$AD_APD`,0)
+    names(ag_ia)[names(ag_ia) == "IA$facility"] <- "facility"     
+    names(ag_ia)[names(ag_ia) == "IA$AD_year"] <-"AD_year"      
+    names(ag_ia)[names(ag_ia) == "IA$program_name"] <-"program_name" 
+    names(ag_ia)[names(ag_ia) == "IA$AD_APD"] <-"AD_APD"
 
-    names(group_hfs)[names(group_hfs)=='HFS_data$program_name'] <-'program_name'
-    names(group_hfs)[names(group_hfs)=='HFS_data$facility'] <-'facility'
+In the Below code i have build a model to see if it have better
+confidence in between the attributes in the data frame or not
 
-We can look at the normality of the dates of enrollment
+    # Build the model
 
-    shapiro.test(group_hfs$AD_APD)
-
-    ## 
-    ##  Shapiro-Wilk normality test
-    ## 
-    ## data:  group_hfs$AD_APD
-    ## W = 0.6828, p-value < 2.2e-16
-
-We then use ANOVA to get the relationship between many of the variables.
-This might not be valid since the distribution is not normal.
-
-    options(ggrepel.max.overlaps = Inf)
-    aov_group_hfs <- aov(cbind(AD_APD)~program_name+state+facility+AD_year+mean, data = group_hfs)
-    summary_group_hfs<-summary(aov_group_hfs)
-    summary_group_hfs
-
-    ##                Df Sum Sq Mean Sq   F value Pr(>F)    
-    ## program_name    2   1778     889 1.363e+32 <2e-16 ***
-    ## state           4   7894    1973 3.025e+32 <2e-16 ***
-    ## facility       24  32580    1358 2.081e+32 <2e-16 ***
-    ## AD_year         9  10260    1140 1.748e+32 <2e-16 ***
-    ## mean            1 377068  377068 5.780e+34 <2e-16 ***
-    ## Residuals    1491      0       0                     
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-According to the Summary Statistics we can tell that mean of
-State,facility and years are similar to one another.
-
-We can then remove the outliers in the data set which contains data of
-2021:
-
-    library(ggstatsplot)
-
-    ## You can cite this package as:
-    ##      Patil, I. (2021). Visualizations with statistical details: The 'ggstatsplot' approach.
-    ##      Journal of Open Source Software, 6(61), 3167, doi:10.21105/joss.03167
-
-    #Create a boxplot that labels the outliers  
-    df2021<-filter(aov_group_hfs$model,aov_group_hfs$model$AD_year==2021)
-    # In df2021 i filter the data based on year 2020 to get in depth idea about the average time taken for registeration process.
-
-and then plot the outliers.
-
-    ggbetweenstats(df2021,state,mean,outlier.tagging = TRUE)
-
-![](RScript_files/figure-markdown_strict/unnamed-chunk-11-1.png)
-
-And here are some sample statistics, such as the quartiles and even
-outliers.
-
-    Q <- quantile(df2021$mean, probs=c(.05, .95))
-    iqr <- IQR(df2021$mean)
-    up <-  Q[2]+1.5*iqr # Upper Range  
-    low<- Q[1]-1.5*iqr # Lower Range
-    eliminated<- subset(df2021, df2021$mean > (Q[1] - 1.5*iqr) & df2021$mean < (Q[2]+1.5*iqr))
-    head(eliminated,6)
-
-    ##   AD_APD  program_name    state                  facility AD_year mean
-    ## 1      0      Gambling     iowa             HFS - Gendler    2021    0
-    ## 2      0      Gambling nebraska             HFS - Gendler    2021    0
-    ## 3      0 Mental Health nebraska Bellevue Reporting Center    2021    0
-    ## 4      0 Mental Health     iowa        Center Mall Office    2021    0
-    ## 5      0 Mental Health nebraska        Center Mall Office    2021    0
-    ## 6      0 Mental Health nebraska             HFS - Central    2021    0
-
-plot we used to remove the outliers.
-
-    ggbetweenstats(eliminated, state, mean, outlier.tagging = TRUE)
-
-![](RScript_files/figure-markdown_strict/unnamed-chunk-13-1.png)
-
-After verifying the initial boxplot we found out that the year data
-includes 2020 and 2021.
-
-    library(ggstatsplot)
-    #Create a boxplot that labels the outliers  
-    df2020<-filter(aov_group_hfs$model,aov_group_hfs$model$AD_year==2020)
-    # In df2020 i filter the data based on year 2020 to get in depth idea about the average time taken for registeration process.
-
-    ggbetweenstats(df2020,state,mean,outlier.tagging = TRUE) # final plot for outliers 
-
-![](RScript_files/figure-markdown_strict/unnamed-chunk-15-1.png)
-
-We remove the top and bottom 5% of the data.
-
-    Q <- quantile(df2020$mean, probs=c(.05, .95), na.rm = FALSE)
-    iqr <- IQR(df2020$mean)
-    up <-  Q[2]+1.5*iqr # Upper Range  
-    low<- Q[1]-1.5*iqr # Lower Range
-    eliminated<- subset(df2020, df2020$mean > (Q[1] - 1.5*iqr) & df2020$mean < (Q[2]+1.5*iqr))
-    ggbetweenstats(eliminated, state, mean, outlier.tagging = TRUE)
-
-![](RScript_files/figure-markdown_strict/unnamed-chunk-16-1.png)
-
-We now do some data modeling using caret for machine learning.
-
-    library('caret')
-
-    ## Loading required package: lattice
-
-    ## 
-    ## Attaching package: 'caret'
-
-    ## The following object is masked from 'package:purrr':
-    ## 
-    ##     lift
-
-    # define training control
-    train_control <- trainControl(method="boot", number=10)
-    # train the model
-    sub_set<-data.frame(aov_group_hfs$model$program_name,aov_group_hfs$mode$AD_year,aov_group_hfs$model$mean)
-    model <- train(aov_group_hfs.model.program_name~.,sub_set, trControl=train_control, method="nb")
-
-    ## Warning: model fit failed for Resample01: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
-
-    ## Warning: model fit failed for Resample02: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
-
-    ## Warning: model fit failed for Resample03: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
-
-    ## Warning: model fit failed for Resample04: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2018, aov_group_hfs.mode.AD_year2019
-
-    ## Warning: model fit failed for Resample05: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2019
-
-    ## Warning: model fit failed for Resample06: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2018, aov_group_hfs.mode.AD_year2019
-
-    ## Warning: model fit failed for Resample07: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2016, aov_group_hfs.mode.AD_year2019
-
-    ## Warning: model fit failed for Resample08: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
-
-    ## Warning: model fit failed for Resample09: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2019
-
-    ## Warning: model fit failed for Resample10: usekernel=FALSE, fL=0, adjust=1 Error in NaiveBayes.default(x, y, usekernel = FALSE, fL = param$fL, ...) : 
-    ##   Zero variances for at least one class in variables: aov_group_hfs.mode.AD_year2013, aov_group_hfs.mode.AD_year2014, aov_group_hfs.mode.AD_year2015, aov_group_hfs.mode.AD_year2018, aov_group_hfs.mode.AD_year2019
-
-    ## Warning in nominalTrainWorkflow(x = x, y = y, wts = weights, info = trainInfo, :
-    ## There were missing values in resampled performance measures.
-
-    ## Warning in train.default(x, y, weights = w, ...): missing values found in
-    ## aggregated results
-
-    # summarize results
-    print(model)
-
-    ## Naive Bayes 
-    ## 
-    ## 1532 samples
-    ##    2 predictor
-    ##    3 classes: 'Gambling', 'Mental Health', 'Substance Use' 
-    ## 
-    ## No pre-processing
-    ## Resampling: Bootstrapped (10 reps) 
-    ## Summary of sample sizes: 1532, 1532, 1532, 1532, 1532, 1532, ... 
-    ## Resampling results across tuning parameters:
-    ## 
-    ##   usekernel  Accuracy   Kappa       
-    ##   FALSE            NaN           NaN
-    ##    TRUE      0.7455565  0.0006615135
-    ## 
-    ## Tuning parameter 'fL' was held constant at a value of 0
-    ## Tuning
-    ##  parameter 'adjust' was held constant at a value of 1
-    ## Accuracy was used to select the optimal model using the largest value.
-    ## The final values used for the model were fL = 0, usekernel = TRUE and adjust
-    ##  = 1.
-
-This allows us to see the overall percentage for different facilities.
-We see this via a linear model.
-
-    # summarize the class distribution
-    percentage <- prop.table(table(HFS_data$facility,HFS_data$program_name)) * 100
-    data<-data.frame(cbind(freq=table(HFS_data$facility), percentage=percentage))
-
-Below code is used for model to get it's Accuracy
-
-    control <- trainControl(method="cv", number=10)
-    metric <- "Accuracy"
-    sub<-data.frame(eliminated$program_name,eliminated$AD_year,eliminated$mean)
-
-then we can create the linear model acn c the confidence between the columns
-
-    (model1 <- lm(eliminated.AD_year ~ eliminated.mean + eliminated.program_name, data=sub))
+    model <- lm(AD_APD ~facility+AD_year, data = ag_ia)
+    model
 
     ## 
     ## Call:
-    ## lm(formula = eliminated.AD_year ~ eliminated.mean + eliminated.program_name, 
-    ##     data = sub)
+    ## lm(formula = AD_APD ~ facility + AD_year, data = ag_ia)
     ## 
     ## Coefficients:
-    ##                          (Intercept)                       eliminated.mean  
-    ##                            2.020e+03                             3.858e-17  
-    ## eliminated.program_nameMental Health  eliminated.program_nameSubstance Use  
-    ##                           -1.827e-13                            -1.833e-13
+    ##                                                (Intercept)  
+    ##                                                     2.5038  
+    ##                                 facilityCenter Mall Office  
+    ##                                                     3.3721  
+    ##                 facilityHeartland Family Service - Central  
+    ##                                                     6.2717  
+    ## facilityHeartland Family Service - Child and Family Center  
+    ##                                                    -0.4007  
+    ##                 facilityHeartland Family Service - Gendler  
+    ##                                                     1.7091  
+    ##                facilityHeartland Family Service - Glenwood  
+    ##                                                    -2.7996  
+    ##         facilityHeartland Family Service - Heartland Homes  
+    ##                                                    10.2086  
+    ##                   facilityHeartland Family Service - Lakin  
+    ##                                                    -5.0006  
+    ##                   facilityHeartland Family Service - Logan  
+    ##                                                     7.8554  
+    ##                   facilityHeartland Family Service - Sarpy  
+    ##                                                     3.7283  
+    ##             facilityKanesville Alternative Learning Center  
+    ##                                                    -1.7283  
+    ##                           facilityKirn Junior High  School  
+    ##                                                    -2.8469  
+    ##                               facilityKreft Primary School  
+    ##                                                    -1.5871  
+    ##                          facilityLewis Central High School  
+    ##                                                     0.4415  
+    ##                        facilityLewis Central Middle School  
+    ##                                                    -1.2661  
+    ##                                        facilityMicah House  
+    ##                                                    -1.9297  
+    ##     facilityNorth Omaha Intergenerational Campus (Service)  
+    ##                                                    -2.6552  
+    ##                       facilityThomas Jefferson High School  
+    ##                                                     0.1272  
+    ##                     facilityTitan Hill Intermediate School  
+    ##                                                    -0.5585  
+    ##                               facilityWilson Middle School  
+    ##                                                    -0.6734  
+    ##                                                AD_year2015  
+    ##                                                    -0.5958  
+    ##                                                AD_year2016  
+    ##                                                     2.7291  
+    ##                                                AD_year2017  
+    ##                                                     1.5950  
+    ##                                                AD_year2018  
+    ##                                                     0.2244  
+    ##                                                AD_year2019  
+    ##                                                     1.2875  
+    ##                                                AD_year2020  
+    ##                                                     4.3986  
+    ##                                                AD_year2021  
+    ##                                                     0.7679
 
-, and do a similar operation for month.
-
-    library(dplyr)
-    group_hfs_m_y<-group_by(HFS_data,AD_APD, program_name,facility,AD_M_Y,state) %>%
-      summarise(
-        count = n(),
-        mean = mean(AD_APD, na.rm = TRUE),
+    new.ag_ia.avg.time <- data.frame(
+      facility = c("Thomas Jefferson High School","Titan Hill Intermediate School", "Heartland Family Service - Heartland Homes")
+      ,AD_year=c('2021','2020','2020')
       )
 
-    ## `summarise()` has grouped output by 'AD_APD', 'program_name', 'facility', 'AD_M_Y'. You can override using the `.groups` argument.
+    predict(model, newdata = new.ag_ia.avg.time)
 
-    names(group_hfs_m_y)[names(group_hfs_m_y)=='HFS_data$program_name'] <-'program_name'
-    names(group_hfs_m_y)[names(group_hfs_m_y)=='HFS_data$facility'] <-'facility'
+    ##         1         2         3 
+    ##  3.398884  6.343865 17.111017
 
-I have aggregated the with the help of Probability to find the
-confidence and error rate for probality at `5%` and `95%` probabilities.
+    predict(model, newdata = new.ag_ia.avg.time, interval = "confidence")
 
-    aggregate_wrt_M_Y<-(aggregate(AD_APD~AD_M_Y+program_name+event_name+state+facility,HFS_data,FUN = quantile,probs = c(0.05, 0.95)))
+    ##         fit       lwr      upr
+    ## 1  3.398884 -3.981651 10.77942
+    ## 2  6.343865  0.627303 12.06043
+    ## 3 17.111017  5.049678 29.17236
 
-We then used Anova to get the overall confidence and average time taken
-for a person to be approved for an event in terms of months and years.
+tried to get a predict value for over all data for Iowa
 
-    aov_group_hfs <- aov(cbind(AD_APD)~program_name+state+facility+AD_M_Y, data = aggregate_wrt_M_Y)
-    summary_group_hfs<-summary(aov_group_hfs)
-    summary_group_hfs
+    # 1. Add predictions 
+    pred.int <- predict(model, interval = "prediction")
 
-    ##  Response 5% :
-    ##                Df Sum Sq Mean Sq F value    Pr(>F)    
-    ## program_name    2    545  272.71  2.8075   0.06056 .  
-    ## state           4   4418 1104.57 11.3712 3.861e-09 ***
-    ## facility       24  12680  528.33  5.4390 4.253e-16 ***
-    ## AD_M_Y         93   5935   63.82  0.6570   0.99519    
-    ## Residuals    2305 223902   97.14                      
+    ## Warning in predict.lm(model, interval = "prediction"): predictions on current data refer to _future_ responses
+
+    mydata <- cbind(ag_ia, pred.int)
+
+Now i have created a plot to see how the predicted value is similar with
+
+    # 2. Regression line + confidence intervals
+    library("ggplot2")
+    p <- ggplot(mydata, aes(y=fit,x=AD_APD,color=AD_year ))+ geom_point()+geom_smooth(method = "lm")+facet_wrap(~AD_year,scales = 'free')
+
+    # 3. Add prediction intervals
+    p + geom_line(aes(x = lwr), color = "red", linetype = "dashed")+
+      geom_line(aes(x = upr), color = "red", linetype = "dashed")
+
+    ## `geom_smooth()` using formula 'y ~ x'
+
+![](R-SCRIPT_git_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+(optional) Now for just verification i am trying to get a Residuals of
+the data that is present in Iowa
+
+    aggregate_IA<-(aggregate(AD_APD~state+facility+AD_year,IA,mean))
+    aov_group_IA <- aov(AD_APD~facility, data = aggregate_IA)
+    summary_group_IA<-summary(aov_group_IA)
+    summary_group_IA
+
+    ##             Df Sum Sq Mean Sq F value  Pr(>F)   
+    ## facility    19  321.2  16.905   2.304 0.00932 **
+    ## Residuals   51  374.3   7.339                   
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+In the below code i have filtered the original data with the state name
+and aggregate the whole data based to get an average time taken for
+completing the HFS process.
+
+    HFS_data$state[HFS_data$state == "NE"] <- "nebrska"
+    NE<-subset(HFS_data,HFS_data$state=="nebrska")#,HFS_data$program_name=='Mental Health')
+    ag_ne<-aggregate(NE$AD_APD~NE$facility+NE$AD_year+NE$program_name,NE,mean)
+    ag_ne$`NE$AD_APD`<-round(ag_ne$`NE$AD_APD`,0)
+    names(ag_ne)[names(ag_ne) == "NE$facility"] <- "facility"     
+    names(ag_ne)[names(ag_ne) == "NE$AD_year"] <-"AD_year"      
+    names(ag_ne)[names(ag_ne) == "NE$program_name"] <-"program_name" 
+    names(ag_ne)[names(ag_ne) == "NE$AD_APD"] <-"AD_APD"
+    # Build the model
+
+In the Below code i have build a model to see if it have better
+confidence in between the attributes in the data frame or not
+
+    model <- lm(AD_APD ~facility+AD_year, data = ag_ne)
+    model
+
     ## 
-    ##  Response 95% :
-    ##                Df Sum Sq Mean Sq F value    Pr(>F)    
-    ## program_name    2   1513  756.66  4.7541  0.008701 ** 
-    ## state           4   7962 1990.47 12.5062 4.567e-10 ***
-    ## facility       24  23324  971.81  6.1060 < 2.2e-16 ***
-    ## AD_M_Y         93  14880  160.00  1.0053  0.467598    
-    ## Residuals    2305 366859  159.16                      
+    ## Call:
+    ## lm(formula = AD_APD ~ facility + AD_year, data = ag_ne)
+    ## 
+    ## Coefficients:
+    ##                                                (Intercept)  
+    ##                                                   21.71567  
+    ##                                 facilityCenter Mall Office  
+    ##                                                   -6.22813  
+    ##                 facilityHeartland Family Service - Central  
+    ##                                                   -2.20322  
+    ## facilityHeartland Family Service - Child and Family Center  
+    ##                                                   -7.01706  
+    ##   facilityHeartland Family Service - Family Works Nebraska  
+    ##                                                    2.85400  
+    ##                 facilityHeartland Family Service - Gendler  
+    ##                                                    0.01962  
+    ##         facilityHeartland Family Service - Heartland Homes  
+    ##                                                   -9.40938  
+    ##                   facilityHeartland Family Service - Lakin  
+    ##                                                    6.59062  
+    ##                   facilityHeartland Family Service - Sarpy  
+    ##                                                   -5.22611  
+    ##                        facilityLewis Central Middle School  
+    ##                                                  -11.62473  
+    ##                                        facilityMicah House  
+    ##                                                   -9.06272  
+    ##     facilityNorth Omaha Intergenerational Campus (Service)  
+    ##                                                   -8.06218  
+    ##                    facilityOmaha (Blondo) Reporting Center  
+    ##                                                   -6.05796  
+    ##                    facilityOmaha (Spring) Reporting Center  
+    ##                                                   -7.64173  
+    ##                                    facilitySanctuary House  
+    ##                                                   29.30561  
+    ##                                                AD_year2013  
+    ##                                                  -12.00000  
+    ##                                                AD_year2015  
+    ##                                                  -15.00777  
+    ##                                                AD_year2016  
+    ##                                                  -11.93342  
+    ##                                                AD_year2017  
+    ##                                                  -10.09094  
+    ##                                                AD_year2018  
+    ##                                                  -12.30629  
+    ##                                                AD_year2019  
+    ##                                                  -14.81415  
+    ##                                                AD_year2020  
+    ##                                                  -11.65295  
+    ##                                                AD_year2021  
+    ##                                                  -10.40313
+
+    new.ag_ne.avg.time <- data.frame(
+      facility = c("Heartland Family Service - Heartland Homes","Sanctuary House", "North Omaha Intergenerational Campus (Service)")
+      ,AD_year=c('2021','2020','2020')
+    )
+    pre<-predict(model, newdata = new.ag_ne.avg.time)
+    pre_con<-predict(model, newdata = new.ag_ne.avg.time, interval = "confidence")
+
+Tried to get a predict value for over all data for Iowa
+
+    # 1. Add predictions 
+    pred.int <- predict(model, interval = "prediction")
+
+    ## Warning in predict.lm(model, interval = "prediction"): predictions on current data refer to _future_ responses
+
+    mydata <- cbind(ag_ne, pred.int)
+
+tried to get a predict value for over all data for Nebraska
+
+    # 2. Regression line + confidence intervals
+    library("ggplot2")
+    p <- ggplot(mydata, aes(y=fit,x=AD_APD,color=AD_year ))+ geom_point()+geom_smooth(method = "lm")+facet_wrap(~AD_year,scales = 'free')
+
+    # 3. Add prediction intervals
+    p + geom_line(aes(x = lwr), color = "red", linetype = "dashed")+
+      geom_line(aes(x = upr), color = "red", linetype = "dashed")
+
+    ## `geom_smooth()` using formula 'y ~ x'
+
+    ## Warning in qt((1 - level)/2, df): NaNs produced
+
+    ## Warning in qt((1 - level)/2, df): NaNs produced
+
+    ## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
+    ## -Inf
+
+    ## Warning in max(ids, na.rm = TRUE): no non-missing arguments to max; returning
+    ## -Inf
+
+![](R-SCRIPT_git_files/figure-markdown_strict/unnamed-chunk-16-1.png)
+
+(optional) Now for just verification i am trying to get a Residuals of
+the data that is present in Nebraska.
+
+    aggregate_NE<-(aggregate(AD_APD~state+facility+AD_year,NE,mean))
+    aov_group_NE <- aov(AD_APD~facility+AD_year, data = aggregate_NE)
+    summary_group_NE<-summary(aov_group_NE)
+    summary_group_NE
+
+    ##             Df Sum Sq Mean Sq F value   Pr(>F)    
+    ## facility    14   3810  272.14  18.781 1.44e-11 ***
+    ## AD_year      8    353   44.08   3.042   0.0116 *  
+    ## Residuals   32    464   14.49                     
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
