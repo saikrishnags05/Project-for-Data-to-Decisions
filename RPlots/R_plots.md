@@ -17,12 +17,21 @@ performed the proofreading.
 
 ## Research Question 1
 
-**My Research Question asks how much delay (in days) exists between enrolling in an event, entering into the system, and the enrollment approval.
+#### RQ 1
 
-Reason:-
+**My Research Question help to know that “how much time it takes for
+enrolling into the event,form starting enrollment process to Approving
+the enrollment.** **(Sai Krishna)**
 
-- This will analyze the time each person takes to within HFS to enroll and then begin their appointments for both Nebraska and Iowa.
-- In turn, this will inform HFS' understanding of the enrollment process and its delays for its clients.
+Reason:- This will help in analyzing the time taking per enrolling from
+starting to ending state of a process for a person in different facilities in a states . 
+In some moments the approval is happened on the same day of the event or before
+the event or after the even and This will help the HFS to improve the
+speed of enrollment and also can increase the speed of the people who
+work in that event.
+
+- This will analyze the time taken for each person to enroll into any events for both Nebraska and Iowa.
+- This will help HFS in understanding the time taken in enrolling a person.
 - Hopefully, HFS can use this data to identify where the slowdowns exist and how the delays can be mitigated.
 
 ``` r
