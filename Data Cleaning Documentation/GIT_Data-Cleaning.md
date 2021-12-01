@@ -35,25 +35,27 @@ community.
 
 #### RQ 1
 
-**My Research Question help to know  that "how much time it takes for enrolling into the event,form starting enrollment process to Approving the enrollment.** **(Sai Krishna)**
+**My Research Question help to know that “how much time it takes for
+enrolling into the event,form starting enrollment process to Approving
+the enrollment.** **(Sai Krishna)**
 
 Reason:- This will help in analyzing the time taking per enrolling from
-starting to ending state. And what kind of people are enrolling on the
-day of the even or before the event and total time taken for individual
-event. This will help the HFS to improve the speed of enrollment and
-also can increate the event of that type in that location.
+starting to ending state of a process for a person in states. In some
+moments the approval is happened on the same day of the event or before
+the event or after the even and This will help the HFS to improve the
+speed of enrollment and also can increase the speed of the people who
+work in that event.
 
 ### Data cleaning:
 
-I have created a new data set based on attributes that I choice from
-Dataset to analyze my desired Research Question. Attributes are
-mentioned bellow.
+I have created a new dataset based on attributes of thee main Dataset to
+analyze my desired Research Question. Attributes are mentioned bellow.
 
 `facility`, `actual_date`, `event_name`, `date_entered`,
 `approved_date`, `program_unit_description`, `zip`,
 `state`,`ethnic_identity`
 
-#### In the new data set there 3 variables that talks about the dates in numeric form.
+#### In the new dataset there are 3 variables that talks about the dates in numeric form.
 
 `actual_date` is about the actual data of the program admission.
 
@@ -61,7 +63,7 @@ mentioned bellow.
 enrollment or days before enrollment)
 
 `approved_date` is about when was the service documentation approved by
-a supervisor? (Days after enrollment)
+a supervisor? (Days after or before or during the event )
 
 #### Other Attributes:
 
@@ -79,48 +81,70 @@ attend the events
 ### Cleaning procidure :-
 
 **step 1:-** Since i am using Data format so i have to find the
-difference between each and every even that is been taken place. So, i
+difference between each and every event that is been taken place. So, i
 have used as.Date() function to get the actual date format.
 
 **step 2:-** Apply step1 to all the date column to verify it in next
 phase.
 
-**step 3:-** Now create a new column add subtract the dates if we get
-the values in negatives then it is enroled before the event,if 0 then
-they resisted at the moment and if greater the 0 then it is after the
-event.
+**step 3:-** Now create a new column . Now apply add and subtract
+methods on the dates if we get the values in negatives then it is
+enrolled before the event,if 0 then they resisted at the moment and if
+greater the 0 then it is after the event.
 
-**step 4:-** Later total we have 5 states in the data set which is
-mentioned in short form
+**step 4:-** Total we have 5 states in the data set which is mentioned
+in short form
 
-**step 5:-** Subset each and every State are in short form like
-`IA`,`NE`,`CO`,`NC`,`SC`and later updated to full form of user
-understanding `iowa`, `Nebrska` `colorado`,
-`north carolina`,`south carolina`
+**step 5:-** Every State in short form like `IA`,`NE`,`CO`,`NC`,`SC`and
+later updated to full form of user understanding `iowa`,
+`Nebrska`,`colorado`, `north carolina`,`south carolina` and we can
+observe many different plots based on state and there zip code.
 
-and we can observe many different plots based on state and there zip
-code.
+    HFS_data<-read.csv("HFS Service Data.csv") # read data set
 
-    HFS_data<-read.csv("HFS Service Data.csv")
-    #before cleasing the Na values
-    #head(HFS_data)
+
+    selected_columns<-c("program_name","facility","actual_date","event_name","date_entered",   
+                        "approved_date","zip","state","age","ethnic_identity")
 
 Libraries used
 
+    library('dplyr')
+
+    ## 
+    ## Attaching package: 'dplyr'
+
+    ## The following objects are masked from 'package:stats':
+    ## 
+    ##     filter, lag
+
+    ## The following objects are masked from 'package:base':
+    ## 
+    ##     intersect, setdiff, setequal, union
+
     library('ggplot2')
 
-As the Information for the sources of the data that is fatched out to
-csv on **25th August 2021**.
+As the sources Information is fetched out to csv on **25th August
+2021**.
 
 By using this date i have created original data of the events. with the
 help of **as.Date()** function in R
 
+    HFS_data<-HFS_data %>%
+      select(selected_columns)  # this command is used for selecting the required columns
+
+    ## Note: Using an external vector in selections is ambiguous.
+    ## i Use `all_of(selected_columns)` instead of `selected_columns` to silence this message.
+    ## i See <https://tidyselect.r-lib.org/reference/faq-external-vector.html>.
+    ## This message is displayed once per session.
+
     HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
     HFS_data$ED<-as.Date(-(HFS_data$date_entered), origin = '2021-08-25')
-    HFS_data$Date_of_approved_date<-as.Date(-(HFS_data$approved_date), origin = '2021-08-25')
-
-    HFS_data$AD_1<-(HFS_data$actual_date-HFS_data$date_entered)
-    #str(HFS_data)
+    HFS_data$AD_M_Y <- format(as.Date(HFS_data$AD), "%Y-%m")
+    HFS_data$AD_year<-(format(as.Date(HFS_data$ED), "%Y"))
+    HFS_data$AD_ED<-(HFS_data$actual_date-HFS_data$date_entered)
+    HFS_data$ED_APD<-(HFS_data$date_entered-HFS_data$approved_date)
+    HFS_data$AD_APD<-(abs(HFS_data$actual_date-HFS_data$approved_date))
+    HFS_data<-na.omit(HFS_data)
 
 ### Cleaning State Names:
 
@@ -129,7 +153,7 @@ We have a total of five states
     regions<-c(unique(HFS_data$state))
     regions
 
-    ## [1] "IA" "NE" "CO" "NC" "SC"
+    ## [1] "NE" "IA" "CO" "NC" "SC"
 
 Now we update all the states name into full form and them into the
 dataset for easy understanding.
@@ -145,7 +169,7 @@ After Changing the Short form of the state:-
 
     c(unique(HFS_data$state))
 
-    ## [1] "iowa"           "nebrska"        "colorado"       "north carolina"
+    ## [1] "nebrska"        "iowa"           "colorado"       "north carolina"
     ## [5] "south carolina"
 
 # Speliting the individual data accoring to the region:-
@@ -154,48 +178,73 @@ After Changing the Short form of the state:-
 
     IA<- subset(HFS_data,state=='iowa')
     #str(IA)
-    p <- ggplot(data = IA, aes(y =IA$AD, x =IA$AD_1,color=ethnic_identity ))
-    p + geom_point()+geom_violin() +facet_wrap(IA$zip~IA$program_name,scales='free')
+    p <- ggplot(data = IA, aes(x =IA$AD_APD, y =IA$AD_year,color=ethnic_identity ))
+    p +geom_point()+facet_wrap(IA$zip~IA$program_name,scales='free') +xlab("Days taken for registration")+
+      ylab("years")
 
-![](GIT_Data-Cleaning_files/figure-markdown_strict/unnamed-chunk-7-1.png)
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-markdown_strict/sai7-1.png)
+
 In the above graph you can understand that most of the people who from
-Iowa joining events are **Not Spanish/Hispanic/Latino** most of them are
-opting Gambling where as other ethnic\_identity groups are attending the
-events like **Mental Health** and **Substance Use** and most of them are
-from Zip code 0. \#\#\# NE(nebraska)
+Iowa enrolled in events are **Not Spanish/Hispanic/Latino** most of them
+opted for **Mental Health** and **Substance Use** where as other
+ethnic\_identity groups are attending the events like **Mental Health**
+and most of them are from Zip code 0.
+
+### NE(nebraska)
 
     NE<- subset(HFS_data,state=='nebrska')
     #head(NE)
-    p <- ggplot(data = NE, aes(y =NE$AD, x =NE$AD_1,color=ethnic_identity ))
-    p + geom_point() +geom_violin()+facet_wrap(zip~program_name,scales='free')
+    p <- ggplot(data = NE, aes(x =NE$AD_APD, y =NE$AD_year,color=ethnic_identity ))
+    p +geom_point()+facet_wrap(zip~program_name,scales='free')+xlab("Days taken for registration")+
+      ylab("years")
 
-![](GIT_Data-Cleaning_files/figure-markdown_strict/unnamed-chunk-8-1.png)
-In this graph we can under stand how the date \#\#\# CO(colorado)
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-markdown_strict/sai8-1.png)
+
+In the above graph you can understand that most of the people who from
+Nebraska enrolled in events are **Not Spanish/Hispanic/Latino** most of
+them opted for **Mental Health** and **Substance Use** where as other
+ethnic\_identity groups are attending the events like **Mental Health**
+and most of them are from Zip code 680 ans 681.
+
+### CO(colorado)
 
     CO<- subset(HFS_data,state=='colorado')
     #head(CO)
-    p <- ggplot(data = CO, aes(y =CO$AD, x =CO$AD_1,color=ethnic_identity ))
-    p + geom_point() +geom_violin()+facet_wrap(~zip,scales='free')
+    p <- ggplot(data = CO, aes(x =CO$AD_APD, y =CO$AD_year,color=ethnic_identity ))
+    p +geom_point()+facet_wrap(zip~program_name,scales='free')+xlab("Days taken for registration")+
+      ylab("years")
 
-![](GIT_Data-Cleaning_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-markdown_strict/sai9-1.png)
+
+In Colorado the even is organised in zip 809 and only Not
+Spanish/Hispanic/Latino have attended to Mental Health.
 
 ### NC(north carolina)
 
     NC<- subset(HFS_data,state=='north carolina')
     #head(NC)
-    p <- ggplot(data = NC, aes(y =NC$AD, x =NC$AD_1,color=ethnic_identity ))
-    p + geom_point() +geom_violin()+facet_wrap(~zip,scales='free')
+    p <- ggplot(data = NC, aes(x =NC$AD_APD, y =NC$AD_year,color=ethnic_identity ))
+    p + geom_point()+facet_wrap(zip~program_name,scales='free')+xlab("Days taken for registration")+
+      ylab("years")
 
-![](GIT_Data-Cleaning_files/figure-markdown_strict/unnamed-chunk-10-1.png)
+![](
+https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-markdown_strict/sai10-1.png)
+
+In North Carolina the even is organised in zip 288 and only Not
+Spanish/Hispanic/Latino have attended to Mental Health.
 
 ### SC(south carolina)
 
     SC<- subset(HFS_data,state=='south carolina')
     #head(SC)
-    p <- ggplot(data = SC, aes(y =SC$AD, x =SC$AD_1,color=ethnic_identity ))
-    p + geom_point() +geom_violin()+facet_wrap(~zip,scales='free')
+    p <- ggplot(data = SC, aes(x =SC$AD_APD, y =SC$AD_year,color=ethnic_identity ))
+    p + geom_point()+facet_wrap(zip~program_name,scales='free')+xlab("Days taken for registration")+
+      ylab("years")
 
-![](GIT_Data-Cleaning_files/figure-markdown_strict/unnamed-chunk-11-1.png)
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Data%20Cleaning%20Documentation/GIT_Data-Cleaning_files/figure-markdown_strict/sai11-1.png)
+
+In South Carolina the even is organised in zip 288 and only Not
+Spanish/Hispanic/Latino have attended to Mental Health.
 
 ## RQ 2
 
