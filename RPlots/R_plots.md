@@ -222,16 +222,18 @@ ethnic_identity age facility program_type
 
 This BoxPlot identifies that most Latinos receive services for Mental
 Health Programs and are between the ages of 18 and 50.
-
 ``` r
 ggplot(HFS.Ethnicity2) +
-  aes(x = program_unit_description, y = age, colour = ethnic_identity) +
-  geom_boxplot(shape = "circle", 
-               fill = "#112446") +
+  aes(x = program_unit_description, y = age, fill = ethnic_identity) +
+  geom_boxplot(width=0.5, lwd=1) +
   scale_color_hue(direction = 1) +
+  ylab("Age") + xlab("Program Unit")+
+  labs(fill = "Ethnicity") +
+  labs (title = "Ethnicity by Age & Program Unit") +
   coord_flip() +
   theme_minimal()
 ```
+
 
 ![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/RQ_3_1.jpeg)<!-- -->
 
