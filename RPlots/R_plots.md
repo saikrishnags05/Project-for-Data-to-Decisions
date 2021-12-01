@@ -253,4 +253,4 @@ ggplot(HFS.Ethnicity2) +
 ```
 
 
-![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/RQ3_2.jpeg)<!-- -->
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Final%20Git%20Repository%20Data%20to%20Decisions/BarChartStackedFacility_Ethnicity.jpeg)<!-- -->
