@@ -32,7 +32,7 @@ Mexican, how many received services at which branch
 ### Dataset Used
 
 ```{r HFS}
-    HFS_data<-read.csv("HFS.csv")
+    HFS<-read.csv("HFS.csv")
 View(HFS)
 ```
 ```{r Cleaned}
