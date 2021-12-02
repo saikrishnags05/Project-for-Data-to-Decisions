@@ -1,0 +1,103 @@
+---
+title: "FinalPresentation"
+author: "Rhonda Silva"
+date: "12/2/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+
+```{r library}
+library('dplyr')
+library(ggplot2)
+```
+
+### RQ Rhonda
+
+Of the clients receiving services that identified as Hispanic or
+Mexican, how many received services at which branch
+
+### Dataset Used
+
+```{r HFS}
+    HFS_data<-read.csv("HFS.csv")
+View(HFS)
+```
+```{r Cleaned}
+HFS.Cleaned<-HFS[c(4,9,25,30,46,49)]
+names(HFS.Cleaned)
+```
+
+```{r Changed to Latino}
+HFS.Ethnicity2 = HFS.Cleaned[HFS.Cleaned$ethnic_identity != "Not Collected",]
+HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Not Spanish/Hispanic/Latino"]<- "Not Latino"
+HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Mexican"]<- "Latino"
+
+HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Other Hispanic or Latino"]<- "Latino"
+
+
+HFS.Ethnicity2 = HFS.Ethnicity2[HFS.Ethnicity2$ethnic_identity !="Unknown",]
+
+count(HFS.Ethnicity2, ethnic_identity)
+```
+
+
+
+## RQ 3
+
+The data cleaning results in a new subset of 5 variables based on the
+attributes analyzed in the first research question. Important columns
+within this data cleaning are listed below: program_unit_desc
+ethnic_identity age facility program_type
+
+This BoxPlot identifies that most Latinos receive services for Mental
+Health Programs and are between the ages of 18 and 50.
+
+``` {r Box Plot}
+ggplot(HFS.Ethnicity2) +
+  aes(x = program_unit_description, y = age, fill = ethnic_identity) +
+  geom_boxplot(width=0.5, lwd=1) +
+  scale_color_hue(direction = 1) +
+  ylab("Age") + xlab("Program Unit")+
+  labs(fill = "Ethnicity") +
+  labs (title = "Ethnicity by Age & Program Unit") +
+  coord_flip() +
+  theme_minimal()
+```
+
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/RQ_3_1.jpeg)<!-- -->
+  
+  ##Bar chart of Ethnicity & Facility
+  
+  This BarChart shows us that the majority of Latinos served attend the
+North Omaha Campus and the Heartland Family Service-Central location.
+
+```{r Bar Chart}
+ggplot(HFS.Ethnicity2) +
+  aes(x = facility, fill = ethnic_identity)+
+  labs(fill = "Ethnicity")+
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  coord_flip() +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 9L))
+```
+
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RPlots/Rplots_files/figure-gfm/RQ3_2.jpeg)<!-- -->
+
+  
+
+
+
