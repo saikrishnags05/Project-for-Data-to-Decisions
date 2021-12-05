@@ -12,7 +12,7 @@ HFS comprises multiple facilities between Iowa and Nebraska that exhibit differe
 
 ### Research Question #1
 Do significant delays exist between enrolling in an event, entering
-into the system, and the enrollment approval?**
+into the system, and the enrollment approval?
 
 ### The Decisions your Analysis Targets Could Help Support
 
