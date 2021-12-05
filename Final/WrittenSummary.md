@@ -14,7 +14,7 @@ HFS comprises multiple facilities between Iowa and Nebraska that exhibit differe
 Do significant delays exist between enrolling in an event, entering
 into the system, and the enrollment approval?
 
-### The Decisions your Analysis Targets Could Help Support
+### The Decisions our Analysis Targets Could Support
 
 It will help the HFS to know the average time taken for a person to
 complete the full process for any event that is organized in different
@@ -26,7 +26,7 @@ approving process.
 Do HFS facility locations have a significant effect on the number of
 missed appointments?
 
-### The Decisions your Analysis Targets Could Help Support
+### The Decisions our Analysis Targets Could Support
 
 There might be unknown but significant reasons why particular locations
 have higher rates of missing appointments, such as issues with the facility
@@ -56,7 +56,7 @@ since it affects the funding HFS receives.
 Which facilities provide services to clients identifying as
 Latino?**
 
-### The Decisions your Analysis Targets Could Help Support
+### The Decisions our Analysis Targets Could Support
 
 Which facilities provide services to Latino ethnicity? Would the Clients
 prefer to have communication in Spanish? Do these facilities provide
