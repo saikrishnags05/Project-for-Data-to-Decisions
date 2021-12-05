@@ -12,7 +12,7 @@
 
 1. [Readme.md](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Final/Readme.md)
 
-2. [Markdown with comprehensive analysis](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Final/ComprehensiveAnalysis.md)
+2. [Comprehensive Analysis](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Final/ComprehensiveAnalysis.md)
 
 3. [Written Summary](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Final/WrittenSummary.md)
 
@@ -50,18 +50,11 @@ Chad put together the structure for the slides. Chad and Sai decided on a final 
 
 ## Git Repository Package
 
-Sai Krishna :
-Read all the R-codes in the group tasks and verify  whether the code is working  together or not and rectify the issues if any and link the plots to the respective plot scripts and submit them into GitHub and commit them and I forward the next task to Chad. He verified  all the details which are  present in the file. whether they are in proper order or not and proofread it and submit it once again.
-
-Chad:
-Chad proofread the written summary. Rhonda proofread the presentation slides.
-
-Rhonda:
-In Github, I revised the code to reflect the suggested changes from the peer review to the graphs for question 3 and linked the new plot to the plot script.  I proofread the presentation slides.
+Sai put together the written summary, including rectifying link issues to the plots. Chad put together the Readme.md and gathered all the remaining deliverables.  Chad also updated the written summary Rmd so it would compile. Rhonda revised the code for the written summary and comprehensive analysis based on the peer reviews.
 
 # Proofreader's Sign-off Statement
 
-Chad proofread the Slides and Rhonda proofread the written summary. 
+Chad proofread the slides and the comprehensive analysis. Rhonda proofread the written summary.
 
 
 
