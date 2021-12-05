@@ -14,7 +14,7 @@ HFS comprises multiple facilities between Iowa and Nebraska that exhibit differe
 Do significant delays exist between enrolling in an event, entering
 into the system, and the enrollment approval?**
 
-### Why this Research Question is Important
+### The Decisions your Analysis Targets Could Help Support
 
 It will help the HFS to know the average time taken for a person to
 complete the full process for any event that is organized in different
@@ -26,7 +26,7 @@ approving process .
 Do HFS facility locations have a significant effect on the number of
 missed appointments?**
 
-### Why this Research Question is Important
+### The Decisions your Analysis Targets Could Help Support
 
 There might be unknown but significant reasons why particular locations
 have higher rates of missing appointments, such as issues with facility
@@ -59,15 +59,11 @@ since it affects the funding HFS receives.
 Which facilities provide services to clients identifying as
 Latino?**
 
-### Why this Research Question is Important
+### The Decisions your Analysis Targets Could Help Support
 
 Which facilities provide services to Latino ethnicity? Would the Clients
 prefer to have communication in Spanish? Do these facilities provide
 Spanish-speaking therapists?
-
-## The decisions your analysis targets or could help support
-
-NEED TO ADD CONTENT HERE
 
 # Data Cleaning Choices
 
@@ -159,8 +155,7 @@ leaves the data with 2 classes for the variable titled
     ## [17] "AD_year"                  "AD_ED"                   
     ## [19] "ED_APD"                   "AD_APD"
 
-## Overview summary of answers to your research questions with supporting plots and statistical results:
-– A persuasive argument for a decision that should make based on your results,
+## Overview Summary of Answers for our Research Questions
 
 ## Research Question 1
 
