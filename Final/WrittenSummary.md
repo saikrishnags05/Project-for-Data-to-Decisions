@@ -175,6 +175,12 @@ rows.
 
 -   **Ethnicity**
 
+<!-- -->
+
+    ## [1] "Not Spanish/Hispanic/Latino" "Not Spanish/Hispanic/Latino"
+    ## [3] "Not Spanish/Hispanic/Latino" "Not Spanish/Hispanic/Latino"
+    ## [5] "Not Spanish/Hispanic/Latino" "Not Spanish/Hispanic/Latino"
+
 We see that 15% of all rows are no shows. 15% seems like a surprisingly
 high number of appointment no shows for any organization. This metric is
 worth looking into further. There are no NAs in the column or values we
@@ -195,6 +201,17 @@ I then changed “Mexican” to “Latino” and “Other Hispanic or Latino” 
 leaves the data with 2 classes for the variable titled
 “ethnic\_identity” Latino Not Latino
 
+    ##  [1] "program_name"             "facility"                
+    ##  [3] "actual_date"              "event_name"              
+    ##  [5] "date_entered"             "approved_date"           
+    ##  [7] "zip"                      "state"                   
+    ##  [9] "age"                      "ethnic_identity"         
+    ## [11] "is_noshow"                "job_title"               
+    ## [13] "program_type"             "program_unit_description"
+    ## [15] "AD"                       "ED"                      
+    ## [17] "AD_year"                  "AD_ED"                   
+    ## [19] "ED_APD"                   "AD_APD"
+
 # R Script
 
 ## Research Question 1
@@ -208,22 +225,77 @@ completing the HFS process.
 In the Below code i have build a model to see if it have better
 confidence in between the attributes in the data frame or not
 
+    ## 
+    ## Call:
+    ## lm(formula = AD_APD ~ facility + AD_year, data = ag_ia)
+    ## 
+    ## Coefficients:
+    ##                                                (Intercept)  
+    ##                                                     2.5038  
+    ##                                 facilityCenter Mall Office  
+    ##                                                     3.3721  
+    ##                 facilityHeartland Family Service - Central  
+    ##                                                     6.2717  
+    ## facilityHeartland Family Service - Child and Family Center  
+    ##                                                    -0.4007  
+    ##                 facilityHeartland Family Service - Gendler  
+    ##                                                     1.7091  
+    ##                facilityHeartland Family Service - Glenwood  
+    ##                                                    -2.7996  
+    ##         facilityHeartland Family Service - Heartland Homes  
+    ##                                                    10.2086  
+    ##                   facilityHeartland Family Service - Lakin  
+    ##                                                    -5.0006  
+    ##                   facilityHeartland Family Service - Logan  
+    ##                                                     7.8554  
+    ##                   facilityHeartland Family Service - Sarpy  
+    ##                                                     3.7283  
+    ##             facilityKanesville Alternative Learning Center  
+    ##                                                    -1.7283  
+    ##                           facilityKirn Junior High  School  
+    ##                                                    -2.8469  
+    ##                               facilityKreft Primary School  
+    ##                                                    -1.5871  
+    ##                          facilityLewis Central High School  
+    ##                                                     0.4415  
+    ##                        facilityLewis Central Middle School  
+    ##                                                    -1.2661  
+    ##                                        facilityMicah House  
+    ##                                                    -1.9297  
+    ##     facilityNorth Omaha Intergenerational Campus (Service)  
+    ##                                                    -2.6552  
+    ##                       facilityThomas Jefferson High School  
+    ##                                                     0.1272  
+    ##                     facilityTitan Hill Intermediate School  
+    ##                                                    -0.5585  
+    ##                               facilityWilson Middle School  
+    ##                                                    -0.6734  
+    ##                                                AD_year2015  
+    ##                                                    -0.5958  
+    ##                                                AD_year2016  
+    ##                                                     2.7291  
+    ##                                                AD_year2017  
+    ##                                                     1.5950  
+    ##                                                AD_year2018  
+    ##                                                     0.2244  
+    ##                                                AD_year2019  
+    ##                                                     1.2875  
+    ##                                                AD_year2020  
+    ##                                                     4.3986  
+    ##                                                AD_year2021  
+    ##                                                     0.7679
+
+    ##         1         2         3 
+    ##  3.398884  6.343865 17.111017
+
+    ##         fit       lwr      upr
+    ## 1  3.398884 -3.981651 10.77942
+    ## 2  6.343865  0.627303 12.06043
+    ## 3 17.111017  5.049678 29.17236
+
 tried to get a predict value for over all data for Iowa
 
 Now i have created a plot to see how the predicted value is similar with
-
-``` r
-# 2. Regression line + confidence intervals
-library("ggplot2")
-p <- ggplot(mydata, aes(y=fit,x=AD_APD,color=AD_year ))+ geom_point()+geom_smooth(method = "lm")+facet_wrap(~AD_year,scales = 'free')
-
-# 3. Add prediction intervals
-p + geom_line(aes(x = lwr), color = "red", linetype = "dashed")+
-  geom_line(aes(x = upr), color = "red", linetype = "dashed")
-```
-
-    ## `geom_smooth()` using formula 'y ~ x'
-
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 (optional) Now for just verification i am trying to get a Residuals of
@@ -237,9 +309,14 @@ the data that is present in Iowa
 
 \#\#\#Nebrska
 
-    ## `geom_smooth()` using formula 'y ~ x'
-
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+
+    ##             Df Sum Sq Mean Sq F value   Pr(>F)    
+    ## facility    14   3810  272.14  18.781 1.44e-11 ***
+    ## AD_year      8    353   44.08   3.042   0.0116 *  
+    ## Residuals   32    464   14.49                     
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 ## Research Question 3:
 
@@ -247,35 +324,10 @@ the data that is present in Iowa
 
 This BarChart shows us that the majority of Latinos served attend the
 North Omaha Campus and the Heartland Family Service-Central location.
-
-``` r
-ggplot(HFS.Ethnicity2) +
-  aes(x = facility, fill = ethnic_identity)+
-  labs(fill = "Ethnicity")+
-  geom_bar() +
-  scale_fill_hue(direction = 1) +
-  coord_flip() +
-  theme_minimal() +
-  theme(axis.title.x = element_text(size = 9L))
-```
-
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
 This BoxPlot identifies that most Latinos receive services for Mental
 Health Programs and are between the ages of 18 and 50.
-
-``` r
-ggplot(HFS.Ethnicity2) +
-  aes(x = program_unit_description, y = age, fill = ethnic_identity) +
-  geom_boxplot(width=0.5, lwd=1) +
-  scale_color_hue(direction = 1) +
-  ylab("Age") + xlab("Program Unit")+
-  labs(fill = "Ethnicity") +
-  labs (title = "Ethnicity by Age & Program Unit") +
-  coord_flip() +
-  theme_minimal()
-```
-
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
 # R plots
@@ -296,39 +348,7 @@ past **8 years** in the state of **Iowa**.
 
 **Example: -** lockdown because Covid-19 which stopped the process
 
-``` r
-HFS_data$state[HFS_data$state == "IA"] <- "iowa"
-IA<-subset(HFS_data,HFS_data$state=="iowa")#,HFS_data$program_name=='Mental Health')
-ag_ia<-aggregate(IA$AD_APD~IA$facility+IA$AD_year,IA,mean)
-ag_ia$`IA$AD_APD`<-round(ag_ia$`IA$AD_APD`,0)
-names(ag_ia)[names(ag_ia) == "IA$facility"] <- "facility"     
-names(ag_ia)[names(ag_ia) == "IA$AD_year"] <-"AD_year"      
-names(ag_ia)[names(ag_ia) == "IA$program_name"] <-"program_name" 
-names(ag_ia)[names(ag_ia) == "IA$AD_APD"] <-"AD_APD"
-#library('plotly')
-p <- ggplot(data=ag_ia, aes(x=AD_APD,y=facility,fill=AD_year)) +
-  geom_bar(stat="identity", position=position_dodge())+labs(title = "Average Time taken for a person to enroll for a program") +xlab('Average days for a person to register')+ylab('Facility in Iowa')+ labs(colour = "Years")+ scale_fill_brewer(palette="Blues")
-#ggplotly(p)
-p
-```
-
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
-
-``` r
-HFS_data$state[HFS_data$state == "NE"] <- "nebrska"
-NE<-subset(HFS_data,HFS_data$state=="nebrska")#,HFS_data$program_name=='Mental Health')
-
-ag_ne<-aggregate(NE$AD_APD~NE$facility+NE$AD_year+NE$program_name,NE,mean)
-
-ag_ne$`NE$AD_APD`<-round(ag_ne$`NE$AD_APD`,0)
-names(ag_ne)[names(ag_ne) == "NE$facility"] <- "facility"     
-names(ag_ne)[names(ag_ne) == "NE$AD_year"] <-"AD_year"      
-names(ag_ne)[names(ag_ne) == "NE$program_name"] <-"program_name" 
-names(ag_ne)[names(ag_ne) == "NE$AD_APD"] <-"AD_APD"
-p <- ggplot(data=ag_ne, aes(x=AD_APD,y=facility,fill=AD_year)) +
-  geom_bar(stat="identity", position=position_dodge())+labs(title = "Average Time taken for a person to enroll for a program") +xlab('Average days for a person to register')+ylab('Facility in Nebraska')+ labs(colour = "Years")+ scale_fill_brewer(palette="Blues")
-p
-```
 
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
 
@@ -367,38 +387,7 @@ quesiton does not break down the data by ethnicity, only because the
 ethnicity counts were not large enough to be meaningful for each
 facility and job title.
 
-``` r
-detach("package:plyr", unload=TRUE)
-detach("package:moderndive", unload=TRUE)
-library('ggplot2') # for sample plot if required
-library('dplyr') # to use pipelines '%>%' for data set
-```
-
-``` r
-HFS_data<-read.csv("HFS Service Data.csv") # read data set
-data <- HFS_data
-therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title == "THERAPIST II" | data$job_title == "THERAPIST III" | data$job_title == "LEAD THERAPIST" | data$job_title == "Therapist")
-```
-
 #### Plot: No show percentage by facility, ethnicity, and type of therapist
-
-``` r
-# possibly look at no show rate by facility
-mental_health <- therapists %>% filter(program_name == "Mental Health")
-noshow_stats <- mental_health %>% group_by(facility, job_title) %>% count(is_noshow) %>% filter(n > 20)
-noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
-shows <- noshow_stats %>% filter(is_noshow == "TRUE")
-noshow_stats_consolidated <- inner_join(shows,noshows,by=c("facility","job_title"), suffix = c("no", "yes"))
-#noshow_stats_consolidated <- select(noshow_stats_consolidated, -c(is_noshowno, is_noshowyes))
-noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
-df <- noshow_percent
-
-ggplot(data = df) + geom_point(mapping = aes(x = reorder(job_title,noshow_percent), y = noshow_percent))  + facet_wrap(~ reorder(facility, -noshow_percent)) +
-ggtitle("No Shows is a Location Problem\n(No Show Percentage by Job Title Across Facilities)") +
-xlab("Job Title") +
-ylab("Percentage of Clients Who Miss Appointments") +
- theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none") 
-```
 
 ![](WrittenSummary_files/figure-gfm/facility-1.png)<!-- -->
 
@@ -440,35 +429,12 @@ ethnic\_identity age facility program\_type
 
 This BoxPlot identifies that most Latinos receive services for Mental
 Health Programs and are between the ages of 18 and 50.
-
-``` r
-ggplot(HFS.Ethnicity2) +
-  aes(x = program_unit_description, y = age, fill = ethnic_identity) +
-  geom_boxplot(width=0.5, lwd=1) +
-  scale_color_hue(direction = 1) +
-  ylab("Age") + xlab("Program Unit")+
-  labs(fill = "Ethnicity") +
-  labs (title = "Ethnicity by Age & Program Unit") +
-  coord_flip() +
-  theme_minimal()
-```
-
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
 \#\#Bar chart of Ethnicity & Facility
 
 This BarChart shows us that the majority of Latinos served attend the
 North Omaha Campus and the Heartland Family Service-Central location.
-
-``` r
-p<-ggplot(HFS.Ethnicity2) +
-  aes(x = facility, fill = ethnic_identity) +
-  geom_bar() +
-  scale_fill_hue(direction = 1) +
-  coord_flip() +
-  theme_minimal() +  theme(axis.title.x = element_text(size = 9L),)
-p
-```
 
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
 

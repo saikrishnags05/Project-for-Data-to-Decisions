@@ -3,7 +3,7 @@ output:  github_document
 ---
 
 
-```{r setup, include=FALSE}
+```{r setup, warning=FALSE, message=FALSE, echo=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
 <center> <h1>HFS-Documentation</h1> </center>
@@ -86,7 +86,7 @@ We have created a new dataset based which can help use to achive a bvest results
 
 **step 1:-** collect all the  columns that are required and store them in a data frame **HFS_data**
 
-```{r ,echo=FALSE, include=FALSE}
+```{r ,echo=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
 library('dplyr')
 library('ggplot2')
 library('plyr')
@@ -102,7 +102,7 @@ HFS_data<-HFS_data %>%
 
  **step 2:-** Since we are using Data format so we have to find the original date. So, we have used as.Date() function to get the actual date format.
  
-```{r,echo=FALSE, include=FALSE}
+```{r,echo=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
 HFS_data<-HFS_data %>%
 select(selected_columns)  # this command is used for selecting the required columns
 HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
@@ -113,7 +113,7 @@ HFS_data$AD_year<-(format(as.Date(HFS_data$ED), "%Y"))
  **step 3:-** Apply step2 to all the date column to verify it in next phase.
  
  **step 4:-** Now create a new column . Now apply add and subtract methods on the dates if we get the values in negatives then it is enrolled before the event,if 0 then they resisted at the moment and if greater the 0 then it is  after the event.
-```{r,echo=FALSE, include=FALSE}
+```{r,echo=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
 HFS_data$AD_ED<-(HFS_data$actual_date-HFS_data$date_entered)
 HFS_data$ED_APD<-(HFS_data$date_entered-HFS_data$approved_date)
 HFS_data$AD_APD<-(abs(HFS_data$actual_date-HFS_data$approved_date))
@@ -123,7 +123,7 @@ HFS_data<-na.omit(HFS_data)
  **step 5:-** Total we have 5 states in the data set which is mentioned in short form
 
  **step 6:-** Every State in short form like `IA`,`NE`,`CO`,`NC`,`SC`and later updated to full form of user understanding `iowa`, `Nebrska`,`colorado`, `north carolina`,`south carolina` and we can observe many different plots based on state and there zip code.
-```{r,echo=FALSE, include=FALSE}
+```{r,echo=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
 HFS_data$state<- as.character(HFS_data$state)
 HFS_data$state[HFS_data$state == "NE"] <- "nebrska"
 HFS_data$state[HFS_data$state == "IA"] <- "iowa"
@@ -139,7 +139,7 @@ The data contains `r nrow(data)` rows. If we filter out NA values for job title 
 
 Most job titles have fewer than fifty instances. Job titles with many instances include therapist, clinical supervisor, case managers, and admin assists. Of those job titles, there are five types of therapists. Given most of the primary job titles are therapists, the exploration of job titles will focus on therapists. We filter the job titles to the various therapist job positions.
 
-```{r,echo=FALSE, include=FALSE}
+```{r,echo=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
 library('dplyr')
 library('tidyverse')
 library('moderndive')
@@ -151,7 +151,7 @@ tibble_data <- as_tibble(data)
 job_title_counts <- tibble_data %>% group_by(job_title) 
 ```
 
-```{r ,echo=FALSE, include=FALSE}
+```{r ,echo=FALSE, warning=FALSE, message=FALSE, echo=FALSE}
 therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title == "THERAPIST II" | job_title == "THERAPIST III" | job_title == "LEAD THERAPIST" | job_title == "Therapist")
 ```
 
@@ -159,7 +159,7 @@ If we filter out therapists there are only `r nrow(therapists)` rows, so 1500 fe
 
 * **Ethnicity**
 
-```{r ,echo=FALSE, include=FALSE}
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
 tibble_data <- as_tibble(HFS_data)
 ethnicity <- tibble_data %>% group_by(ethnic_identity) 
 # data header
@@ -186,7 +186,7 @@ I changed “Not Spanish/Hispanic/Latino” to “Not Latino”
 This leaves the data with 2 classes for the variable titled “ethnic_identity”
 	Latino
 	Not Latino
-```{r,echo=FALSE, include=FALSE}
+```{r,warning=FALSE, message=FALSE, echo=FALSE}
 library('plyr')
 HFS_d<-HFS_data
 HFS.Cleaned<-HFS_d
@@ -215,7 +215,7 @@ HFS.Ethnic_Identity.cleaned = HFS.Ethnic_Identity[HFS.Ethnic_Identity$ethnic_ide
 
 In the below code i have filtered the original data with the state  name and aggregate the whole data based to get an average time taken for completing the HFS process.
 
-```{r ,include=FALSE}
+```{r ,warning=FALSE, message=FALSE, echo=FALSE}
 HFS_data$state[HFS_data$state == "IA"] <- "iowa"
 IA<-subset(HFS_data,HFS_data$state=="iowa")#,HFS_data$program_name=='Mental Health')
 ag_ia<-aggregate(AD_APD~facility+AD_year+program_name,IA,mean)
@@ -227,7 +227,7 @@ names(ag_ia)[names(ag_ia) == "IA$AD_APD"] <-"AD_APD"
 ```
 
 In the Below code i have build a model to see if it have better confidence in between the attributes in the data frame or not
-```{r,include=FALSE}
+```{r,warning=FALSE, message=FALSE, echo=FALSE}
 # Build the model
 
 model <- lm(AD_APD ~facility+AD_year, data = ag_ia)
@@ -242,14 +242,14 @@ predict(model, newdata = new.ag_ia.avg.time, interval = "confidence")
 ```
 
 tried to get a predict value for over all data for Iowa
-```{r,include=FALSE}
+```{r,warning=FALSE, message=FALSE, echo=FALSE}
 # 1. Add predictions 
 pred.int <- predict(model, interval = "prediction")
 mydata <- cbind(ag_ia, pred.int)
 ```
 
 Now i have created a plot to see how the predicted value is similar with 
-```{r}
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
 # 2. Regression line + confidence intervals
 library("ggplot2")
 p <- ggplot(mydata, aes(y=fit,x=AD_APD,color=AD_year ))+ geom_point()+geom_smooth(method = "lm")+facet_wrap(~AD_year,scales = 'free')
@@ -262,7 +262,7 @@ p + geom_line(aes(x = lwr), color = "red", linetype = "dashed")+
 
 (optional) Now for just verification i am trying to get a Residuals of the data that is present in Iowa
 
-```{r,echo=FALSE}
+```{r,warning=FALSE, message=FALSE, echo=FALSE}
 aggregate_IA<-(aggregate(AD_APD~state+facility+AD_year,IA,mean))
 aov_group_IA <- aov(AD_APD~facility, data = aggregate_IA)
 summary_group_IA<-summary(aov_group_IA)
@@ -271,7 +271,7 @@ summary_group_IA
 
 ###Nebrska
 
-```{r,echo=FALSE, include=FALSE}
+```{r,warning=FALSE, message=FALSE, echo=FALSE}
 HFS_data$state[HFS_data$state == "NE"] <- "nebrska"
 NE<-subset(HFS_data,HFS_data$state=="nebrska")#,HFS_data$program_name=='Mental Health')
 ag_ne<-aggregate(NE$AD_APD~NE$facility+NE$AD_year+NE$program_name,NE,mean)
@@ -291,7 +291,7 @@ pre_con<-predict(model, newdata = new.ag_ne.avg.time, interval = "confidence")
 ```
 
 
-```{r,echo=FALSE,warning=FALSE}
+```{r,warning=FALSE, message=FALSE, echo=FALSE}
 # 2. Regression line + confidence intervals
 library("ggplot2")
 pred.int_ne <- predict(model, interval = "prediction")
@@ -303,7 +303,7 @@ p + geom_line(aes(x = lwr), color = "red", linetype = "dashed")+
   geom_line(aes(x = upr), color = "red", linetype = "dashed")
 ```
 
-```{r,echo=FALSE, include=FALSE}
+```{r,warning=FALSE, message=FALSE, echo=FALSE}
 aggregate_NE<-(aggregate(AD_APD~state+facility+AD_year,NE,mean))
 aov_group_NE <- aov(AD_APD~facility+AD_year, data = aggregate_NE)
 summary_group_NE<-summary(aov_group_NE)
@@ -315,7 +315,7 @@ summary_group_NE
 
 This BarChart shows us that the majority of Latinos served attend the
 North Omaha Campus and the Heartland Family Service-Central location.
-```{r}
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
 ggplot(HFS.Ethnicity2) +
   aes(x = facility, fill = ethnic_identity)+
   labs(fill = "Ethnicity")+
@@ -330,7 +330,7 @@ ggplot(HFS.Ethnicity2) +
 
 This BoxPlot identifies that most Latinos receive services for Mental
 Health Programs and are between the ages of 18 and 50.
-```{r}
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
 ggplot(HFS.Ethnicity2) +
   aes(x = program_unit_description, y = age, fill = ethnic_identity) +
   geom_boxplot(width=0.5, lwd=1) +
@@ -358,7 +358,7 @@ If we observe the Graph we can tell that over all behavior of enrollment process
 **Example: -** lockdown because Covid-19 which stopped the process
 
 
-```{r}
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
 HFS_data$state[HFS_data$state == "IA"] <- "iowa"
 IA<-subset(HFS_data,HFS_data$state=="iowa")#,HFS_data$program_name=='Mental Health')
 ag_ia<-aggregate(IA$AD_APD~IA$facility+IA$AD_year,IA,mean)
@@ -374,7 +374,7 @@ p <- ggplot(data=ag_ia, aes(x=AD_APD,y=facility,fill=AD_year)) +
 p
 ```
 
-```{r}
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
 HFS_data$state[HFS_data$state == "NE"] <- "nebrska"
 NE<-subset(HFS_data,HFS_data$state=="nebrska")#,HFS_data$program_name=='Mental Health')
 
@@ -407,7 +407,7 @@ HFS facility locations have a significant effect on the number of missed appoint
 
 The research question builds on existing knowledge that Omaha and Iowa contain pockets of segregated populations, both in terms of ethnicity, finances, and priviledge. The research question poses that location might have a significant effect on missed appointments. If a particular location has a population with financial access to vehicles, or even multiple vehicles, they might be more able to make their appointments. Initially, we hope to identify that facility location affects missed appointments. If we can show this is true, we can further explore what about the facility location negatively affects client's ability to make their appointments. This research data specifically looks at the mental health program, the largest for HFS.  This research also breaks down no shows by the type of therapist, knowing that different types of therapists might handle different appointments, each of which might be related to the likelihood of missing appointments. This research quesiton does not break down the data by ethnicity, only because the ethnicity counts were not large enough to be meaningful for each facility and job title.
 
-```{r}
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
 detach("package:plyr", unload=TRUE)
 detach("package:moderndive", unload=TRUE)
 library('ggplot2') # for sample plot if required
@@ -415,7 +415,7 @@ library('dplyr') # to use pipelines '%>%' for data set
 ```
 
 
-```{r}
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
 HFS_data<-read.csv("HFS Service Data.csv") # read data set
 data <- HFS_data
 therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title == "THERAPIST II" | data$job_title == "THERAPIST III" | data$job_title == "LEAD THERAPIST" | data$job_title == "Therapist")
@@ -423,7 +423,7 @@ therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title ==
 
 #### Plot: No show percentage by facility, ethnicity, and type of therapist
 
-```{r facility}
+```{r facility, warning=FALSE, message=FALSE, echo=FALSE}
 # possibly look at no show rate by facility
 mental_health <- therapists %>% filter(program_name == "Mental Health")
 noshow_stats <- mental_health %>% group_by(facility, job_title) %>% count(is_noshow) %>% filter(n > 20)
@@ -456,7 +456,7 @@ The data cleaning results in a new subset of 5 variables based on the attributes
   program_unit_desc ethnic_identity   age facility   program_type
 
 This BoxPlot identifies that most Latinos receive services for Mental Health Programs and are between the ages of 18 and 50.
-``` {r}
+``` {r, warning=FALSE, message=FALSE, echo=FALSE}
 ggplot(HFS.Ethnicity2) +
   aes(x = program_unit_description, y = age, fill = ethnic_identity) +
   geom_boxplot(width=0.5, lwd=1) +
@@ -472,7 +472,7 @@ ggplot(HFS.Ethnicity2) +
 
 This BarChart shows us that the majority of Latinos served attend the North Omaha Campus and the Heartland Family Service-Central location. 
 
-```{r }
+```{r, warning=FALSE, message=FALSE, echo=FALSE}
 p<-ggplot(HFS.Ethnicity2) +
   aes(x = facility, fill = ethnic_identity) +
   geom_bar() +
