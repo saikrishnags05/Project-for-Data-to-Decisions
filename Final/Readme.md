@@ -10,7 +10,7 @@
 
 # Overview of Package Contents
 
-1. [Readme.md](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/edit/master/Final/Readme.md)
+1. [Readme.md](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Final/Readme.md)
 
 2. [Markdown with comprehensive analysis](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Final/ComprehensiveAnalysis.md)
 
