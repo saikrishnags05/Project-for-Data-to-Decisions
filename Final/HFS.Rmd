@@ -408,7 +408,8 @@ HFS facility locations have a significant effect on the number of missed appoint
 The research question builds on existing knowledge that Omaha and Iowa contain pockets of segregated populations, both in terms of ethnicity, finances, and priviledge. The research question poses that location might have a significant effect on missed appointments. If a particular location has a population with financial access to vehicles, or even multiple vehicles, they might be more able to make their appointments. Initially, we hope to identify that facility location affects missed appointments. If we can show this is true, we can further explore what about the facility location negatively affects client's ability to make their appointments. This research data specifically looks at the mental health program, the largest for HFS.  This research also breaks down no shows by the type of therapist, knowing that different types of therapists might handle different appointments, each of which might be related to the likelihood of missing appointments. This research quesiton does not break down the data by ethnicity, only because the ethnicity counts were not large enough to be meaningful for each facility and job title.
 
 ```{r}
-library('tidyverse') 
+detach("package:plyr", unload=TRUE)
+detach("package:moderndive", unload=TRUE)
 library('ggplot2') # for sample plot if required
 library('dplyr') # to use pipelines '%>%' for data set
 ```
@@ -416,9 +417,6 @@ library('dplyr') # to use pipelines '%>%' for data set
 
 ```{r}
 HFS_data<-read.csv("HFS Service Data.csv") # read data set
-```
-
-```{r filter_for_therapists}
 data <- HFS_data
 therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title == "THERAPIST II" | data$job_title == "THERAPIST III" | data$job_title == "LEAD THERAPIST" | data$job_title == "Therapist")
 ```

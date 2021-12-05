@@ -134,7 +134,7 @@ results for our Research Question. Attributes are mentioned bellow.
 `Appointment No Shows`.
 
 **step 1:-** collect all the columns that are required and store them in
-a data frame **HFS_data**
+a data frame **HFS\_data**
 
 **step 2:-** Since we are using Data format so we have to find the
 original date. So, we have used as.Date() function to get the actual
@@ -181,9 +181,9 @@ worth looking into further. There are no NAs in the column or values we
 want to filter.
 
 **Step 9** Delete Rows that have “Not Collected” in variable
-Ethnic_Identity.
+Ethnic\_Identity.
 
-**Step 10** I then discovered that the variable “ethnic_identity” had
+**Step 10** I then discovered that the variable “ethnic\_identity” had
 the following classes *Mexican *Not Collected *Not
 Spanish/Hispanic/Latino *Other Hispanic or Latino \*Unknown
 
@@ -192,14 +192,14 @@ information will not help with the interpretation of data.
 
 I then changed “Mexican” to “Latino” and “Other Hispanic or Latino” to
 “Latino” I changed “Not Spanish/Hispanic/Latino” to “Not Latino” This
-leaves the data with 2 classes for the variable titled “ethnic_identity”
-Latino Not Latino
+leaves the data with 2 classes for the variable titled
+“ethnic\_identity” Latino Not Latino
 
 # R Script
 
 ## Research Question 1
 
-###Iowa
+\#\#\#Iowa
 
 In the below code i have filtered the original data with the state name
 and aggregate the whole data based to get an average time taken for
@@ -235,12 +235,11 @@ the data that is present in Iowa
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-###Nebrska
+\#\#\#Nebrska
 
     ## `geom_smooth()` using formula 'y ~ x'
 
 ![](HFS_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
-
 
 ## Research Question 3:
 
@@ -369,30 +368,14 @@ ethnicity counts were not large enough to be meaningful for each
 facility and job title.
 
 ``` r
-library('tidyverse') 
-```
-
-    ## -- Attaching packages --------------------------------------- tidyverse 1.3.1 --
-
-    ## v ggplot2 3.3.5     v purrr   0.3.4
-    ## v tibble  3.1.4     v dplyr   1.0.7
-    ## v tidyr   1.1.3     v stringr 1.4.0
-    ## v readr   2.0.1     v forcats 0.5.1
-
-    ## -- Conflicts ------------------------------------------ tidyverse_conflicts() --
-    ## x dplyr::filter() masks stats::filter()
-    ## x dplyr::lag()    masks stats::lag()
-
-``` r
+detach("package:plyr", unload=TRUE)
+detach("package:moderndive", unload=TRUE)
 library('ggplot2') # for sample plot if required
 library('dplyr') # to use pipelines '%>%' for data set
 ```
 
 ``` r
 HFS_data<-read.csv("HFS Service Data.csv") # read data set
-```
-
-``` r
 data <- HFS_data
 therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title == "THERAPIST II" | data$job_title == "THERAPIST III" | data$job_title == "LEAD THERAPIST" | data$job_title == "Therapist")
 ```
@@ -417,7 +400,7 @@ ylab("Percentage of Clients Who Miss Appointments") +
  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none") 
 ```
 
-![](HFS_files/figure-gfm/unnamed-chunk-23.png)<!-- -->
+![](HFS_files/figure-gfm/facility-1.png)<!-- -->
 
 The purpose of the above graph is to highlight the stark different in
 the y-axis for each facet. The y-axis shows no show percentage, which
@@ -452,8 +435,8 @@ appointments.
 
 The data cleaning results in a new subset of 5 variables based on the
 attributes analyzed in the first research question. Important columns
-within this data cleaning are listed below: program_unit_desc
-ethnic_identity age facility program_type
+within this data cleaning are listed below: program\_unit\_desc
+ethnic\_identity age facility program\_type
 
 This BoxPlot identifies that most Latinos receive services for Mental
 Health Programs and are between the ages of 18 and 50.
@@ -470,9 +453,9 @@ ggplot(HFS.Ethnicity2) +
   theme_minimal()
 ```
 
-![](HFS_files/figure-gfm/unnamed-chunk-21-1.png)<!-- -->
+![](HFS_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
-##Bar chart of Ethnicity & Facility
+\#\#Bar chart of Ethnicity & Facility
 
 This BarChart shows us that the majority of Latinos served attend the
 North Omaha Campus and the Heartland Family Service-Central location.
@@ -487,7 +470,7 @@ p<-ggplot(HFS.Ethnicity2) +
 p
 ```
 
-![](HFS_files/figure-gfm/unnamed-chunk-22-1.png)<!-- -->
+![](HFS_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
 
 # Results
 
