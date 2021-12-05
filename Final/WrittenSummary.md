@@ -298,15 +298,7 @@ North Omaha Campus and the Heartland Family Service-Central location.
 
 # Conclusion
 
-RQ1: Different facilities have significantly different delays. Schools
-are especially fast but counties are slower.
-
-RQ2: Missed appointments are closely related to the facility. Slight
-differences in missed appointments by the type of therapist (I vs II).
-
-RQ3: HFS could possibly benefit by having the bilingual staff at the
-Sarpy Office as well so that there are 3 branches throughout the metro
-area to serve Latino client
+Our research takes a deep dive into the inner workings of HFS facilities. We looked at appointment delays, missed appointments, and the ethnicities at each facility. We found large discrepancies in appointment delays, missed appoinments, and the number of persons with a latino ethnicity among locations. These results are detailed via the plots in the above section. Firstly, while we find that appointment delays vary widely among facilities, some facilities, such as schools, have a faster registration and approval process wheras counties take much longer. We also saw that the overall enrollment delay tends to decrease over time. In a similar vein, we found that missed appointments vary by multiple factors based on location.  Where the Sarpy location might have a ten-percent missed appointment rate, the Blondo location has a nearly thirty-percent rate of missed appointments. In our opinion, this unveils a massive discrepancy in the user experience and facility operations. However, we are not such why this delay occurs. We suspect the delay might be a function of facility accessability, such as traffic, parking, or alternative transportation options. Thirdly, we analyzed the number of latinos by location. We found that three locations standout as serving this demographic and suggest each of these locations has billingual staff to support their experience at HFS. Based on these findings, we believe that HFS can better understand the differences in user experience by facility and improve the user experience throughout Nebraska and Iowa locations.
 
 # Reference
 
