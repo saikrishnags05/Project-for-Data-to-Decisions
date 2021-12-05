@@ -24,7 +24,7 @@ approving process.
 
 ### Research Question #2
 Do HFS facility locations have a significant effect on the number of
-missed appointments?**
+missed appointments?
 
 ### The Decisions your Analysis Targets Could Help Support
 
