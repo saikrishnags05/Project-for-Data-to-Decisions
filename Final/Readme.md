@@ -1,13 +1,23 @@
-# Instructions (REMOVE ME)
-Brief but descriptive Readme.md that includes a license for your work, the names of the team members, and an overview of package contents, along with a paragraph describing each person's contributions to the individual deliverables for the entire project (who did what), which should be fairly consistent with Git version history, and the proofreaders’ sign-off statement.
-
-
 # License
+
+- [GNU General Public License v3.0](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/LICENSE)
 
 # Names of Team Members
 
+- Chad Crowe
+- Sai Krishna Gaduputi Subbammagari
+- Rhonda Silva
+
 # Overview of Package Contents
 
+1. Readme.md (this document)
+
+2. [Markdown with comprehensive analysis]()
+
+3. [Written Summary]()
+
+4. [Presentation Slides]()
+U
 # Contributions for Individual Deliverables
 
 ## Project Work Plan
