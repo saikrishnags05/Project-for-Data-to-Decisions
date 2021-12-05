@@ -164,6 +164,39 @@ leaves the data with 2 classes for the variable titled
 
 ## Research Question 1
 
+In the below code I have filtered the original data with the state name
+and aggregate the whole data based to get an average time taken for
+completing the HFS process.
+
+In the Below code I have build a model to see if it have better
+confidence in between the attributes in the data frame or not tried to get a predict value for over all data for Iowa
+
+### Iowa
+
+Now I have created a plot to see how the predicted value is similar with
+![](WrittenSummary_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+(optional) Now for just verification i am trying to get a Residuals of
+the data that is present in Iowa
+
+    ##             Df Sum Sq Mean Sq F value  Pr(>F)   
+    ## facility    19  321.2  16.905   2.304 0.00932 **
+    ## Residuals   51  374.3   7.339                   
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+### Nebrska
+
+![](WrittenSummary_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+
+    ##             Df Sum Sq Mean Sq F value   Pr(>F)    
+    ## facility    14   3810  272.14  18.781 1.44e-11 ***
+    ## AD_year      8    353   44.08   3.042   0.0116 *  
+    ## Residuals   32    464   14.49                     
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+
 If we observe the Graph we can tell that over all behavior of enrollment
 process w.r.t the time taken for per person to enroll for an event from
 past **8 years** in the state of **Iowa**.
@@ -194,38 +227,6 @@ overall enrollment time is decresed compared to previous years.
 -   Overall there is no delay in the registration process compared to
     previous years.
     
-### Iowa
-
-In the below code i have filtered the original data with the state name
-and aggregate the whole data based to get an average time taken for
-completing the HFS process.
-
-In the Below code i have build a model to see if it have better
-confidence in between the attributes in the data frame or not tried to get a predict value for over all data for Iowa
-
-Now i have created a plot to see how the predicted value is similar with
-![](WrittenSummary_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
-
-(optional) Now for just verification i am trying to get a Residuals of
-the data that is present in Iowa
-
-    ##             Df Sum Sq Mean Sq F value  Pr(>F)   
-    ## facility    19  321.2  16.905   2.304 0.00932 **
-    ## Residuals   51  374.3   7.339                   
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-### Nebrska
-
-![](WrittenSummary_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
-
-    ##             Df Sum Sq Mean Sq F value   Pr(>F)    
-    ## facility    14   3810  272.14  18.781 1.44e-11 ***
-    ## AD_year      8    353   44.08   3.042   0.0116 *  
-    ## Residuals   32    464   14.49                     
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
 # Research Question 2
 
 HFS facility locations have a significant effect on the number of missed
