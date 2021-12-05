@@ -1,0 +1,743 @@
+---
+title: "R Scripts"
+author: "Author:- Sai Krishna,Chad Crowe,Rhonda Silva"
+output:
+  md_document: default
+---
+## Contributor Statement
+Chad, Sai and Rhonda each contributed to the project plan.
+Sai worked on Research Question 1
+Chad worked on Research Question 2
+Rhonda worked on Research Question 3
+Chad proofread
+
+The entire group is performing data exploration concerning location and its relationship to other columns, such as the onboarding duration, ethnicity, program name, and job title. Given this general direction of interest, each of us explored a related research question. Fortunately, based on the data exploration documentation, we are updating the direction of our research. Specifically, how does onboarding duration change when enhanced by interesting findings concerning ethnicity, program name, and job title. Part of the progress demonstrated by this assignment intertwines these aspects.
+
+## Introduction
+Heartland Family Service, which was founded in Omaha in 1875, served more than 79,000 individuals and families last year through direct services, education, and outreach from more than 15 facilities in east central Nebraska and southwest Iowa. In the following focus areas, our programs provide important human services to children, individuals, and families:
+
+•	Housing, Safety, and Financial Stability 
+
+•	Child & Family Well-Being 
+
+•	Counseling & Prevention
+
+Heartland Family Service's objective is to enhance communities by providing education, counseling, and support services to individuals and families. Last year, Heartland Family Service, which was founded in Omaha in 1875, served 60,309 individuals and families through direct services, education, and outreach from more than 15 locations in east central Nebraska and southwest Iowa. In the following target areas: Child & Family Well-Being, Counseling & Prevention, and Housing, Safety, & Financial Stability,their programs provide important human services to the individuals and families that ultimately create the future of our community.
+
+
+# Cleaning Process
+
+## RQ 1
+
+The first reserach question explores datetime relationships per person.  Specifically, we look at the time delay between signup and the first appointment, as well as appointment volumes by datetime for HFS.
+
+### Reason
+
+This will help in analyzing the time taken per enrolling; from the signup to the appointment date.  It will also give us insights concerning demographic breakdowns per customer, e.g., their ethnic identity and location.  We will also explore the total time taken for each event. This analysis will provide HFS data concerning their enrollment speed by different customer facets.
+
+The data cleaning results in a new subset of data based on the attributes analyzed in the first research question.  Important columns within this data cleaning are listed below:
+
+`facility`, `actual_date`, `event_name`, `date_entered`, `approved_date`, `program_unit_description`, `zip`, `state`,`ethnic_identity`
+
+```{r}
+library('tidyverse') 
+library('ggplot2') # for sample plot if required
+library('dplyr') # to use pipelines '%>%' for data set
+```
+
+Read the files and Select the required columns 
+```{r}
+
+HFS_data<-read.csv("HFS Service Data.csv") # read data set
+
+
+selected_columns<-c("program_name","facility","actual_date","event_name","date_entered",   
+                    "approved_date","zip","state","age","ethnic_identity")
+HFS_data<-HFS_data %>%
+  select(selected_columns)  # this command is used for selecting the required columns
+```
+
+As the sources Information is fetched out to csv on 25th August 2021.
+
+By using this date i have created original data of the eventsm with the help of
+as.Date() function in R
+```{r}
+HFS_data$AD<-as.Date(-(HFS_data$actual_date), origin = '2021-08-25')
+HFS_data$ED<-as.Date(-(HFS_data$date_entered), origin = '2021-08-25')
+HFS_data$AD_year<-(format(as.Date(HFS_data$ED), "%Y"))
+HFS_data$AD_ED<-(HFS_data$actual_date-HFS_data$date_entered)
+HFS_data$ED_APD<-(HFS_data$date_entered-HFS_data$approved_date)
+HFS_data$AD_APD<-(abs(HFS_data$actual_date-HFS_data$approved_date))
+```
+
+Omit all the **NA** values
+
+```{r}
+HFS_data<-na.omit(HFS_data)
+```
+
+Rename all the state name with it's full form
+```{r}
+HFS_data$state<- as.character(HFS_data$state)
+HFS_data$state[HFS_data$state == "NE"] <- "nebrska"
+HFS_data$state[HFS_data$state == "IA"] <- "iowa"
+HFS_data$state[HFS_data$state == "SC"] <- "south carolina"
+HFS_data$state[HFS_data$state == "NC"] <- "north carolina"
+HFS_data$state[HFS_data$state == "CO"] <- "colorado"
+```
+
+# Iowa
+
+In the below code i have filtered the original data with the state  name and aggregate the whole data based to get an average time taken for completing the HFS process.
+
+```{r}
+HFS_data$state[HFS_data$state == "IA"] <- "iowa"
+IA<-subset(HFS_data,HFS_data$state=="iowa")#,HFS_data$program_name=='Mental Health')
+ag_ia<-aggregate(IA$AD_APD~IA$facility+IA$AD_year+IA$program_name,IA,mean)
+ag_ia$`IA$AD_APD`<-round(ag_ia$`IA$AD_APD`,0)
+names(ag_ia)[names(ag_ia) == "IA$facility"] <- "facility"     
+names(ag_ia)[names(ag_ia) == "IA$AD_year"] <-"AD_year"      
+names(ag_ia)[names(ag_ia) == "IA$program_name"] <-"program_name" 
+names(ag_ia)[names(ag_ia) == "IA$AD_APD"] <-"AD_APD"
+```
+
+In the Below code i have build a model to see if it have better confidence in between the attributes in the data frame or not
+```{r}
+# Build the model
+
+model <- lm(AD_APD ~facility+AD_year, data = ag_ia)
+model
+new.ag_ia.avg.time <- data.frame(
+  facility = c("Thomas Jefferson High School","Titan Hill Intermediate School", "Heartland Family Service - Heartland Homes")
+  ,AD_year=c('2021','2020','2020')
+  )
+
+predict(model, newdata = new.ag_ia.avg.time)
+predict(model, newdata = new.ag_ia.avg.time, interval = "confidence")
+```
+
+tried to get a predict value for over all data for Iowa
+```{r}
+# 1. Add predictions 
+pred.int <- predict(model, interval = "prediction")
+mydata <- cbind(ag_ia, pred.int)
+```
+
+Now i have created a plot to see how the predicted value is similar with 
+```{r}
+# 2. Regression line + confidence intervals
+library("ggplot2")
+p <- ggplot(mydata, aes(y=fit,x=AD_APD,color=AD_year ))+ geom_point()+geom_smooth(method = "lm")+facet_wrap(~AD_year,scales = 'free')
+```
+
+```{r}
+# 3. Add prediction intervals
+p + geom_line(aes(x = lwr), color = "red", linetype = "dashed")+
+  geom_line(aes(x = upr), color = "red", linetype = "dashed")
+
+```
+(optional) Now for just verification i am trying to get a Residuals of the data that is present in Iowa
+```{r}
+aggregate_IA<-(aggregate(AD_APD~state+facility+AD_year,IA,mean))
+aov_group_IA <- aov(AD_APD~facility, data = aggregate_IA)
+summary_group_IA<-summary(aov_group_IA)
+summary_group_IA
+```
+## RQ 2
+
+### Job Position, Ethnicity, Location, and Dropped Appointments (Chad Crowe)
+
+### RQ Overview
+
+The third research question concerns exploring the job role of therapists within HFS, with specific interest in appointment no shows. When patients fail to appear for appointments, this costs HFS time and costs the patient opportunity for therapy. We explore whether there exist clear patterns that might contribute to patients missing visits, such as a location or ethnicity effect. It might be the case that particular facilities are less friendly in supporting a language, which might effect the rate of dropped appointments. 
+
+The research also explores whether job title effects dropped appointments. Job requirements might change from title to title that might have an effect on dropped appointments. This research explores the phenomenon. 
+
+Initial research also explores appointment duration.  Based on the given data, it is unknown whether appointment duration is fixed by insurance or varies between patients. This research explores duration of appointments across job position, ethnicity, location, and the rate of dropped appointments too. While success is not determined by duration, Dr. Juarez mentioned how HFS is very interested in exploring patterns pertaining to the number of appointments and durations by each patient since it affects the funding HFS receives. 
+
+### Datasets Used
+
+The data explored in this research question include five columns:
+
+- Job Title (Therapists I, II, and III)
+
+- Ethnicity
+
+- Facility Location
+
+- Appointment Duration
+
+- Appointment No Shows
+
+Each column will be explored in the following section. The section will describe the number of rows & columns and provide sample headers. The section will also include a description of the metadata, such as what information is available for understanding and interpreting the data. The section will also cover the rationale for remediating and cleaning the data, such as handling empty data. It will also include a description of the approach and the code required for replication.
+
+### Description of Datasets
+
+#### Job Title (Therapists I, II, and III)
+
+```{r classwork}
+library('dplyr')
+library('tidyverse')
+library('moderndive')
+#data <- read.csv("/Users/ccrowe/github/isqa8600_ChadCrowe/programs/data/HFS Service Data.csv")
+data <- read.csv("HFS Service Data.csv")
+
+```
+The data contains `r nrow(data)` rows. If we filter out NA values for job title there are `r nrow(as_tibble(data) %>% drop_na(job_title))`. This means each row has a job title and there are no NA values. Given that there is no missing data, there is no need to handle missing data. 
+
+Below is a plot of available job titles:
+```{r job_title_all}
+tibble_data <- as_tibble(data)
+# data header
+head(tibble_data$job_title)
+job_title_counts <- tibble_data %>% group_by(job_title) %>% count(sort=TRUE)
+ggplot(job_title_counts) + geom_point(mapping = aes(x = reorder(job_title,-n), y = n)) +
+ggtitle("Count of Rows for each Job Title") +
+xlab("Job Title") +
+ylab("Count of Job Title's Occurrence") +
+ #ylim(0, 130) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+```
+
+Most job titles have fewer than fifty instances. Job titles with many instances include therapist, clinical supervisor, case managers, and admin assists. Of those job titles, there are five types of therapists. Given most of the primary job titles are therapists, the exploration of job titles will focus on therapists. We filter the job titles to the various therapist job positions.
+
+```{r filter_for_therapists}
+therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title == "THERAPIST II" | data$job_title == "THERAPIST III" | data$job_title == "LEAD THERAPIST" | data$job_title == "Therapist")
+```
+
+If we filter out therapists there are only `r nrow(therapists)` rows, so 1500 fewer rows. 
+
+#### Plot - Histogram of Duration for All Therapist Job Titles
+
+Firstly we filter the dataset for therapist job titles. Most of the data concerns therapists, more than 80% of the dataset. 
+
+```{r filter}
+data <- as_tibble(read.csv("HFS Service Data.csv"))
+therapists = data %>% filter(data$job_title == "THERAPIST I" | data$job_title == "THERAPIST II" | data$job_title == "THERAPIST III" | data$job_title == "LEAD THERAPIST")
+#nrow(therapists)# 1500 fewer rows
+```
+
+We want to explore the relationship of duration for each of the therapist job titles. Therefore, we create a histogram of duration for each therapist job title.
+
+```{r therapists_vs_duration}
+hist(therapists$total_duration_num, breaks=50,xlim=c(0,150),main="Histogram of Duration for All Records\n With a Therapist Job Title", xlab="Duration (minutes)", ylab = "Count")
+```
+
+#### Ethnicity
+
+```{r ethnicity_breakdown}
+tibble_data <- as_tibble(data)
+ethnicity <- tibble_data %>% group_by(ethnic_identity) %>% count(sort=TRUE)
+# data header
+head(tibble_data$ethnic_identity)
+
+```
+
+There are no NAs for the ethnic_identity column. The ethnic identities are categorized as Mexian, Hispanic/Latino, and not Spanish/Hispanic/Latino. Ninety-percent of the data (7820 rows) are not Spanish, Hispanic or Latino. The following plot shows the diparity of counts within the ethic_identity column.
+
+```{r ethnic_plot}
+ggplot(ethnicity) + geom_point(mapping = aes(x = reorder(ethnic_identity,-n), y = n)) +
+ggtitle("Count of Rows for each Ethnicity") +
+xlab("Ethnicity") +
+ylab("Count of Ethnicity") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+```
+
+Given that most categories have fewer than two-hundred persons, one simlification is to create a binary column for Not Spanish/Hispanic/Latino and Spanish/Hispanic/Lantino.  We'll filter out unknown since it contains no ethnic identity information. Otherwise, there are no NAs or missing data in this column so there's no need to handle or filter out NAs.
+
+```{r two_ethnicities}
+two_ethnicities <- tibble_data %>% mutate(is_minority = ethnic_identity != "Not Spanish/Hispanic/Latino") %>% filter(ethnic_identity != "Unknown")
+two_ethnicities %>% group_by(is_minority) %>% count()
+```
+
+When we filter by the identified ethinicities and filter out the unknown category we get almost 800 rows of ethnicities HFS tracks. 
+
+
+#### Facility Location
+
+Below we can see a breakdown of records per facility.  We group by facility and sort by the facilities with the most usage. This will help us understand the usage of HFS facilities within the dataset.
+
+```{r facility_breakdown}
+tibble_data <- as_tibble(data)
+# data header
+head(tibble_data$facility)
+grouped_facility <- tibble_data %>% group_by(facility) %>% count(sort=TRUE)
+#ordered <- transform(grouped_facility, variable=reorder(facility, n) ) 
+ggplot(grouped_facility) + geom_point(mapping = aes(x = reorder(facility,-n), y = n)) +
+ggtitle("Count of Records by Facility") +
+xlab("Facility") +
+ylab("Count of Records at a Facility") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+# check for NAs
+tibble_data %>% filter(facility == NA) %>% count()
+```
+
+From the graph we see nine main facilities with more than two-hundred records. There are three facilities with more than one-thousand rows. We want to avoid aggregating smaller facilities together since each facility might be very different.  For now, we will leave the smaller facilities in the data.  Later on, we might remove facilities with very few users. No rows are NA so there is no need to handle NAs or missing data in this column. 
+
+#### Plot: Count of each Zip Code for Therapists
+
+This plot aims to get an idea of zip code and whether it will be helpful in any location analysis. In the below graph, we group by zip code, plot the count, and sort descending.
+
+```{r location}
+counts <- therapists %>% group_by(zip) %>% count(sort = TRUE)
+plot(counts$n, main = "Plot of Record Count per Zip",xlab="Zip Index (Descending)", ylab="Count of Records per Zip")
+```
+
+The graph shows only two main zip-codes, 681, 680, and 0, which is not very informative. The other zip codes had fewer than fifty records.
+
+We'll use the facility's name now that we've decided not to use general location or zip code.  We'll also keep exploring job title, duration, and ethnicity.
+
+
+#### Plot of General Location for Therapist Work
+
+There are a few columns I'm interested in using, such as general location and the zip code.  In the below plots, I'll explore these columns.
+
+```{r general_location}
+counts <- therapists %>% group_by(general_location) %>% count(sort = TRUE)
+plot(counts$n, main = "Plot of Record Count per Location",xlab="Location Index (Descending)", ylab="Count of Records per Location")
+```
+
+The data exploration looked into general location data.  We thought we might find insights about where treatment tends to occur.  We firstly group by location, get the count and plot the counts. We see there are seven main locations with more than two hundred records. The rest of the locations contain 25 or fewer records.  For the sake of data readability, we will filter out these sparse locations for understanding larger trends. It is worth noting that most of the data is not location-specific, including the telehealth video, phone, and where there is no location. This data might not be useful for understanding location trends but lets us know that many services are outside the HFS office.
+
+A lot of the general location data is telehealth - video.  I assume this means location does not matter.
+
+
+#### Appointment No Shows
+
+The column is_noshow is interesting because these are costly events for both HFS and for the potential benefactor. No_shows consume HFS appointment time and the person loses out on an opportunity for therapy. 
+
+```{r noshow_breakdown}
+tibble_data <- as_tibble(data)
+# data header
+head(tibble_data$is_noshow)
+grouped_no_show <- tibble_data %>% group_by(is_noshow) %>% count(sort=TRUE)
+ggplot(grouped_no_show) + geom_point(mapping = aes(x = reorder(is_noshow,-n), y = n)) +
+ggtitle("Count of Rows for Show vs NoShow") +
+xlab("Appointment Show or No Show") +
+ylab("Count of Category") +
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+# check for NAs
+tibble_data %>% filter(is_noshow == NA) %>% count()
+```
+
+We see that 15% of all rows are no shows. 15% seems like a surprisingly high number of appointment no shows for any organization. This metric is worth looking into further. There are no NAs in the column or values we want to filter.
+
+#### Number of Appointments per Person
+
+HFS has voiced an interest in the number of appointments and total duration spent per patient. While duration length or the number of appointments does not connotate to organizational success, they are metrics that HFS reports to funders. 
+
+```{r appointments}
+tibble_data <- as_tibble(data)
+# data header
+head(tibble_data$recordID)
+record_counts <- tibble_data %>% group_by(recordID) %>% count(sort=TRUE) %>% filter(n > 2)
+ggplot(record_counts) + geom_point(mapping = aes(x = reorder(recordID,-n), y = n)) +
+ggtitle("Plot of Repeated Record Count per Person") +
+xlab("Person's RecordId") +
+ylab("Count of Person's Appointments") +
+  theme(axis.text.x=element_blank(),
+        axis.ticks.x=element_blank())
+```
+
+There are only 460 records with more than one appointment with HFS, which is only 5% of all HFS records. From this we learn that almost all appointments are single-time appointments. Considering the few number of records with multiple appointments, it might not be worth looking further into the factors affecting duration or the number of appointments.
+
+
+#### Plot: Total Duration for each Therapist Job Title, Faceted by Program Name
+
+The next goal is to visualize the relationship between job title, duration, ethnicity, and the program. We'll show a few plots below that begin to explore this relationship.  Firstly, we will look at job title vs. duration across programs. Next, we'll include ethnicity as a color, but it doesn't tell us much about ethnicity.
+
+```{r therapist_type_vs_duration}
+ggplot(data = therapists) + geom_point(mapping = aes(x = job_title, y = total_duration_num, color=ethnic_identity)) +  facet_wrap(~ program_name, nrow = 2) +
+ggtitle("Total Appointment Duration for Each Therapist Job Title\nFacet by Program Name") +
+xlab("Job Title") +
+ylab("Duration (minutes)") + 
+  ylim(0, 130) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+The primary observation is the distribution of appointments across both program types and job titles. Therapist III only exists in their Mental Health program. Gambling only has Therapist I and II. Gambling duration is much lower and Mental Health appointment duration has a higher range. Most importantly, we see differences in the duration range, variance, and range by job title for each program. The implication of different durations across job titles might indicate that "job title" affects the duration of appointments or the type of appointments assigned to each therapist job title. 
+
+It isn't easy from the graph's colors to distinguish ethnicity. Using shape instead of color is even more challenging to read. 
+
+
+#### Plot: Duration vs. Job Title, Faceted by Program Name
+
+```{r job_title_vs_therapists}
+# therapist 1 is far less effective.  therapist is faster, possibly a different title?
+ggplot(data = therapists) + 
+  stat_summary(
+    mapping = aes(x = job_title, y = total_duration_num),
+    #fun.min = min,
+    #fun.max = max,
+    fun = median
+  ) + facet_grid(~ program_name) +
+ggtitle("Duration vs Job Title, Facet by Program Type") +
+xlab("Job Title") +
+ylab("Duration (minutes)") + 
+  ylim(0, 130) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+# we do get an equal or decrease in the mean time by experience.  What about the variance?  
+# therapist 3 are only seen in mental health
+# in substance abuse duration goes up from therapist 1 to 2, though it is lower than therapist and lead therapist.
+
+```
+
+#### Plot: Total Appointment Duration For Each Therapist Job Title, Faceted by Ethnicity, Colored for Location
+
+```{r}
+# but total_duration goes down with increase experience
+# I wonder if clients are more likely to show up in the future based on the previous experience who rendered the service.
+# durations do total together!
+# BEAUTIFUL, it shows the efficiency across types
+ggplot(data = therapists) + geom_point(mapping = aes(x = job_title, y = duration_num, color=facility)) + facet_wrap(~ ethnic_identity) +
+ggtitle("Total Appointment Duration for Each Therapist Job Title,\nFacet by Ethnicity, colored for Location") +
+xlab("Job Title") +
+ylab("Duration (minutes)") +
+ ylim(0, 130) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none")
+
+```
+
+```{r include=FALSE}
+ethnicity <- therapists %>% group_by(ethnic_identity) %>% group_by(job_title)
+ethnicity %>% summarise(
+  mean_total = mean(total_duration_num),
+  variance_total = var(total_duration_num),
+  mean_other = mean(duration_other_num),
+  variance_other = var(duration_other_num),
+  mean = mean(duration_num),
+  variance = var(duration_num)  
+)
+
+title <- therapists %>% group_by(job_title) %>% group_by(ethnic_identity)
+title %>% summarise(
+  mean_total = mean(total_duration_num),
+  variance_total = var(total_duration_num),
+  mean_other = mean(duration_other_num),
+  variance_other = var(duration_other_num),
+  mean = mean(duration_num),
+  variance = var(duration_num)
+)
+
+```
+  
+This graph is extremely complicated but also informative. Coloring by location is informative and tells us where ethnicities and job titles congregate. I hid the legend since I am less concerned with the actual location and more concerned with the general area.
+
+
+#### Plot: No show by Ethnicity
+
+```{r noshow_ethnicity}
+noshow_stats <- therapists %>% group_by(ethnic_identity) %>% count(is_noshow) %>% filter(n > 10)
+noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
+shows <- noshow_stats %>% filter(is_noshow == "TRUE")
+noshow_stats_consolidated <- inner_join(shows,noshows,by=c("ethnic_identity"), suffix = c("no", "yes"))
+noshow_stats_consolidated <- select(noshow_stats_consolidated, -c(is_noshowno, is_noshowyes))
+noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
+df <- noshow_percent
+
+ggplot(data = df) + geom_point(mapping = aes(x = ethnic_identity, y = noshow_percent)) + coord_flip() +
+ggtitle("Average No Show Percent\n by Ethnicity") +
+xlab("Ethnicity") +
+ylab("Average Percentage of No Shows")
+```
+
+This shows that the groups with the highest no-show rate across all programs looks like it is the Mexican ethnic identity. It is worthwhile to break down ethnic identity by the program to understand if this relationship still holds.  If it does, this research can explore how one might decrease the no show rate across the groups experiencing the highest rates of no-shows.
+
+#### Plot: Break down no show for ethnicity across program types
+
+```{r ethnicity_by_program_noshows}
+noshow_stats <- therapists %>% group_by(ethnic_identity, program_name) %>% count(is_noshow) %>% filter(n > 10)
+noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
+shows <- noshow_stats %>% filter(is_noshow == "TRUE")
+noshow_stats_consolidated <- inner_join(shows,noshows,by=c("ethnic_identity","program_name"), suffix = c("no", "yes"))
+noshow_stats_consolidated <- select(noshow_stats_consolidated, -c(is_noshowno, is_noshowyes))
+noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
+df <- noshow_percent
+
+ggplot(data = df) + geom_point(mapping = aes(x = ethnic_identity, y = noshow_percent)) +  facet_wrap(~ program_name, nrow = 2) +
+ggtitle("No Show Percentage for Each Ethnicity\nFacet by Program Name") +
+xlab("Job Title") +
+ylab("Duration (minutes)") + 
+  ylim(10, 25) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
+
+We see a similar dropout rate for both "Non-Spanish/Hispanic/Latino and Other Hispanic or Latino"  On the other hand, we see a far higher, even double, no show rate for those who are identified as the Mexican ethnic identity, which only exists in the "Mental Health" program type. This research should explore the Mexican ethnic identity within the "Mental Health Program."
+
+#### Plot: Mexican Dropout Percentage by Job Title within the Mental Health Program
+
+We can then go one step further and see if we see a difference in drop out, within the "Mental Health" program for the "Mexican" ethnic identity.
+
+```{r}
+mexican_ethnic_identity <- therapists %>% filter(program_name == "Mental Health" & ethnic_identity == "Mexican") %>% group_by(ethnic_identity,job_title)  %>% count(is_noshow)
+noshow_stats <- mexican_ethnic_identity
+noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
+shows <- noshow_stats %>% filter(is_noshow == "TRUE")
+noshow_stats_consolidated <- inner_join(shows,noshows,by=c("ethnic_identity","job_title"), suffix = c("no", "yes"))
+noshow_stats_consolidated <- select(noshow_stats_consolidated, -c(is_noshowno, is_noshowyes))
+noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
+df <- noshow_percent
+
+ggplot(data = df) + geom_point(mapping = aes(x = job_title, y = noshow_percent)) +
+ggtitle("No Show Percentage for the Mexican Ethnic Identity\nfor the Mental Health Program by Therapist Job Title") +
+xlab("Job Title") +
+ylab("Duration (minutes)") + 
+  ylim(20, 55) + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+```
+
+Now this looks AMAZING and like we've found something truly significant. However, when we look at the data we find only eight instances of the Mexican ethnic identity for Therapist II.  It is possible this relationship is significant but more data is needed to confirm this phenomenon. Otherwise, no-show rate is mostly similar across all ethnicities.
+
+#### Plot: Average No Show Percent for Each Therapist Job Title\n by Ethnicity, Faceted by Program Name
+
+There is now an opportunity to look at no-show rate across therapist job title, program name, and ethnicity.  The graph separates the data into facets for each program type and graphs no show percentage for each ethnicity, colored for therapist job title.  
+
+```{r noshows}
+
+noshow_stats <- therapists %>% group_by(job_title) %>% count(is_noshow)
+noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
+shows <- noshow_stats %>% filter(is_noshow == "TRUE")
+noshow_stats_consolidated <- inner_join(shows,noshows,by=c("job_title"), suffix = c("no", "yes")) 
+noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
+noshow_percent
+
+# All shows and no-shows are under
+noshow_stats <- therapists %>% group_by(job_title, ethnic_identity, program_name) %>% count(is_noshow) %>% filter(n > 10)
+noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
+shows <- noshow_stats %>% filter(is_noshow == "TRUE")
+noshow_stats_consolidated <- inner_join(shows,noshows,by=c("job_title","ethnic_identity","program_name"), suffix = c("no", "yes"))
+noshow_stats_consolidated <- select(noshow_stats_consolidated, -c(is_noshowno, is_noshowyes))
+noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
+df <- noshow_percent
+
+ggplot(data = df) + geom_point(mapping = aes(x = ethnic_identity, y = noshow_percent, color = job_title)) + 
+facet_wrap(~ program_name, nrow = 2) +
+ggtitle("Average No Show Percent for Each Therapist Job Title\n by Ethnicity, Faceted by Program Name") +
+xlab("Ethnicity") +
+ylab("Average Percentage of No Shows\n for Each Therapist Job Title") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
+
+Noticeable takeaway is a general trend for more experienced job titles to have a lower no-show percentage by graphed by ethnicity. You also notice that some ethnicities are only treated by one level of therapist by each program type. On average, mental health has lower no-show rates.
+
+#### Simple Linear Model of No Show Percentage vs Job Title + Ethnicity + Program
+
+Since we've created some insightful plots, it's worth getting a feeling of how strong the relationship is between no-show percentage and the other variables we've investigated. Moreover, the residuals and standard residuals are somewhat constant. 
+
+```{r linear_model_assumptions}
+score_model <- lm(df$noshow_percent ~ df$job_title + df$ethnic_identity + df$program_name, data = df)
+plot(score_model)
+shapiro.test(df$noshow_percent)
+```
+
+From the four plots, it seems the distribution might be a good candidate for a linear model.  Most of the data is normal in the qqplot and all the lines have a manageable leverage. Moreover, a Shapiro-Wilk's test shows the data is not significantly different from normal.
+
+R allows us to create a linear model and investigate the properties expected within a linear model.
+
+```{r linear_model}
+summary(score_model)
+```
+
+Most notable is no significant relationship between the no-show percentage with other variables. However, both the mental health program and most common ethnicity contained more extreme values. It gives us feedback that no-show percentage is likely more complicated than job title alone. However, I noticed that some facilities had much higher no-show rates.  I bet if I include facility it might change a lot in the model.
+
+#### Linear Model with Facility
+
+This time we heavily filter to the main few facility locations and include it in the linear model. Again, I only want a few main facilities since too many locations will heavily bias the model toward significance.
+
+```{r with_facility}
+
+main_facilities <- unique(therapists %>% group_by(facility) %>% count(is_noshow) %>% filter(n > 100))
+
+noshow_stats <- therapists %>% group_by(job_title, ethnic_identity, program_name, facility) %>% count(is_noshow)
+noshows <- noshow_stats %>% filter(is_noshow == "FALSE")
+shows <- noshow_stats %>% filter(is_noshow == "TRUE")
+noshow_stats_consolidated <- inner_join(shows,noshows,by=c("job_title","ethnic_identity","program_name","facility"), suffix = c("no", "yes"))
+noshow_stats_consolidated <- select(noshow_stats_consolidated, -c(is_noshowno, is_noshowyes))
+noshow_percent <- noshow_stats_consolidated %>% add_column(noshow_percent = .$nno / (.$nyes + .$nno) * 100)
+df <- noshow_percent
+# filter by major facilities
+df <- inner_join(df,main_facilities,by=c("facility"), suffix = c("no", "yes"))
+```
+
+Above, we already showed that noshow_percent is not statistically different from normal and the assumptions of normality are generally held by the data. Below, we show the relationship between noshow_percent and other important varaibles like job title, ethnicity, and facility.
+
+```{r normal_check_facilities}
+facility.model <- lm(df$noshow_percent ~ df$job_title + df$program_name + df$ethnic_identity + df$facility, data = df)
+summary(facility.model)
+```
+
+What I'm most interested in is the relationship between the main variables by facility. We then find a relationship between Therapist I, ethnicity, and a few locations, which might be insightful since one might expect more no-shows with a newer therapist.  Also, we might expect that certain locations are less able to handle certain ethnicities, such as a lack of support for Spanish. However, depending on the facility filter I use the stats change, which makes me think that some of the significance is due to the sheer number of facilities. Further work should categorize facilities based on size or primary ethnicities and try to remodel with fewer variables.
+
+### Integrating RQ 1 and RQ2
+
+#### Looking at Day Lapse from Signup to Appointment by Facility
+Sai did a lot of useful work concerning the date on which appointment data is entered.  I thought it would be interesting to explore whether this data looks the same across all the primary facilities for HFS. If the data varies, maybe we can glean differences in the busyness of facilities due to needing to create appointments further in the future. From these observations, we might be able to better understand which facilities are more difficult for customers to use.
+
+```{r appointment_entry_lapse_by_facility}
+
+average_lapse <- HFS_data %>% select(facility, AD) %>% group_by(facility) %>% drop_na() %>% summarise(mean = mean(AD)) %>% arrange(mean)
+
+filter_to_large_facilities <- inner_join(average_lapse,main_facilities,by=c("facility"), suffix = c(".1", ".2"))
+
+plot(filter_to_large_facilities$mean,xlab = "Facility, Ordered by Mean", ylab = "Day Lapse from Data Entry to Appointment", main = "Plot of Day Lapse to Appointments by Facility")
+
+```
+
+From the above plot we can see that HFS is fairly efficient at getting customers registered and into appointments for all of their facilities that handled at least 100 customers in the dataset. Given the discovered efficiency for HFS when processing new persons, it might be not be worth digging deeper into this lapse between signup to appointment day.
+
+#### Looking at Timestamp Volumes per Facility, no Facet
+
+If we look across all facilities, we can see how the HFS volumes increase over time.  This is particularly noticeable in 2021, where HFS volume substantially increased.
+
+```{r timestamp_appointment_entry_lapse_by_facility}
+facility_timestamp_count <- HFS_data %>% select(facility, AD) %>% group_by(facility, AD) %>% drop_na() %>% count(sort=TRUE) %>% arrange(n)
+
+ggplot(facility_timestamp_count, aes(y =facility_timestamp_count$AD, x =facility_timestamp_count$n)) + 
+  geom_point() +
+ggtitle("Daily Facility Volume per Day") +
+xlab("Date Time") +
+ylab("Count of Appointments per Day at the Facility") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))
+
+```
+
+#### Looking at Timestamp Volumes by Facility, Facet by Facility
+
+```{r timestamp_appointment_entry_lapse_by_facility_facet}
+facility_timestamp_count <- HFS_data %>% select(facility, AD) %>% group_by(facility, AD) %>% drop_na() %>% count(sort=TRUE) %>% arrange(n)
+
+filter_to_large_facilities <- inner_join(facility_timestamp_count,main_facilities,by=c("facility"), suffix = c(".1", ".2"))
+
+sorted <- filter_to_large_facilities %>% group_by(facility) %>% summarise(mean = mean(n.2)) %>% arrange(mean)
+
+with_averages <- inner_join(sorted,filter_to_large_facilities,by=c("facility"), suffix = c(".1", ".2"))
+
+ggplot(filter_to_large_facilities, aes(y =filter_to_large_facilities$AD, x=filter_to_large_facilities$n.1)) + 
+  geom_point() +
+ggtitle("Facility Volume per Day, Facet by Facility") +
+xlab("Date Time") +
+ylab("Count of Appointments per Day at the Facility") + 
+  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1))+
+  geom_violin()+
+  facet_wrap(~filter_to_large_facilities$facility, labeller = labeller(groupwrap = label_wrap_gen(5)))
+
+```
+
+The goal of the above graph is to visualize how volume has changed over time at the primary facilities for HFS. With this knowledge, our research can better understand what HFS growth has looked like at its primary facilities over the past few years. As is expected, most facilities have a constant or slight increase in volume over time.  However, Some facilities like HFS - C. Have had substantial growth, maybe 5x growth since 2020. However, most facilities show a slow growth in daily appointments over time. 
+
+Per future analysis, from this information it might be useful to calculate facility capacity as a function of therapist count per facility. 
+
+#### RQ 3
+
+###  RQ Rhonda
+
+Of the clients receiving services that identified as Hispanic or Mexican, how many received services at which branch
+
+### Dataset Used
+
+```{r}
+HFS_data<-read.csv("HFS Service Data.csv")
+HFS.Ethnic_Identity<-HFS_data
+```
+
+```{r}
+str(HFS.Ethnic_Identity)
+```
+
+### To see the names of Columns
+
+```{r} 
+names(HFS.Ethnic_Identity)
+```
+
+### Deleted Columns that I didn't need and named it HFS.Hispanic.cleaned
+
+```{r}
+HFS.Ethnicity2 <- HFS.Ethnic_Identity %>% select(c(1:4,7,9,17,24,25,30,46,48,49:51))
+```
+```{r}
+names(HFS.Ethnicity2)
+```
+
+"program_name"         
+"facility"                   
+"program_unit_description"      
+"age"                      "ethnic_identity"         
+
+ 
+** I now have 5 Variables (columns) & 8745 rows
+
+
+ ###  apply count function
+count (df, ethnic_identity)
+###  RESULTS
+1 Mexican                       148
+2 Not Collected                 165
+3 Not Spanish/Hispanic/Latino  7820
+4 Other Hispanic or Latino      471
+5 Unknown                       141
+
+###Clean NA & "Not Collected"
+###Find missing values
+```{r}
+#is.na(HFS.Ethnic_identity.cleaned) # too long to show
+```
+
+###Delete Rows that have "Not Collected" in variable Ethnic_Identity
+```{r}
+HFS.Ethnicity2 = HFS.Ethnic_Identity[HFS.Ethnic_Identity$ethnic_identity  != "Not Collected",]
+```
+
+###Replace "Not Spanish/Hispanic/Latino" with "Not Latino"
+```{r}
+HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Not Spanish/Hispanic/Latino"]<- "Not Latino"
+```
+
+###Replace "Other Hispanic or Latino" with "Latino"
+```{r}
+HFS.Ethnicity2$ethnic_identity[HFS.Ethnicity2$ethnic_identity== "Other Hispanic or Latino"]<- "Latino"
+```
+# Bar chart of Ethnicity & Facility
+
+This BarChart shows us that the majority of Latinos served attend the
+North Omaha Campus and the Heartland Family Service-Central location.
+```r
+ggplot(HFS.Ethnicity2) +
+  aes(x = facility, fill = ethnic_identity)+
+  labs(fill = "Ethnicity")+
+  geom_bar() +
+  scale_fill_hue(direction = 1) +
+  coord_flip() +
+  theme_minimal() +
+  theme(axis.title.x = element_text(size = 9L))
+```
+
+
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Final%20Git%20Repository%20Data%20to%20Decisions/BarChartStackedFacility_Ethnicity.jpeg)<!-- -->
+
+This BoxPlot identifies that most Latinos receive services for Mental
+Health Programs and are between the ages of 18 and 50.
+``` r
+ggplot(HFS.Ethnicity2) +
+  aes(x = program_unit_description, y = age, fill = ethnic_identity) +
+  geom_boxplot(width=0.5, lwd=1) +
+  scale_color_hue(direction = 1) +
+  ylab("Age") + xlab("Program Unit")+
+  labs(fill = "Ethnicity") +
+  labs (title = "Ethnicity by Age & Program Unit") +
+  coord_flip() +
+  theme_minimal()
+```
+
+
+![](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Final%20Git%20Repository%20Data%20to%20Decisions/BoxPlot-updated.jpeg)<!-- -->
+
+
+# Thing explored:
+We have explored many different types of attributes that are required to solve the 3 research questions and also we analysed the data that we have now can also get other results.Further We can subset each and every Character data and get additional information.
+
+# Results
+All the Data is perfectly cleaned and analysed. We can get clear and beautiful plots or results from the cleaned data.
