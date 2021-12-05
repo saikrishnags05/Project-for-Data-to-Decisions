@@ -11,8 +11,8 @@ HFS comprises multiple facilities between Iowa and Nebraska that exhibit differe
 ## Research Questions
 
 ### Research Question #1
-Do significant delays exist between enrolling in an event, entering
-into the system, and the enrollment approval?
+**Do significant delays exist between enrolling in an event, entering
+into the system, and the enrollment approval?**
 
 ### The Decisions our Analysis Targets Could Support
 
@@ -23,8 +23,8 @@ they can take action on the particular location and improve the
 approving process.
 
 ### Research Question #2
-Do HFS facility locations have a significant effect on the number of
-missed appointments?
+**Do HFS facility locations have a significant effect on the number of
+missed appointments?**
 
 ### The Decisions our Analysis Targets Could Support
 
@@ -53,7 +53,7 @@ about the number of appointments and durations by each patient
 since it affects the funding HFS receives.
 
 ### Research Question #3
-Which facilities provide services to clients identifying as
+**Which facilities provide services to clients identifying as
 Latino?**
 
 ### The Decisions our Analysis Targets Could Support
