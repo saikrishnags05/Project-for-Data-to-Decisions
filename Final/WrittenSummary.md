@@ -189,7 +189,7 @@ overall enrollment time is decresed compared to previous years.
 -   Overall there is no delay in the registration process compared to
     previous years.
     
-\#\#\#Iowa
+### Iowa
 
 In the below code i have filtered the original data with the state name
 and aggregate the whole data based to get an average time taken for
@@ -210,7 +210,7 @@ the data that is present in Iowa
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-\#\#\#Nebrska
+### Nebrska
 
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
