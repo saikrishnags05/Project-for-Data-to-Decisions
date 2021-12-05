@@ -224,7 +224,7 @@ p + geom_line(aes(x = lwr), color = "red", linetype = "dashed")+
 
     ## `geom_smooth()` using formula 'y ~ x'
 
-![](HFS_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+![](WrittenSummary_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 (optional) Now for just verification i am trying to get a Residuals of
 the data that is present in Iowa
@@ -239,7 +239,7 @@ the data that is present in Iowa
 
     ## `geom_smooth()` using formula 'y ~ x'
 
-![](HFS_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+![](WrittenSummary_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
 ## Research Question 3:
 
@@ -259,7 +259,7 @@ ggplot(HFS.Ethnicity2) +
   theme(axis.title.x = element_text(size = 9L))
 ```
 
-![](HFS_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
+![](WrittenSummary_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
 
 This BoxPlot identifies that most Latinos receive services for Mental
 Health Programs and are between the ages of 18 and 50.
@@ -276,7 +276,7 @@ ggplot(HFS.Ethnicity2) +
   theme_minimal()
 ```
 
-![](HFS_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
+![](WrittenSummary_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
 
 # R plots
 
@@ -312,7 +312,7 @@ p <- ggplot(data=ag_ia, aes(x=AD_APD,y=facility,fill=AD_year)) +
 p
 ```
 
-![](HFS_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
+![](WrittenSummary_files/figure-gfm/unnamed-chunk-19-1.png)<!-- -->
 
 ``` r
 HFS_data$state[HFS_data$state == "NE"] <- "nebrska"
@@ -330,7 +330,7 @@ p <- ggplot(data=ag_ne, aes(x=AD_APD,y=facility,fill=AD_year)) +
 p
 ```
 
-![](HFS_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
+![](WrittenSummary_files/figure-gfm/unnamed-chunk-20-1.png)<!-- -->
 
 If we observe the Graph we can tell that over all behavior of enrollment
 process w.r.t the time taken for per person to enroll for an event from
@@ -400,7 +400,7 @@ ylab("Percentage of Clients Who Miss Appointments") +
  theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1), legend.position = "none") 
 ```
 
-![](HFS_files/figure-gfm/facility-1.png)<!-- -->
+![](WrittenSummary_files/figure-gfm/facility-1.png)<!-- -->
 
 The purpose of the above graph is to highlight the stark different in
 the y-axis for each facet. The y-axis shows no show percentage, which
@@ -453,7 +453,7 @@ ggplot(HFS.Ethnicity2) +
   theme_minimal()
 ```
 
-![](HFS_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
+![](WrittenSummary_files/figure-gfm/unnamed-chunk-23-1.png)<!-- -->
 
 \#\#Bar chart of Ethnicity & Facility
 
@@ -470,7 +470,7 @@ p<-ggplot(HFS.Ethnicity2) +
 p
 ```
 
-![](HFS_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
+![](WrittenSummary_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
 
 # Results
 
