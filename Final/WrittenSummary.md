@@ -6,7 +6,7 @@ By Sai Krishna Gaduputi Subbammagari, Chad Crowe, and Rhonda Silva
 
 ## Abstract
 
-HFS comprises multiple facilities between Iowa and Nebraska that exhibit different aspects of customer behavior related to 1. enrollment, missed appointments, and the ethnicity of those appointments. Our group takes a deep dive into facility information concerning their enrollment process, the rate of missed appointments, and ethnicity information. We find the enrollment delays, missed appointments, and Latino ethnicity varies dramatically, based on the facility. Our study makes recommendations based on these findings and how HFS can investigate these facility differences to improve the user experience and organization's efficiency.
+Heartland Family Services(HFS) comprises multiple facilities between Iowa and Nebraska that exhibit different aspects of customer behavior related to 1. enrollment, missed appointments, and the ethnicity of those appointments. Our group takes a deep dive into facility information concerning their enrollment process, the rate of missed appointments, and ethnicity information. We find the enrollment delays, missed appointments, and Latino ethnicity varies dramatically, based on the facility. Our study makes recommendations based on these findings and how HFS can investigate these facility differences to improve the user experience and organization's efficiency.
 
 ## Research Questions
 
@@ -33,9 +33,9 @@ have higher rates of missing appointments, such as issues with the facility
 accessibility or local financial burdens like access to transportation.
 
 The second research question concerns exploring the job role of
-therapists within HFS, with a specific interest in appointment no-shows.
+therapists within HFS with a specific interest in appointment no-shows.
 When patients fail to appear for appointments, this costs HFS time and
-costs the patient opportunity for therapy. We explore whether clear patterns might contribute to patients missing visits,
+costs the patient opportunity for therapy. We explore whether clear patterns might contribute to patients missing visits
 such as a location or ethnicity effect. It might be the case that
 particular facilities are less friendly in supporting a language, affecting the rate of dropped appointments.
 
@@ -128,17 +128,17 @@ want to filter.
 **Step 9** Delete Rows that have "Not Collected" in variable
 Ethnic\_Identity.
 
-**Step 10** I then discovered that the variable "ethnic\_identity" had
+**Step 10** Wethen discovered that the variable "ethnic\_identity" had
 the following classes *Mexican *Not Collected *Not
 Spanish/Hispanic/Latino *Other Hispanic or Latino \*Unknown
 
-I omitted the rows that had "Not collected" or "Unknown" since this
+We omitted the rows that had "Not collected" or "Unknown" since this
 information will not help with the interpretation of data.
 
-I then changed "Mexican" to "Latino" and "Other Hispanic or Latino" to
-"Latino" I changed "Not Spanish/Hispanic/Latino" to "Not Latino" This
+Wethen changed "Mexican" to "Latino" and "Other Hispanic or Latino" to
+"Latino" we changed "Not Spanish/Hispanic/Latino" to "Not Latino" This
 leaves the data with 2 classes for the variable titled
-"ethnic\_identity" Latino Not Latino
+"ethnic\_identity" Latino and Not Latino
 
     ##  [1] "program_name"             "facility"                
     ##  [3] "actual_date"              "event_name"              
@@ -159,12 +159,12 @@ In the below code, I have filtered the original data with the state name
 and aggregate the whole data based to get an average time taken for
 completing the HFS process.
 
-In the Below code, I have built a model to see if it have a better
+In the Below code, I have built a model to see if it has a better
 confidence in between the attributes in the data frame or not tried to get a predict value for over all data for Iowa
 
 ### Iowa
 
-Now I have created a plot to see how the predicted value is similar with
+Now I have created a plot to see how the predicted value is similar
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 (optional) Now for just verification, i am trying to get a Residuals of
@@ -189,16 +189,16 @@ the data that is present in Iowa
 
 
 If we observe the graph we can tell that overall behavior of enrollment
-process w.r.t the time taken for per person to enroll for an event from
+process w.r.t the time taken per person to enroll for an event from
 past **8 years** in the state of **Iowa**.
 
 -   There are few facilities where it is taking more time to enroll for
     a person compared to the previous year.
 
--   We can notice that in the enrolling time is so fast in schools.
+-   We can notice that the enrolling time is faster in schools.
 
 -   From the plot, I can tell that all the enrollments have been late for
-    In the past two years, there may be multiple reasons.
+    the past two years. There may be multiple reasons.
 
 **example: -** lockdown because Covid-19 which stopped the process
 
@@ -283,14 +283,13 @@ Health Programs and are between the ages of 18 and 50.
 
 \#\#Bar chart of Ethnicity & Facility
 
-This BarChart shows us that the majority of Latinos served to attend the
-North Omaha Campus and the Heartland Family Service-Central location.
+The majority of Latino clients received services at the North Omaha Campus and at the HFS-Central location. HFS should look at staffing these two facilities with bi-lingual (Spanish) therapists and receptionists. HFS could possibly benefit by having the bilingual staff at the Sarpy Office as well so that there are 3 branches throughout the metro area to serve Latino clients.
 
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
 
 # Conclusion
 
-Our research takes a deep dive into the inner workings of HFS facilities. We looked at appointment delays, missed appointments, and the ethnicities at each facility. We found large discrepancies in appointment delays, missed appointments, and the number of persons with a Latino ethnicity among locations. These results are detailed via the plots in the above section. Firstly, while we find that appointment delays vary widely among facilities, some facilities, such as schools, have a faster registration and approval process, wheras counties take much longer. We also saw that the overall enrollment delay tends to decrease over time. We found that missed appointments vary by multiple factors based on location in a similar vein.  The Sarpy location might have a ten-percent missed appointment rate, but the Blondo location has a nearly thirty-percent rate of missed appointments. In our opinion, this unveils a massive discrepancy in the user experience and facility operations. However, we are not such why this delay occurs. We suspect the delay might be a function of facility accessibility, such as traffic, parking, or alternative transportation options. Thirdly, we analyzed the number of Latinos by location. We found that three locations stand out as serving this demographic and suggest each of these locations has bilingual staff to support their experience at HFS. Based on these findings, we believe that HFS can better understand the differences in user experience by the facility and improve the user experience throughout Nebraska and Iowa locations.
+Our research takes a deep dive into the inner workings of HFS facilities. We looked at appointment delays, missed appointments, and the ethnicities at each facility. We found large discrepancies in appointment delays, missed appointments, and the number of persons with a Latino ethnicity among locations. These results are detailed via the plots in the above section. Firstly, while we find that appointment delays vary widely among facilities, some facilities, such as schools, have a faster registration and approval process, wheras counties take much longer. We also saw that the overall enrollment delay tends to decrease over time. We found that missed appointments vary by multiple factors based on location in a similar vein.  The Sarpy location might have a ten-percent missed appointment rate, but the Blondo location has a nearly thirty-percent rate of missed appointments. In our opinion, this unveils a massive discrepancy in the user experience and facility operations. However, we are not sure why this delay occurs. We suspect the delay might be a function of facility accessibility, such as traffic, parking, or alternative transportation options. Thirdly, we analyzed the number of Latinos by location. We found that three locations stand out as serving this demographic and suggest each of these locations has bilingual staff to support their experience at HFS. Based on these findings, we believe that HFS can better understand the differences in user experience by the facility and improve the user experience throughout Nebraska and Iowa locations.
 
 # Reference
 
