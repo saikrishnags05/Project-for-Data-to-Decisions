@@ -2,9 +2,11 @@
 
 By Sai Krishna Gaduputi Subbammagari, Chad Crowe, and Rhonda Silva
 
+# Overview
+
 ## Abstract
 
-# Overview
+HFS comprises multiple facilities between Iowa and Nebraska that exhibit different aspects of customer behavior related to 1. enrollment, missed appointments, and the ethnicity of those appointments. Our group takes a deep dive into facility information concerning their enrollment process, the rate of missed appointments, and ethnicity information. We find the enrollment delays, missed appointments, and the latino ethnicity vary dramatically, based on the facility. Our study makes recommendations based on these findings and how HFS can investigate these facility differences to improve the user experience and organization's efficiency.
 
 ## Research Questions
 
