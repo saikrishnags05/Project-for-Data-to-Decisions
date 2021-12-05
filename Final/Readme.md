@@ -22,7 +22,7 @@
 
 ## Project Work Plan
 
-Chad, Sai and Rhonda each contributed to the project plan. Sai created the repository, Chad created the project plan timeline, and Rhonda proofread.
+Chad, Sai, and Rhonda each contributed to the project plan. Sai created the repository, Chad made the project plan timeline, and Rhonda proofread.
 
 ## Research Questions
 
@@ -30,19 +30,19 @@ Each of us split up the research question.  Chad worked on the first research qu
 
 ## Data Cleaning Documentation
 
-Each of us worked on the data cleaning documentation for our research question.  Sai worked on the first question, Chad the second, and Rhonda on the third.  Rhond proofread.
+Each of us worked on the data cleaning documentation for our research question.  Sai worked on the first question, Chad the second, and Rhonda on the third.  Rhonda proofread.
 
 ## R Script
 
-Chad, Sai and Rhonda each contributed to the project plan. Sai worked on Research Question 1 Chad worked on Research Question 2 Rhonda worked on Research Question 3 Chad proofread
+Chad, Sai, and Rhonda each contributed to the project plan. Sai worked on Research Question 1 Chad worked on Research Question 2 Rhonda worked on Research Question 3 Chad proofread
 
-The entire group is performing data exploration concerning location and its relationship to other columns, such as the onboarding duration, ethnicity, program name, and job title. Given this general direction of interest, each of us explored a related research question. Fortunately, based on the data exploration documentation, we are updating the direction of our research. Specifically, how does onboarding duration change when enhanced by interesting findings concerning ethnicity, program name, and job title. Part of the progress demonstrated by this assignment intertwines these aspects.
+The entire group is performing data exploration concerning the location and its relationship to other columns, such as the onboarding duration, ethnicity, program name, and job title. Given this general direction of interest, we explored a related research question. Fortunately, based on the data exploration documentation, we are updating the direction of our research. Specifically, how does onboarding duration change when enhanced by interesting findings concerning ethnicity, program name, and job title. Part of the progress demonstrated by this assignment intertwines these aspects.
 
 ## R Plots
 
-Chad, Sai and Rhonda each contributed to the project plan. Sai worked on Research Question 1 Chad worked on Research Question 2 Rhonda worked on Research Question 3 Rhonda proofread
+Chad, Sai, and Rhonda each contributed to the project plan. Sai worked on Research Question 1 Chad worked on Research Question 2 Rhonda worked on Research Question 3 Rhonda proofread
 
-Each person went ahead and readdressed their research question from the initial “Research Questions” assignment. Secondly, each person chose a particularly informative plot that best-fit or best-explained the exploration and analysis of their research question. Thirdly, each person provided their own explanation of their plot in one or two paragraphs. Chad combined the work of all three team persons and also performed the proofreading.
+Each person went ahead and readdressed their research question from the initial "Research Questions" assignment. Secondly, each person chose a particularly informative plot that best fit or explained the exploration and analysis of their research question. Thirdly, each person explained their plot in one or two paragraphs. Chad combined the work of all three team persons and also performed the proofreading.
 
 ## Project Presentation
 
@@ -50,14 +50,8 @@ Chad put together the structure for the slides. Chad and Sai decided on a final 
 
 ## Git Repository Package
 
-Sai put together the written summary, including rectifying link issues to the plots. Chad put together the Readme.md and gathered all the remaining deliverables.  Chad also updated the written summary Rmd so it would compile. Rhonda revised the code for the written summary and comprehensive analysis based on the peer reviews.
+Sai put together the written summary, including rectifying link issues to the plots. Chad put together the Readme.md and gathered all the remaining deliverables.  Chad also updated the written summary Rmd so it would compile. Finally, Rhonda revised the code for the written summary and comprehensive analysis based on the peer reviews.
 
 # Proofreader's Sign-off Statement
 
 Chad proofread the slides and the comprehensive analysis. Rhonda proofread the written summary.
-
-
-
-
-
-
