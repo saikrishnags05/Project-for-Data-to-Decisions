@@ -1,74 +1,12 @@
+# Written Summary
 
-<center>
-<h1>
-HFS-Documentation
-</h1>
-</center>
-<center>
-<h3>
-<u>table of contents</u>
-</h3>
-</center>
+By Sai Krishna Gaduputi Subbammagari, Chad Crowe, and Rhonda Silva
 
--   [Research Question](#research-questions)
+## Abstract
 
--   [Data Cleaning](#data-cleaning)
+# Overview
 
--   [R Script](#r-script)
-
--   [R plots](#r-plots)
-
--   [Results](#results)
-
--   [Conclusion](#conclusion)
-
--   [Reference](#reference)
-
-## Team Members:
-
--   Sai Krishna Gaduputi Subbammagari
-
--   Chad Crowe
-
--   Rhonda Silva
-
-# Licence
-
-[GNU General Public License
-v3.0](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/LICENSE)
-
-# Introduction
-
-Heartland Family Service, which was founded in Omaha in 1875, served
-more than 79,000 individuals and families last year through direct
-services, education, and outreach from more than 15 facilities in east
-central Nebraska and southwest Iowa. In the following focus areas, our
-programs provide important human services to children, individuals, and
-families:
-
-• Housing, Safety, and Financial Stability
-
-• Child & Family Well-Being
-
-• Counseling & Prevention
-
-Staff can hand-craft an integrated, multi-service, trauma-informed
-strategy to help clients toward safety, well-being, and, ultimately,
-self-sufficiency, thanks to their programs and services. A sliding
-pricing scale is available for some of their counseling services.
-
-Heartland Family Service’s objective is to enhance communities by
-providing education, counseling, and support services to individuals and
-families. Last year, Heartland Family Service, which was founded in
-Omaha in 1875, served 60,309 individuals and families through direct
-services, education, and outreach from more than 15 locations in east
-central Nebraska and southwest Iowa. In the following target areas:
-Child & Family Well-Being, Counseling & Prevention, and Housing, Safety,
-& Financial Stability,their programs provide important human services to
-the individuals and families that ultimately create the future of our
-community.
-
-# Research Questions
+## Research Questions
 
 **1)Do significant delays exist between enrolling in an event, entering
 into the system, and the enrollment approval?**
@@ -122,7 +60,11 @@ Which facilities provide services to Latino ethnicity? Would the Clients
 prefer to have communication in Spanish? Do these facilities provide
 Spanish-speaking therapists?
 
-# Data Cleaning
+## The decisions your analysis targets or could help support
+
+NEED TO ADD CONTENT HERE
+
+# Data Cleaning Choices
 
 We have created a new dataset based which can help use to achive a bvest
 results for our Research Question. Attributes are mentioned bellow.
@@ -212,127 +154,10 @@ leaves the data with 2 classes for the variable titled
     ## [17] "AD_year"                  "AD_ED"                   
     ## [19] "ED_APD"                   "AD_APD"
 
-# R Script
+## Overview summary of answers to your research questions with supporting plots and statistical results:
+– A persuasive argument for a decision that should make based on your results,
 
 ## Research Question 1
-
-\#\#\#Iowa
-
-In the below code i have filtered the original data with the state name
-and aggregate the whole data based to get an average time taken for
-completing the HFS process.
-
-In the Below code i have build a model to see if it have better
-confidence in between the attributes in the data frame or not
-
-    ## 
-    ## Call:
-    ## lm(formula = AD_APD ~ facility + AD_year, data = ag_ia)
-    ## 
-    ## Coefficients:
-    ##                                                (Intercept)  
-    ##                                                     2.5038  
-    ##                                 facilityCenter Mall Office  
-    ##                                                     3.3721  
-    ##                 facilityHeartland Family Service - Central  
-    ##                                                     6.2717  
-    ## facilityHeartland Family Service - Child and Family Center  
-    ##                                                    -0.4007  
-    ##                 facilityHeartland Family Service - Gendler  
-    ##                                                     1.7091  
-    ##                facilityHeartland Family Service - Glenwood  
-    ##                                                    -2.7996  
-    ##         facilityHeartland Family Service - Heartland Homes  
-    ##                                                    10.2086  
-    ##                   facilityHeartland Family Service - Lakin  
-    ##                                                    -5.0006  
-    ##                   facilityHeartland Family Service - Logan  
-    ##                                                     7.8554  
-    ##                   facilityHeartland Family Service - Sarpy  
-    ##                                                     3.7283  
-    ##             facilityKanesville Alternative Learning Center  
-    ##                                                    -1.7283  
-    ##                           facilityKirn Junior High  School  
-    ##                                                    -2.8469  
-    ##                               facilityKreft Primary School  
-    ##                                                    -1.5871  
-    ##                          facilityLewis Central High School  
-    ##                                                     0.4415  
-    ##                        facilityLewis Central Middle School  
-    ##                                                    -1.2661  
-    ##                                        facilityMicah House  
-    ##                                                    -1.9297  
-    ##     facilityNorth Omaha Intergenerational Campus (Service)  
-    ##                                                    -2.6552  
-    ##                       facilityThomas Jefferson High School  
-    ##                                                     0.1272  
-    ##                     facilityTitan Hill Intermediate School  
-    ##                                                    -0.5585  
-    ##                               facilityWilson Middle School  
-    ##                                                    -0.6734  
-    ##                                                AD_year2015  
-    ##                                                    -0.5958  
-    ##                                                AD_year2016  
-    ##                                                     2.7291  
-    ##                                                AD_year2017  
-    ##                                                     1.5950  
-    ##                                                AD_year2018  
-    ##                                                     0.2244  
-    ##                                                AD_year2019  
-    ##                                                     1.2875  
-    ##                                                AD_year2020  
-    ##                                                     4.3986  
-    ##                                                AD_year2021  
-    ##                                                     0.7679
-
-    ##         1         2         3 
-    ##  3.398884  6.343865 17.111017
-
-    ##         fit       lwr      upr
-    ## 1  3.398884 -3.981651 10.77942
-    ## 2  6.343865  0.627303 12.06043
-    ## 3 17.111017  5.049678 29.17236
-
-tried to get a predict value for over all data for Iowa
-
-Now i have created a plot to see how the predicted value is similar with
-![](WrittenSummary_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
-
-(optional) Now for just verification i am trying to get a Residuals of
-the data that is present in Iowa
-
-    ##             Df Sum Sq Mean Sq F value  Pr(>F)   
-    ## facility    19  321.2  16.905   2.304 0.00932 **
-    ## Residuals   51  374.3   7.339                   
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-\#\#\#Nebrska
-
-![](WrittenSummary_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
-
-    ##             Df Sum Sq Mean Sq F value   Pr(>F)    
-    ## facility    14   3810  272.14  18.781 1.44e-11 ***
-    ## AD_year      8    353   44.08   3.042   0.0116 *  
-    ## Residuals   32    464   14.49                     
-    ## ---
-    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
-
-## Research Question 3:
-
-### Bar chart of Ethnicity & Facility
-
-This BarChart shows us that the majority of Latinos served attend the
-North Omaha Campus and the Heartland Family Service-Central location.
-![](WrittenSummary_files/figure-gfm/unnamed-chunk-17-1.png)<!-- -->
-
-This BoxPlot identifies that most Latinos receive services for Mental
-Health Programs and are between the ages of 18 and 50.
-![](WrittenSummary_files/figure-gfm/unnamed-chunk-18-1.png)<!-- -->
-
-# R plots
-
-# Research Question 1
 
 If we observe the Graph we can tell that over all behavior of enrollment
 process w.r.t the time taken for per person to enroll for an event from
@@ -363,6 +188,38 @@ overall enrollment time is decresed compared to previous years.
 
 -   Overall there is no delay in the registration process compared to
     previous years.
+    
+\#\#\#Iowa
+
+In the below code i have filtered the original data with the state name
+and aggregate the whole data based to get an average time taken for
+completing the HFS process.
+
+In the Below code i have build a model to see if it have better
+confidence in between the attributes in the data frame or not tried to get a predict value for over all data for Iowa
+
+Now i have created a plot to see how the predicted value is similar with
+![](WrittenSummary_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
+
+(optional) Now for just verification i am trying to get a Residuals of
+the data that is present in Iowa
+
+    ##             Df Sum Sq Mean Sq F value  Pr(>F)   
+    ## facility    19  321.2  16.905   2.304 0.00932 **
+    ## Residuals   51  374.3   7.339                   
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+\#\#\#Nebrska
+
+![](WrittenSummary_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
+
+    ##             Df Sum Sq Mean Sq F value   Pr(>F)    
+    ## facility    14   3810  272.14  18.781 1.44e-11 ***
+    ## AD_year      8    353   44.08   3.042   0.0116 *  
+    ## Residuals   32    464   14.49                     
+    ## ---
+    ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 # Research Question 2
 
@@ -437,8 +294,6 @@ This BarChart shows us that the majority of Latinos served attend the
 North Omaha Campus and the Heartland Family Service-Central location.
 
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
-
-# Results
 
 # Conclusion
 
