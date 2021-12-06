@@ -22,6 +22,13 @@ facility till date. So that If they find any delay in enrolling, then
 they can take action on the particular location and improve the
 approving process.
 
+The  research question also help in tracking the process of enrollement 
+in all facilities with respect to state.
+
+This research explore the whole topic with the help of years. I compared the average time taken for total
+registration process for a facility in a state with respect to years.
+
+
 ### Research Question #2
 **Do HFS facility locations have a significant effect on the number of
 missed appointments?**
