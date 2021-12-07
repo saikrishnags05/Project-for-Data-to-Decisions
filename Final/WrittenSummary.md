@@ -44,7 +44,7 @@ HFS deeply cares about the experiences of minority demographics, therefore, we e
 
 # Data Cleaning Choices
 
-We have created a new dataset to help us achieve our research question's best results. Attributes are mentioned below.
+We have created a new dataset to help us achieve the best results for our research question. The attributes studies are listed below:
 
 `facility`, `actual_date`, `event_name`, `date_entered`,
 `approved_date`, `program_unit_description`, `zip`,
@@ -52,47 +52,23 @@ We have created a new dataset to help us achieve our research question's best re
 `Job Title (Therapists I, II, and III)`,`Appointment Duration`.
 `Appointment No Shows`.
 
-**Step 1:-** collect all the columns that are required and store them in
-a data frame **HFS\_data**
+**Step 1:-** collect all the columns that are required and store them within a data frame.
 
-**Step 2:-** Since we use Data format, we have to find the
-original date. So, we have used as.Date() function to get the actual
-date format.
+**Step 2:-** We calculate the original date.
 
-**Step 3:-** Apply step2 to all the date columns to verify it in next
-phase.
+**Step 3:-** We decorate all events with a date, based on its offset from the original date.
 
-**Step 4:-** Now create a new column. Now apply to add and subtract
-methods on the dates if we get the values in negatives, then it is
-enrolled before the event, if 0 then they resisted at the moment, and if
-greater the 0 than it is after the event.
+**Step 4:-** We then add columns that capture the delays each person experiences for their enrollment and event.
 
-**Step 5:-** Total we have five states in the data set which is mentioned
-in short form
+**Step 5:-** In total we collected data for five states but focus in on NE and IA.
 
-**Step 6:-** Every State in short form like `IA`,`NE`,`CO`,`NC`,`SC'and
-later updated to the full form of user understanding `Iowa`,
-`Nebraska`,`colorado`, `north Carolina,`south Carolina and we can
-observe many different plots based on state and their zip code.
+**Step 6:-** We filter out NA rows, such as NA values for job title entries. This removes all rows with missing data.
 
-**Step 7:-** The data contains rows. If we filter out NA values for job
-title, there are 8158. This means each row has a job title and 
-no NA values. Therefore, there is no missing data, and there is no need to
-handle missing data.
+**Step 7:-** We then group by columns of interest, such as facility, ethnic_identity, and job_title. This leaves us with 1500 fewer rows, 7246 rows in total.
 
-**Step 8:-**
+**Step 8:-** We group ethnicity into Spanish-specific and non-Spanish ethnicity for our analysis.  More details are discussed immediately below.
 
-Most job titles have fewer than fifty instances. Job titles with many
-instances include therapist, clinical supervisor, case managers, and
-admin assists. Of those job titles, there are five types of therapists.
-Given that most primary job titles are therapists, exploring
-job titles will focus on therapists. We filter the job titles to the
-various therapist job positions.
-
-If we filter out therapists, there are only 7246 rows, so 1500 fewer
-rows.
-
--   **ethnicity**
+**ethnicity**
 
 <!-- -->
 
@@ -135,12 +111,9 @@ leaves the data with 2 classes for the variable titled
 
 ## Research Question 1
 
-In the below code, I have filtered the original data with the state name
-and aggregate the whole data based to get an average time taken for
-completing the HFS process.
+In the below code, we have filtered the original date by state and facility and processed the data to show the average delays to complete the HFS enrollment process.
 
-In the Below code, I have built a model to see if it has a better
-confidence in between the attributes in the data frame or not tried to get a predict value for over all data for Iowa
+Firstly, we'll show our model that demonstrates that facility is a large predictor of overall enrollment delays.
 
 ### Iowa
 
