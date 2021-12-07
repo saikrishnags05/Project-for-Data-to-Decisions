@@ -26,15 +26,15 @@ Chad, Sai, and Rhonda each contributed to the project plan. Sai created the repo
 
 ## Research Questions
 
-Each of us split up the research question.  Chad worked on the first research question, Sai the second, and Rhonda the third. Rhonda proofread.
+Each of us split up the research question.  sai worked on the first research question, Chad the second, and Rhonda the third. Rhonda proofread.
 
 ## Data Cleaning Documentation
 
-Each of us worked on the data cleaning documentation for our research question.  Sai worked on the first question, Chad the second, and Rhonda on the third.  Rhonda proofread.
+Each of us worked on the data cleaning documentation for our research question.  Sai worked on the first question, Chad the second, and Rhonda on the third.sai brought all the data into a single file. Rhonda proofread and chad submitted into Git.
 
 ## R Script
 
-Chad, Sai, and Rhonda each contributed to the project plan. Sai worked on Research Question 1 Chad worked on Research Question 2 Rhonda worked on Research Question 3 Chad proofread
+Chad, Sai, and Rhonda each contributed to the project plan. Sai worked on Research Question 1 Chad worked on Research Question 2 Rhonda worked on Research Question 3 sai brought all the data into a single file, Chad proofread and submitted into Git.
 
 The entire group is performing data exploration concerning the location and its relationship to other columns, such as the onboarding duration, ethnicity, program name, and job title. Given this general direction of interest, we explored a related research question. Fortunately, based on the data exploration documentation, we are updating the direction of our research. Specifically, how does onboarding duration change when enhanced by interesting findings concerning ethnicity, program name, and job title. Part of the progress demonstrated by this assignment intertwines these aspects.
 
