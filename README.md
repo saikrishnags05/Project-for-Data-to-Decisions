@@ -17,4 +17,4 @@ Copyright 2021 Rhonda Silva, Chad Crowe, Sai Krishna Gaduputi Subbammagari
 
 [RScript](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/RScript/RScript.md)
 
-[Final GitHub Turning](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Final/Readme.md)
+[Final GitHub Documents](https://github.com/saikrishnags05/Project-for-Data-to-Decisions/blob/master/Final/Readme.md)
