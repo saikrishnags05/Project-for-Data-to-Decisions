@@ -35,29 +35,11 @@ missed appointments?**
 
 ### The Decisions our Analysis Targets Could Support
 
-There might be unknown but significant reasons why particular locations
-have higher rates of missing appointments, such as issues with the facility
-accessibility or local financial burdens like access to transportation.
+This research question allows HFS to better understand the affect that facility has on missed appointments. Missed appointments describe events where the person does not show up for their appointment. These missed appointments are costly for HFS since the user misses their treatment and the therapist is unable to perform chargeable services. Therefore, missed appointments represent a large costs, both for the clients and in terms of overall revenue. This research question explores the relationship between the facility and missed appointments.
 
-The second research question concerns exploring the job role of
-therapists within HFS with a specific interest in appointment no-shows.
-When patients fail to appear for appointments, this costs HFS time and
-costs the patient opportunity for therapy. We explore whether clear patterns might contribute to patients missing visits
-such as a location or ethnicity effect. It might be the case that
-particular facilities are less friendly in supporting a language, affecting the rate of dropped appointments.
+There are multiple aspects about a facility that might affect the number of missed appointments. A location with limited parking or limited alternative transportation might affect a client's ability to reach the facility. Further, a location without sidewalks might that primarly serves persons without personal vehicles might negatively affect the ease of visiting the location, therefore, the target demographic might also affect the rate of missed appointments. Language might also be a barrier, facilities that serve a Spanish-only speaking population but lacks a sufficient amount of language support might result in a higher missed appointment rate for particular ethnicities.  
 
-The research also explores whether job title affects dropped
-appointments. Job requirements might change from title to title, which might affect dropped appointments. This research explores the
-phenomenon.
-
-Initial research also explores appointment duration. Based on the given
-data, it is unknown whether appointment duration is fixed by insurance
-or varies between patients. This research explores the duration of
-appointments across job position, ethnicity, location, and the rate of
-dropped appointments too. While success is not determined by duration,
-Dr. Juarez mentioned how HFS is very interested in exploring patterns
-about the number of appointments and durations by each patient
-since it affects the funding HFS receives.
+The research also explores whether job title affects dropped appointments. Job requirements might change from title to title, which might affect dropped appointments. This research explores the phenomenon. It might be that more experienced therapists are better at scheduling appointments and auxiliary details to help the patient make the meeting. In contrast, a busier facility might result in more persons who fall through the cracks and therefore miss appointments. This question provides details concerning the relationship between the therapist job title and the rate of missed appointments.
 
 ### Research Question #3
 **Which facilities provide services to clients identifying as
