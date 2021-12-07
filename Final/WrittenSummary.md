@@ -22,11 +22,10 @@ facility till date. So that If they find any delay in enrolling, then
 they can take action on the particular location and improve the
 approving process.
 
-The  research question also help in tracking the process of enrollement 
-in all facilities with respect to state.
+The  research question also help in tracking the process of enrollment 
+in all facilities concerning state.
 
-This research explore the whole topic with the help of years. I compared the average time taken for total
-registration process for a facility in a state with respect to years.
+This research explores the whole topic with the help of years. I compared the average time taken for the total registration process for a facility in a state with respect to years.
 
 
 ### Research Question #2
@@ -35,13 +34,13 @@ missed appointments?**
 
 ### The Decisions our Analysis Targets Could Support
 
-This research question allows HFS to better understand the affect that facility has on missed appointments. Missed appointments describe events where the person does not show up for their appointment. These missed appointments are costly for HFS since the user misses their treatment and the therapist is unable to perform chargeable services. Therefore, missed appointments represent a large costs, both for the clients and in terms of overall revenue. This research question explores the relationship between the facility and missed appointments.
+This research question allows HFS to understand the effect better that facility has on missed appointments. Missed appointments describe events where the person does not show up for their appointment. These missed appointments are costly for HFS since the user misses their treatment and the therapist cannot perform chargeable services. Therefore, missed appointments represent large costs, both for the clients and in terms of overall revenue. This research question explores the relationship between the facility and missed appointments.
 
-There are multiple aspects about a facility that might affect the number of missed appointments. A location with limited parking or limited alternative transportation might affect a client's ability to reach the facility. Further, a location without sidewalks might that primarly serves persons without personal vehicles might negatively affect the ease of visiting the location, therefore, the target demographic might also affect the rate of missed appointments. Language might also be a barrier, facilities that serve a Spanish-only speaking population but lacks a sufficient amount of language support might result in a higher missed appointment rate for particular ethnicities.  
+There are multiple aspects of a facility that might affect the number of missed appointments. A location with limited parking or limited alternative transportation might affect a client's ability to reach the facility. Further, a location without sidewalks might that primarily serves persons without personal vehicles might negatively affect the ease of visiting the location; therefore, the target demographic might also affect the rate of missed appointments. The language might also be a barrier. Facilities that serve a Spanish-only speaking population but lack a sufficient amount of language support might result in a higher missed appointment rate for particular ethnicities.  
 
-The research also explores whether job title affects dropped appointments. Job requirements might change from title to title, which might affect dropped appointments. This research explores the phenomenon. It might be that more experienced therapists are better at scheduling appointments and auxiliary details to help the patient make the meeting. In contrast, a busier facility might result in more persons who fall through the cracks and therefore miss appointments. This question provides details concerning the relationship between the therapist job title and the rate of missed appointments.
+The research also explores whether job title affects dropped appointments. Job requirements might change from title to title, affecting dropped appointments. This research explores the phenomenon. It might be that more experienced therapists are better at scheduling appointments and auxiliary details to help the patient make the meeting. In contrast, a busier facility might result in more persons falling through the cracks and, therefore, missing appointments. This question provides details concerning the relationship between the therapist job title and the rate of missed appointments.
 
-Knowledge about the relationship between missed appointments and the facility can support numerous decisions. Firstly, it might create awareness about problematic facilities with higher missed appointment rates. Secondly, we uncover an interesting relationship between job title and missed appointments. HFS can take this knoweldge and delve into why these facilities and job titles have higher rates of missed appointments. Given the large cost of missed appointments, we feel that this research question has the potential to impact HFS' efficiency and revenue, improving both its and patients' outcomes.
+Knowledge about the relationship between missed appointments and the facility can support numerous decisions. Firstly, it might create awareness about problematic facilities with higher missed appointment rates. Secondly, we uncover an interesting relationship between job title and missed appointments. HFS can take this knowledge and delve into why these facilities and job titles have higher rates of missed appointments. Given the large cost of missed appointments, we feel that this research question can potentially impact HFS's efficiency and revenue, improving both its and patients' outcomes.
 
 ### Research Question #3
 **Which facilities provide services to clients identifying as
@@ -55,7 +54,7 @@ Spanish-speaking therapists?
 
 # Data Cleaning Choices
 
-We have created a new dataset that can help us achieve our research question's best results. Attributes are mentioned below.
+We have created a new dataset to help us achieve our research question's best results. Attributes are mentioned below.
 
 `facility`, `actual_date`, `event_name`, `date_entered`,
 `approved_date`, `program_unit_description`, `zip`,
@@ -63,40 +62,40 @@ We have created a new dataset that can help us achieve our research question's b
 `Job Title (Therapists I, II, and III)`,`Appointment Duration`.
 `Appointment No Shows`.
 
-**step 1:-** collect all the columns that are required and store them in
+**Step 1:-** collect all the columns that are required and store them in
 a data frame **HFS\_data**
 
-**step 2:-** Since we are using Data format, we have to find the
+**Step 2:-** Since we use Data format, we have to find the
 original date. So, we have used as.Date() function to get the actual
 date format.
 
-**step 3:-** Apply step2 to all the date columns to verify it in next
+**Step 3:-** Apply step2 to all the date columns to verify it in next
 phase.
 
-**step 4:-** Now create a new column. Now apply to add and subtract
+**Step 4:-** Now create a new column. Now apply to add and subtract
 methods on the dates if we get the values in negatives, then it is
 enrolled before the event, if 0 then they resisted at the moment, and if
 greater the 0 than it is after the event.
 
-**step 5:-** Total we have five states in the data set which is mentioned
+**Step 5:-** Total we have five states in the data set which is mentioned
 in short form
 
-**step 6:-** Every State in short form like `IA`,`NE`,`CO`,`NC`,`SC'and
-later updated to the full form of user understanding `iowa`,
-`Nebrska`,`colorado`, `north carolina`,`south carolina` and we can
-observe many different plots based on state and there zip code.
+**Step 6:-** Every State in short form like `IA`,`NE`,`CO`,`NC`,`SC'and
+later updated to the full form of user understanding `Iowa`,
+`Nebraska`,`colorado`, `north Carolina,`south Carolina and we can
+observe many different plots based on state and their zip code.
 
-**step 7:-** The data contains rows. If we filter out NA values for job
+**Step 7:-** The data contains rows. If we filter out NA values for job
 title, there are 8158. This means each row has a job title and 
-no NA values. There is no missing data, and there is no need to
+no NA values. Therefore, there is no missing data, and there is no need to
 handle missing data.
 
-**step 8:-**
+**Step 8:-**
 
 Most job titles have fewer than fifty instances. Job titles with many
 instances include therapist, clinical supervisor, case managers, and
 admin assists. Of those job titles, there are five types of therapists.
-Given that most of the primary job titles are therapists, exploring
+Given that most primary job titles are therapists, exploring
 job titles will focus on therapists. We filter the job titles to the
 various therapist job positions.
 
@@ -119,14 +118,14 @@ want to filter.
 **Step 9** Delete Rows that have "Not Collected" in variable
 Ethnic\_Identity.
 
-**Step 10** Wethen discovered that the variable "ethnic\_identity" had
+**Step 10** We then discovered that the variable "ethnic\_identity" had
 the following classes *Mexican *Not Collected *Not
 Spanish/Hispanic/Latino *Other Hispanic or Latino \*Unknown
 
 We omitted the rows that had "Not collected" or "Unknown" since this
 information will not help with the interpretation of data.
 
-Wethen changed "Mexican" to "Latino" and "Other Hispanic or Latino" to
+We then changed "Mexican" to "Latino" and "Other Hispanic or Latino" to
 "Latino" we changed "Not Spanish/Hispanic/Latino" to "Not Latino" This
 leaves the data with 2 classes for the variable titled
 "ethnic\_identity" Latino and Not Latino
@@ -179,7 +178,7 @@ the data that is present in Iowa
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
 
-If we observe the graph we can tell that overall behavior of enrollment
+If we observe the graph, we can tell that the overall behavior of enrollment
 process w.r.t the time taken per person to enroll for an event from
 past **8 years** in the state of **Iowa**.
 
@@ -215,7 +214,7 @@ HFS facility locations have a significant effect on the number of missed
 appointments.
 
 The research question builds on existing knowledge that Omaha and Iowa
-contain pockets of segregated populations, both in terms of ethnicity,
+contain pockets of segregated populations, both ethnicity,
 finances, and privilege. The research question poses that location
 might significantly affect missed appointments. If a particular
 location has a population with financial access to vehicles or even
@@ -235,9 +234,9 @@ facility and job title.
 ![](WrittenSummary_files/figure-gfm/facility-1.png)<!-- -->
 
 The purpose of the above graph is to highlight the stark difference in
-the y-axis for each facet. The y-axis shows no-show percentage, which
+the y-axis for each facet. The y-axis shows the no-show percentage, which
 captures the percentage of missed appointments, e.g., clients
-do not show up for their appointments. The facet is facility, such as
+do not show up for their appointments. The facet is the facility, such as
 the "Center Mall Office" and "Omaha (Blondo) Reporting Center." The
 graph shows significant differences in no-show percentage by the facility.
 Depending on the facility, the range itself varies from around 5% to almost 30%. The plot also separates out job function since it has a
@@ -274,13 +273,13 @@ Health Programs and are between the ages of 18 and 50.
 
 \#\#Bar chart of Ethnicity & Facility
 
-The majority of Latino clients received services at the North Omaha Campus and at the HFS-Central location. HFS should look at staffing these two facilities with bi-lingual (Spanish) therapists and receptionists. HFS could possibly benefit by having the bilingual staff at the Sarpy Office as well so that there are 3 branches throughout the metro area to serve Latino clients.
+Most Latino clients received services at the North Omaha Campus and at the HFS-Central location. HFS should staff these two facilities with bi-lingual (Spanish) therapists and receptionists. HFS could possibly benefit by having the bilingual staff at the Sarpy Office as well so that there are 3 branches throughout the metro area to serve Latino clients.
 
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-24-1.png)<!-- -->
 
 # Conclusion
 
-Our research takes a deep dive into the inner workings of HFS facilities. We looked at appointment delays, missed appointments, and the ethnicities at each facility. We found large discrepancies in appointment delays, missed appointments, and the number of persons with a Latino ethnicity among locations. These results are detailed via the plots in the above section. Firstly, while we find that appointment delays vary widely among facilities, some facilities, such as schools, have a faster registration and approval process, wheras counties take much longer. We also saw that the overall enrollment delay tends to decrease over time. We found that missed appointments vary by multiple factors based on location in a similar vein.  The Sarpy location might have a ten-percent missed appointment rate, but the Blondo location has a nearly thirty-percent rate of missed appointments. In our opinion, this unveils a massive discrepancy in the user experience and facility operations. However, we are not sure why this delay occurs. We suspect the delay might be a function of facility accessibility, such as traffic, parking, or alternative transportation options. Thirdly, we analyzed the number of Latinos by location. We found that three locations stand out as serving this demographic and suggest each of these locations has bilingual staff to support their experience at HFS. Based on these findings, we believe that HFS can better understand the differences in user experience by the facility and improve the user experience throughout Nebraska and Iowa locations.
+Our research takes a deep dive into the inner workings of HFS facilities. We looked at appointment delays, missed appointments, and the ethnicities at each facility. We found large discrepancies in appointment delays, missed appointments, and the number of persons with a Latino ethnicity among locations. These results are detailed via the plots in the above section. Firstly, while we find that appointment delays vary widely among facilities, some facilities, such as schools, have a faster registration and approval process, whereas counties take much longer. We also saw that the overall enrollment delay tends to decrease over time. We found that missed appointments vary by multiple factors based on location in a similar vein. For example, the Sarpy location might have a ten-percent missed appointment rate, but the Blondo location has a nearly thirty-percent rate of missed appointments. In our opinion, this unveils a massive discrepancy in the user experience and facility operations. However, we are not sure why this delay occurs. We suspect the delay might be a function of facility accessibility, such as traffic, parking, or alternative transportation options. Thirdly, we analyzed the number of Latinos by location. We found that three locations stand out as serving this demographic and suggest each of these locations has bilingual staff to support their experience at HFS. Based on these findings, we believe that HFS can better understand the differences in user experience by the facility and improve the user experience throughout Nebraska and Iowa locations.
 
 # Reference
 
