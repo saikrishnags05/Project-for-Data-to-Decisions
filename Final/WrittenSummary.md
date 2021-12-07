@@ -26,7 +26,7 @@ missed appointments?**
 
 ### The Decisions our Analysis Targets Could Support
 
-This research question allows HFS to understand the effect better that facility has on missed appointments. Missed appointments describe events where the person does not show up for their appointment. These missed appointments are costly for HFS since the user misses their treatment and the therapist cannot perform chargeable services. Therefore, missed appointments represent large costs, both for the clients and in terms of overall revenue. This research question explores the relationship between the facility and missed appointments.
+This research question allows HFS to understand the effect that facility has on missed appointments. Missed appointments describe events where the person does not show up for their appointment. These missed appointments are costly for HFS since the user misses their treatment and the therapist cannot perform chargeable services. Therefore, missed appointments represent large costs, both for the clients and in terms of overall revenue. This research question explores the relationship between the facility and missed appointments.
 
 There are multiple aspects of a facility that might affect the number of missed appointments. A location with limited parking or limited alternative transportation might affect a client's ability to reach the facility. Further, a location without sidewalks might that primarily serves persons without personal vehicles might negatively affect the ease of visiting the location; therefore, the target demographic might also affect the rate of missed appointments. The language might also be a barrier. Facilities that serve a Spanish-only speaking population but lack a sufficient amount of language support might result in a higher missed appointment rate for particular ethnicities.  
 
@@ -129,7 +129,7 @@ the data that is present in Iowa
     ## ---
     ## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
 
-### Nebrska
+### Nebraska
 
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-15-1.png)<!-- -->
 
