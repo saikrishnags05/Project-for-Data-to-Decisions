@@ -11,22 +11,14 @@ Heartland Family Services(HFS) comprises multiple facilities between Iowa and Ne
 ## Research Questions
 
 ### Research Question #1
-**Do significant delays exist between enrolling in an event, entering
-into the system, and the enrollment approval?**
+**Do significant delays exist between enrolling in an event, entering it
+into the system, and its enrollment approval?**
 
 ### The Decisions our Analysis Targets Could Support
 
-It will help the HFS to know the average time taken for a person to
-complete the full process for any event that is organized in different
-facility till date. So that If they find any delay in enrolling, then
-they can take action on the particular location and improve the
-approving process.
-
-The  research question also help in tracking the process of enrollment 
-in all facilities concerning state.
-
-This research explores the whole topic with the help of years. I compared the average time taken for the total registration process for a facility in a state with respect to years.
-
+This research question will help the HFS to know the average time taken for a person to
+complete the full enrollment process for any event. Moreover, this is organized by different
+facilities and accounts for data over the last few years. This research question uncovers patterns related to enrollment delays.  HFS can use this information to take action at particular locations in order to improve the enrollment/approval proces.
 
 ### Research Question #2
 **Do HFS facility locations have a significant effect on the number of
@@ -48,9 +40,7 @@ Latino?**
 
 ### The Decisions our Analysis Targets Could Support
 
-Which facilities provide services to Latino ethnicity? Would the Clients
-prefer to have communication in Spanish? Do these facilities provide
-Spanish-speaking therapists?
+HFS deeply cares about the experiences of minority demographics, therefore, we explore which facilities serve groups with these demographics. We focus on minorities that might speak Spanish. Our goal is to identify which facilities receive and serve this demographic. We hope to provide feedback concerning which facilities require more Spanish-speaking staff. Our results might help HFS to understand where their minorities are served and can ensure they provide the necessary support for these minority groups.
 
 # Data Cleaning Choices
 
