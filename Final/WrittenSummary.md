@@ -113,11 +113,11 @@ leaves the data with 2 classes for the variable titled
 
 In the below code, we have filtered the original date by state and facility and processed the data to show the average delays to complete the HFS enrollment process.
 
-Firstly, we'll show our model that demonstrates that facility is a large predictor of overall enrollment delays.
+Firstly, we'll show our model that demonstrates that year and state is a large predictor of overall enrollment delays.
 
 ### Iowa
 
-Now I have created a plot to see how the predicted value is similar
+The below plot shows our ability to predict the enrollment delay by year and state.
 ![](WrittenSummary_files/figure-gfm/unnamed-chunk-12-1.png)<!-- -->
 
 (optional) Now for just verification, i am trying to get a Residuals of
