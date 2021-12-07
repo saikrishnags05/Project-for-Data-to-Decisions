@@ -41,6 +41,8 @@ There are multiple aspects about a facility that might affect the number of miss
 
 The research also explores whether job title affects dropped appointments. Job requirements might change from title to title, which might affect dropped appointments. This research explores the phenomenon. It might be that more experienced therapists are better at scheduling appointments and auxiliary details to help the patient make the meeting. In contrast, a busier facility might result in more persons who fall through the cracks and therefore miss appointments. This question provides details concerning the relationship between the therapist job title and the rate of missed appointments.
 
+Knowledge about the relationship between missed appointments and the facility can support numerous decisions. Firstly, it might create awareness about problematic facilities with higher missed appointment rates. Secondly, we uncover an interesting relationship between job title and missed appointments. HFS can take this knoweldge and delve into why these facilities and job titles have higher rates of missed appointments. Given the large cost of missed appointments, we feel that this research question has the potential to impact HFS' efficiency and revenue, improving both its and patients' outcomes.
+
 ### Research Question #3
 **Which facilities provide services to clients identifying as
 Latino?**
