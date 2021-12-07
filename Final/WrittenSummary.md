@@ -81,17 +81,13 @@ high number of appointment no-shows for any organization. This metric is
 worth looking into further. There are no NAs in the column or values we
 want to filter.
 
-**Step 9** Delete Rows that have "Not Collected" in variable
+**Step 9** Delete Rows that have "Not Collected" in the variable
 Ethnic\_Identity.
 
 **Step 10** We then discovered that the variable "ethnic\_identity" had
 the following classes *Mexican *Not Collected *Not
-Spanish/Hispanic/Latino *Other Hispanic or Latino \*Unknown
-
-We omitted the rows that had "Not collected" or "Unknown" since this
-information will not help with the interpretation of data.
-
-We then changed "Mexican" to "Latino" and "Other Hispanic or Latino" to
+Spanish/Hispanic/Latino *Other Hispanic or Latino \*Unknown.  We omitted the rows that had "Not collected" or "Unknown" since this
+information will not help with the interpretation of data. We then changed "Mexican" to "Latino" and "Other Hispanic or Latino" to
 "Latino" we changed "Not Spanish/Hispanic/Latino" to "Not Latino" This
 leaves the data with 2 classes for the variable titled
 "ethnic\_identity" Latino and Not Latino
@@ -111,9 +107,7 @@ leaves the data with 2 classes for the variable titled
 
 ## Research Question 1
 
-In the below code, we have filtered the original date by state and facility and processed the data to show the average delays to complete the HFS enrollment process.
-
-Firstly, we'll show our model that demonstrates that year and state is a large predictor of overall enrollment delays.
+In the below code, we have filtered the original date by state and facility and processed the data to show the average delays to complete the HFS enrollment process. Firstly, we'll show our model that demonstrates that year and state is a large predictor of overall enrollment delays.
 
 ### Iowa
 
